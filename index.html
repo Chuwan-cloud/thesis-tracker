@@ -2,44 +2,44 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Thesis Tracker</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Helvetica Neue',Arial,sans-serif;background:#f9fafb;display:flex;min-height:100vh;}
 input,textarea,button{font-family:inherit;}
-a{cursor:pointer;}
-#sidebar{width:210px;background:#fff;border-right:1px solid #e5e7eb;padding:20px 0;flex-shrink:0;overflow-y:auto;}
-#main{flex:1;padding:32px 36px;max-width:700px;overflow-y:auto;}
+#sidebar{width:210px;background:#fff;border-right:1px solid #e5e7eb;padding:20px 0;flex-shrink:0;height:100vh;position:sticky;top:0;overflow-y:auto;}
+#main{flex:1;padding:28px 32px;overflow-y:auto;}
+.two-col{display:flex;gap:24px;align-items:flex-start;}
+.col-left{flex:1;min-width:0;}
+.col-right{width:280px;flex-shrink:0;}
 .pbar-wrap{background:#e5e7eb;border-radius:99px;height:5px;overflow:hidden;margin:5px 0 2px;}
 .pbar-fill{height:100%;border-radius:99px;transition:width .4s;}
 .badge{font-size:11px;font-weight:600;padding:2px 7px;border-radius:99px;white-space:nowrap;}
-.task-row{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;border:1px solid #e5e7eb;margin-bottom:5px;background:#fff;}
-.task-row.done{background:#f9fafb;opacity:.55;}
+.task-row{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;border:1px solid #e5e7eb;margin-bottom:5px;}
 .subtask-item{border:1px solid #e5e7eb;border-radius:8px;margin-bottom:5px;}
-.subtask-header{display:flex;align-items:center;gap:10px;padding:9px 12px;cursor:pointer;}
-.subtask-body{padding:0 12px 12px;border-top:1px solid #f3f4f6;display:none;}
+.subtask-header{display:flex;align-items:center;gap:10px;padding:9px 12px;cursor:pointer;user-select:none;}
+.subtask-body{padding:0 12px 12px;border-top:1px solid #f3f4f6;}
+.child-row{border:1px solid #e5e7eb;border-radius:8px;margin-bottom:4px;}
+.child-header{display:flex;align-items:center;gap:8px;padding:7px 12px;cursor:pointer;user-select:none;}
+.child-body{padding:6px 12px 10px 40px;}
 .report-card{border:1px solid #e5e7eb;border-radius:10px;margin-bottom:8px;overflow:hidden;background:#fff;}
-.report-header{display:flex;align-items:center;gap:10px;padding:11px 14px;cursor:pointer;}
-.report-body{padding:8px 14px 12px;border-top:1px solid #f3f4f6;display:none;}
-.accordion-wrap{margin-top:20px;}
-.accordion-btn{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:9px 14px;font-size:13px;cursor:pointer;color:#374151;font-weight:600;width:100%;}
+.report-header{display:flex;align-items:center;gap:10px;padding:11px 14px;cursor:pointer;user-select:none;}
+.report-body{padding:8px 14px 12px;border-top:1px solid #f3f4f6;}
+.accordion-wrap{margin-top:10px;}
+.accordion-btn{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:9px 14px;font-size:13px;cursor:pointer;color:#374151;font-weight:600;width:100%;user-select:none;}
 .accordion-btn.open{border-radius:8px 8px 0 0;}
-.accordion-inner{border:1px solid #e5e7eb;border-top:none;border-radius:0 0 8px 8px;background:#fff;display:none;}
-.sec-btn{width:100%;text-align:left;background:none;border:none;padding:10px 16px;font-size:13px;font-weight:700;color:#374151;cursor:pointer;display:flex;justify-content:space-between;}
-.sec-content{font-size:12px;color:#4b5563;line-height:1.9;padding:0 16px 12px;white-space:pre-wrap;display:none;}
-.sec-list{margin:0 0 10px;padding:0 16px 0 32px;}
-.sec-list li{font-size:12px;color:#4b5563;line-height:1.9;}
-.timeline-row{display:flex;align-items:center;gap:8px;padding:8px 12px;background:#fff;border:1px solid #e5e7eb;border-radius:8px;margin-bottom:4px;}
-.memo-area{width:100%;border:1px solid #e5e7eb;border-radius:8px;padding:10px 12px;font-size:13px;resize:vertical;min-height:72px;outline:none;color:#374151;}
+.accordion-inner{border:1px solid #e5e7eb;border-top:none;border-radius:0 0 8px 8px;background:#fff;}
+.sec-btn{width:100%;text-align:left;background:none;border:none;padding:10px 16px;font-size:13px;font-weight:700;color:#374151;cursor:pointer;display:flex;justify-content:space-between;user-select:none;}
 .url-input{width:100%;border:1px solid #e5e7eb;border-radius:6px;padding:6px 10px;font-size:12px;outline:none;}
-.add-input{flex:1;min-width:120px;border:1px solid #e5e7eb;border-radius:8px;padding:8px 12px;font-size:13px;outline:none;}
-.link-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;text-decoration:none;background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:7px 14px;}
-.child-note{display:none;}
+.add-input{flex:1;min-width:80px;border:1px solid #e5e7eb;border-radius:8px;padding:7px 10px;font-size:12px;outline:none;}
+.memo-area{width:100%;border:1px solid #e5e7eb;border-radius:8px;padding:10px 12px;font-size:13px;resize:vertical;min-height:72px;outline:none;color:#374151;}
+.link-btn{display:flex;align-items:center;gap:6px;font-size:12px;text-decoration:none;background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:7px 12px;}
+.slbl{font-size:10px;font-weight:700;color:#9ca3af;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;}
+.timeline-row{display:flex;align-items:center;gap:8px;padding:8px 12px;background:#fff;border:1px solid #e5e7eb;border-radius:8px;margin-bottom:4px;}
 </style>
 </head>
 <body>
-
 <div id="sidebar">
   <div style="display:flex;margin:0 14px 16px;background:#f3f4f6;border-radius:8px;padding:3px;">
     <button id="btn-project" onclick="setView('project')" style="flex:1;border:none;border-radius:6px;padding:5px 0;font-size:11px;font-weight:600;cursor:pointer;">Subjects</button>
@@ -48,81 +48,41 @@ a{cursor:pointer;}
   <div style="font-size:10px;font-weight:700;color:#9ca3af;letter-spacing:1px;padding:0 18px 8px;text-transform:uppercase;">PROJECTS</div>
   <div id="sidebar-projects"></div>
 </div>
-
 <div id="main"></div>
-
 <script>
-const YEAR = 2026;
-
-function makeReport(prefix, num, label, deadline, finalDeadline) {
-  return {
-    id:`${prefix}_r${num}`, label, deadline, finalDeadline,
-    steps:[
-      {id:`${prefix}_r${num}_s1`,text:"Draft",done:false},
-      {id:`${prefix}_r${num}_s2`,text:"Prof Feedback",done:false},
-      {id:`${prefix}_r${num}_s3`,text:"Peer Review",done:false},
-      {id:`${prefix}_r${num}_s4`,text:"Final",done:false},
-    ],
-    url:"", open:false
-  };
-}
-
-const DEFAULT_PROJECTS = [
-  {
-    id:"thesis", title:"修士論文", color:"#4f46e5", memo:"",
-    tasks:[
-      {id:"th1",text:"題目提出",done:false,deadline:`${YEAR}-06-30`},
-      {id:"th2",text:"背景・先行研究・目的・方法 提出（50%）",done:false,deadline:`${YEAR}-08-31`},
-      {id:"th3",text:"中間発表",done:false,deadline:`${YEAR}-09-30`},
-      {id:"th4",text:"初稿 ピア・レビュー",done:false,deadline:`${YEAR}-10-07`},
-      {id:"th5",text:"初稿修正版 提出（70%）",done:false,deadline:`${YEAR}-10-15`},
-      {id:"th6",text:"第2稿 提出（90%）",done:false,deadline:`${YEAR}-11-15`},
-      {id:"th7",text:"修士論文 提出",done:false,deadline:`${YEAR}-12-31`},
-      {id:"th8",text:"面接試問",done:false,deadline:`${YEAR+1}-01-31`},
-    ],
-    subtasks:[
-      {id:"st1",group:"研究内容",text:"研究背景",done:false,isParent:true,open:false,children:[
-        {id:"st1a",text:"海外中等教育段階の日本語教育の制度・理念",done:false,note:""},
-        {id:"st1b",text:"外国語環境における日本語教育の課題",done:false,note:""},
-        {id:"st1c",text:"メキシコの言語状況",done:false,note:""},
-        {id:"st1d",text:"メキシコの日本語教育の歴史と現状",done:false,note:""},
-        {id:"st1e",text:"LMJ概要",done:false,note:""},
-      ]},
-      {id:"st6",group:"研究内容",text:"先行研究",done:false,isParent:true,open:false,children:[
-        {id:"st6a",text:"外国語環境における日本語学習動機",done:false,note:"",url:""},
-        {id:"st6b",text:"実益のない日本語学習の意味",done:false,note:"",url:""},
-        {id:"st6c",text:"学習経験の意味・興味の変容",done:false,note:"",url:""},
-        {id:"st6d",text:"中南米における日本語教育の現状と課題",done:false,note:"",url:""},
-        {id:"st6e",text:"海外中等教育段階の日本語教育",done:false,note:"",url:""},
-      ]},
-      {id:"st7",group:"研究内容",text:"研究目的",done:false,note:""},
-      {id:"st8",group:"研究内容",text:"研究課題",done:false,note:""},
-      {id:"st9",group:"研究内容",text:"研究方法",done:false,note:""},
-      {id:"st10",group:"研究内容",text:"研究意義",done:false,note:""},
-      {id:"st_analysis",group:"研究内容",text:"分析",done:false,note:""},
-      {id:"st_summary",group:"研究内容",text:"まとめ",done:false,note:""},
-      {id:"st11",group:"Research",text:"Survey",done:false,note:""},
-      {id:"st12",group:"Research",text:"Pre-intv.",done:false,note:""},
-      {id:"st13",group:"Research",text:"Intv. 1",done:false,note:""},
-      {id:"st14",group:"Research",text:"Intv. 2",done:false,note:""},
-      {id:"st15",group:"Research",text:"Intv. 3",done:false,note:""},
-    ],
-  },
-  {id:"c1",title:"異文化間コミュニケーション論",color:"#0891b2",memo:"",reports:[makeReport("c1",1,"〈前期〉レポート①",`${YEAR}-06-15`,`${YEAR}-08-14`),makeReport("c1",2,"〈前期〉レポート②",`${YEAR}-08-15`,`${YEAR}-09-07`),makeReport("c1",3,"〈後期〉レポート③",`${YEAR}-10-15`,`${YEAR}-12-14`),makeReport("c1",4,"〈後期〉レポート④",`${YEAR}-12-15`,`${YEAR+1}-01-11`)]},
-  {id:"c2",title:"言語教育学",color:"#059669",memo:"",reports:[makeReport("c2",1,"〈前期〉レポート①",`${YEAR}-06-15`,`${YEAR}-08-14`),makeReport("c2",2,"〈前期〉レポート②",`${YEAR}-08-15`,`${YEAR}-09-07`),makeReport("c2",3,"〈後期〉レポート③",`${YEAR}-10-15`,`${YEAR}-12-14`),makeReport("c2",4,"〈後期〉レポート④",`${YEAR}-12-15`,`${YEAR+1}-01-11`)]},
-  {id:"c3",title:"日本語教育方法論",color:"#d97706",memo:"",reports:[makeReport("c3",1,"〈前期〉レポート①",`${YEAR}-06-15`,`${YEAR}-08-14`),makeReport("c3",2,"〈前期〉レポート②",`${YEAR}-08-15`,`${YEAR}-09-07`),makeReport("c3",3,"〈後期〉レポート③",`${YEAR}-10-15`,`${YEAR}-12-14`),makeReport("c3",4,"〈後期〉レポート④",`${YEAR}-12-15`,`${YEAR+1}-01-11`)]},
-  {id:"c4",title:"言語教育工学",color:"#db2777",memo:"",reports:[makeReport("c4",1,"〈前期〉レポート①",`${YEAR}-06-15`,`${YEAR}-08-14`),makeReport("c4",2,"〈前期〉レポート②",`${YEAR}-08-15`,`${YEAR}-09-07`),makeReport("c4",3,"〈後期〉レポート③",`${YEAR}-10-15`,`${YEAR}-12-14`),makeReport("c4",4,"〈後期〉レポート④",`${YEAR}-12-15`,`${YEAR+1}-01-11`)]},
+const YEAR=2026;
+function mkRep(pfx,n,label,dl,fdl){return{id:`${pfx}_r${n}`,label,deadline:dl,finalDeadline:fdl,steps:[{id:`${pfx}_r${n}_s1`,text:"Draft",done:false},{id:`${pfx}_r${n}_s2`,text:"Prof Feedback",done:false},{id:`${pfx}_r${n}_s3`,text:"Peer Review",done:false},{id:`${pfx}_r${n}_s4`,text:"Final",done:false}],url:"",open:false};}
+const DEFAULT_PROJECTS=[
+  {id:"thesis",title:"修士論文",color:"#4f46e5",memo:"",
+   tasks:[{id:"th1",text:"題目提出",done:false,deadline:`${YEAR}-06-30`},{id:"th2",text:"背景・先行研究・目的・方法 提出（50%）",done:false,deadline:`${YEAR}-08-31`},{id:"th3",text:"中間発表",done:false,deadline:`${YEAR}-09-30`},{id:"th4",text:"初稿 ピア・レビュー",done:false,deadline:`${YEAR}-10-07`},{id:"th5",text:"初稿修正版 提出（70%）",done:false,deadline:`${YEAR}-10-15`},{id:"th6",text:"第2稿 提出（90%）",done:false,deadline:`${YEAR}-11-15`},{id:"th7",text:"修士論文 提出",done:false,deadline:`${YEAR}-12-31`},{id:"th8",text:"面接試問",done:false,deadline:`${YEAR+1}-01-31`}],
+   subtasks:[
+     {id:"st1",group:"研究内容",text:"研究背景",done:false,isParent:true,open:false,children:[{id:"st1a",text:"海外中等教育段階の日本語教育の制度・理念",done:false,note:""},{id:"st1b",text:"外国語環境における日本語教育の課題",done:false,note:""},{id:"st1c",text:"メキシコの言語状況",done:false,note:""},{id:"st1d",text:"メキシコの日本語教育の歴史と現状",done:false,note:""},{id:"st1e",text:"LMJ概要",done:false,note:""}]},
+     {id:"st6",group:"研究内容",text:"先行研究",done:false,isParent:true,open:false,children:[{id:"st6a",text:"外国語環境における日本語学習動機",done:false,note:"",url:""},{id:"st6b",text:"実益のない日本語学習の意味",done:false,note:"",url:""},{id:"st6c",text:"学習経験の意味・興味の変容",done:false,note:"",url:""},{id:"st6d",text:"中南米における日本語教育の現状と課題",done:false,note:"",url:""},{id:"st6e",text:"海外中等教育段階の日本語教育",done:false,note:"",url:""}]},
+     {id:"st7",group:"研究内容",text:"研究目的",done:false,note:""},
+     {id:"st8",group:"研究内容",text:"研究課題",done:false,note:""},
+     {id:"st9",group:"研究内容",text:"研究方法",done:false,note:""},
+     {id:"st10",group:"研究内容",text:"研究意義",done:false,note:""},
+     {id:"st_analysis",group:"研究内容",text:"分析",done:false,note:""},
+     {id:"st_summary",group:"研究内容",text:"まとめ",done:false,note:""},
+     {id:"st11",group:"Research",text:"Survey",done:false,note:""},
+     {id:"st12",group:"Research",text:"Pre-intv.",done:false,note:""},
+     {id:"st13",group:"Research",text:"Intv. 1",done:false,note:""},
+     {id:"st14",group:"Research",text:"Intv. 2",done:false,note:""},
+     {id:"st15",group:"Research",text:"Intv. 3",done:false,note:""},
+   ]},
+  {id:"c1",title:"異文化間コミュニケーション論",color:"#0891b2",memo:"",reports:[mkRep("c1",1,"〈前期〉レポート①",`${YEAR}-06-15`,`${YEAR}-08-14`),mkRep("c1",2,"〈前期〉レポート②",`${YEAR}-08-15`,`${YEAR}-09-07`),mkRep("c1",3,"〈後期〉レポート③",`${YEAR}-10-15`,`${YEAR}-12-14`),mkRep("c1",4,"〈後期〉レポート④",`${YEAR}-12-15`,`${YEAR+1}-01-11`)]},
+  {id:"c2",title:"言語教育学",color:"#059669",memo:"",reports:[mkRep("c2",1,"〈前期〉レポート①",`${YEAR}-06-15`,`${YEAR}-08-14`),mkRep("c2",2,"〈前期〉レポート②",`${YEAR}-08-15`,`${YEAR}-09-07`),mkRep("c2",3,"〈後期〉レポート③",`${YEAR}-10-15`,`${YEAR}-12-14`),mkRep("c2",4,"〈後期〉レポート④",`${YEAR}-12-15`,`${YEAR+1}-01-11`)]},
+  {id:"c3",title:"日本語教育方法論",color:"#d97706",memo:"",reports:[mkRep("c3",1,"〈前期〉レポート①",`${YEAR}-06-15`,`${YEAR}-08-14`),mkRep("c3",2,"〈前期〉レポート②",`${YEAR}-08-15`,`${YEAR}-09-07`),mkRep("c3",3,"〈後期〉レポート③",`${YEAR}-10-15`,`${YEAR}-12-14`),mkRep("c3",4,"〈後期〉レポート④",`${YEAR}-12-15`,`${YEAR+1}-01-11`)]},
+  {id:"c4",title:"言語教育工学",color:"#db2777",memo:"",reports:[mkRep("c4",1,"〈前期〉レポート①",`${YEAR}-06-15`,`${YEAR}-08-14`),mkRep("c4",2,"〈前期〉レポート②",`${YEAR}-08-15`,`${YEAR}-09-07`),mkRep("c4",3,"〈後期〉レポート③",`${YEAR}-10-15`,`${YEAR}-12-14`),mkRep("c4",4,"〈後期〉レポート④",`${YEAR}-12-15`,`${YEAR+1}-01-11`)]},
 ];
-
-const GUIDE_SECTIONS = [
+const GUIDE_SECTIONS=[
   {title:"体裁・書式",items:["A4サイズ，縦40字×横40字（レポート・修論共通）","日本語：MS明朝体　英語：Times New Roman","「両端揃え」を使用（文字間隔崩れ防止）","２行以上の文頭揃えは「インデント」を使用","章・節の区切りは「改ページ」を使用","注釈は「脚注の挿入」または「文末脚注の挿入」を使用"]},
   {title:"数字・記号",items:["２桁以上の数字・２字以上のアルファベット → 半角","（ ）は全角（日本語本文）/ 半角（英語要旨）","読点は全角カンマ「，」。英数字間は半角カンマ＋半角スペース","統計数式：等号・不等号の前後は半角カンマ＋半角スペース　例：t (18) = 3.2, p < .01"]},
   {title:"構成",items:["「まとめ」の後に「おわりに」は不可","小節は必ず２つ以上（１つだけの小節は不可）","節タイトルの後にサブタイトルをつけない"]},
   {title:"本文中の出典",items:["文頭：田中（2022）　← （）全角","文末・文中：（田中，2022）　← （）とカンマ全角，年号はTimes New Roman","ページ付き：（鈴木，2009, p. 35）／（佐藤，2015, pp. 47-49）","増刷書籍は第１刷の年を使用","先行研究に別論文の引用がある場合，その論文も取り寄せ・引用文献に載せる","直接引用は「 」使用。複数ページ：（pp. 285-286）"]},
   {title:"引用文献・調査資料",items:["「調査資料」と「引用文献」は分けて記載","Webサイトはハイパーリンクを外すこと","日本語文献は著者名五十音順，２行以上は全角２字分字下げ","英語文献はAPA準拠，著者名は姓名順，書名は斜体"]},
 ];
-
-const SYLLABUS = {
+const SYLLABUS={
   c1:{title:"異文化間コミュニケーション論",sections:[
     {title:"科目概要",content:"担当：小川 直人\n異文化コミュニケーション能力の向上のため、知っておくべき様々な重要性について考察しつつ理解を深める。"},
     {title:"到達目標",content:"・異文化間コミュニケーションの基本的プロセスについて説明できる\n・異文化間コミュニケーションの効果性について評価できる\n・異文化間コミュニケーション能力について説明・評価できる"},
@@ -131,470 +91,223 @@ const SYLLABUS = {
     {title:"レポート課題（後期）",content:"【基本教材2】同上（参考書：小川直人『多文化共生と異文化コミュニケーション』八朔社, 2020）\n\n課題1：第5・7章を読み、3,000字程度で要約、1,000字程度で考察。\n\n課題2：第8・9章を読み、3,000字程度で要約、1,000字程度で考察。"},
   ]},
   c2:{title:"言語教育学",sections:[
-    {title:"科目概要",content:"言語教育学特講　担当：小林 和歌子\nCLIL（Content Language Integrated Learning＝内容言語統合型学習）を軸に、その背景・理念・教授法・評価を深く学ぶ。"},
+    {title:"科目概要",content:"言語教育学特講　担当：小林 和歌子\nCLILを軸に、その背景・理念・教授法・評価を深く学ぶ。"},
     {title:"到達目標",content:"・CLILの背景とCLILの基本原理を説明することができる\n・CLILのシラバスと教材等に関し理解を深め説明することができる\n・第二言語習得理論研究から見たCLILの指導原理と実践に関し説明することができる\n・CLILのテストと評価に関し適切に論じることができる\n・CLILの実践例を批判的思考力を持って考察し説明することができる"},
-    {title:"成績評価",content:"・レポート 80%（論理的明確性・緻密性・構成・文章表現の適正及び妥当性・引用における適切性等）\n  ★前期レポート課題1・2、後期レポート課題1は最終稿で評価\n  ★後期レポート課題2は最終試験として初稿で評価\n・観察記録 20%（ピア・レスポンスへの参加度、レポート添削への対応等）"},
-    {title:"履修者への望み",content:"・教員によるフィードバックを受けた後修正、ピア・レスポンスによる推敲、最終稿の提出と段階を踏んで進める\n・初稿の締め切り等に注意しそれぞれを遵守すること\n・ピア・レスポンスはそれぞれのレポートへの個別指導が終わり次第始めること\n・レポート作成に際しては「剽窃」に関し充分に注意し、引用のルールを厳守すること"},
-    {title:"レポート課題（前期）",content:"【基本教材1】笹島茂『教育としてのCLIL』（三修社, 2020年）\n\n課題1（3,000〜4,000語）：基本教材1と参考図書を参考に、CLILの基本理念や目的・特徴等を整理理解した上で、言語教育として優れている点について考察する。\n\n課題2（3,000〜4,000語）：基本教材から1〜2つの論点を各自取り上げ要約した上でそれらの論点に関連付けながら自分自身が関与する言語教育におけるCLILの実践方法について論じる。"},
-    {title:"レポート課題（後期）",content:"【基本教材2】和泉伸一ほか『CLIL 内容言語統合型言語学習』（上智大学出版, 2012年）\n\n課題1（3,000〜4,000語）：基本教材2と参考図書から2〜3つの論点を各自取り上げて教育現場へのCLILの導入の実践と実施状況について論じ、自分自身の教育現場への適応・応用について論じる。\n\n課題2（3,000〜4,000語）：日本の英語教育におけるCLILの実施状況について発表した論文を1〜2編各自取り上げそれらについて批判的思考力をもって纏め考察する。"},
+    {title:"成績評価",content:"・レポート 80%\n  ★前期レポート課題1・2、後期レポート課題1は最終稿で評価\n  ★後期レポート課題2は最終試験として初稿で評価\n・観察記録 20%"},
+    {title:"履修者への望み",content:"・教員によるフィードバックを受けた後修正、ピア・レスポンスによる推敲、最終稿の提出と段階を踏んで進める\n・初稿の締め切り等に注意しそれぞれを遵守すること"},
+    {title:"レポート課題（前期）",content:"【基本教材1】笹島茂『教育としてのCLIL』（三修社, 2020年）\n\n課題1（3,000〜4,000語）：CLILの基本理念や目的・特徴等を整理した上で、言語教育として優れている点を考察。\n\n課題2（3,000〜4,000語）：1〜2つの論点を取り上げ、自分が関与する言語教育におけるCLILの実践方法を論じる。"},
+    {title:"レポート課題（後期）",content:"【基本教材2】和泉伸一ほか『CLIL 内容言語統合型言語学習』（上智大学出版, 2012年）\n\n課題1（3,000〜4,000語）：教育現場へのCLIL導入の実践と実施状況、自分の教育現場への適応を論じる。\n\n課題2（3,000〜4,000語）：CLILの実施状況に関する論文を1〜2編取り上げ批判的に考察。"},
   ]},
   c3:{title:"日本語教育方法論",sections:[
-    {title:"科目概要",content:"担当：島田 めぐみ\n日本語教育の状況・言語学・異文化コミュニケーション・指導法・評価法・社会・歴史・教材などの観点から多角的に日本語教育を概観し、各々の現場に適した方法を考察する。"},
+    {title:"科目概要",content:"担当：島田 めぐみ\n多角的に日本語教育を概観し、各々の現場に適した方法を考察する。"},
     {title:"成績評価",content:"・レポート 60%（後期レポート課題2は最終試験として初稿で評価。その他は最終稿で評価）\n・観察記録 40%"},
-    {title:"履修者への望み",content:"・教師によるフィードバック・ピア・レスポンスをもとにレポートを完成させること\n・無断引用・不適切な引用は不正行為とみなされる\n・生成AIを利用した場合は最終行に明記すること"},
-    {title:"レポート課題（前期）",content:"【基本教材1】遠藤織枝『新・日本語教育を学ぶ』（三修社, 2020）\n\n課題1（4,000〜5,000字）：第1〜3章を読み、歴史や社会情勢が日本語教育に与えた影響を考察し、これからのあり方を論じる。\n\n課題2（3,000〜4,000字）：第2・7〜10章を中心に、地域・対象者を1つ選定してコースデザインを検討する。"},
-    {title:"レポート課題（後期）",content:"【基本教材2】文化庁『日本語教育の参照枠』\n\n課題1（3,000〜4,000字）：各種評価（pp.78-89）を理解し、評価に関する論文1〜2編を要約した上で自分の意見を論じる。\n\n課題2（3,000〜4,000字）：試験（テスト）に関する論文1〜2編を要約した上で自分の意見を論じる。"},
+    {title:"履修者への望み",content:"・教師によるフィードバック・ピア・レスポンスをもとにレポートを完成させること\n・生成AIを利用した場合は最終行に明記すること"},
+    {title:"レポート課題（前期）",content:"【基本教材1】遠藤織枝『新・日本語教育を学ぶ』（三修社, 2020）\n\n課題1（4,000〜5,000字）：歴史や社会情勢が日本語教育に与えた影響を考察し、あり方を論じる。\n\n課題2（3,000〜4,000字）：地域・対象者を1つ選定してコースデザインを検討。"},
+    {title:"レポート課題（後期）",content:"【基本教材2】文化庁『日本語教育の参照枠』\n\n課題1（3,000〜4,000字）：各種評価を理解し、論文1〜2編を要約した上で意見を論じる。\n\n課題2（3,000〜4,000字）：試験（テスト）に関する論文1〜2編を要約した上で意見を論じる。"},
   ]},
   c4:{title:"言語教育工学",sections:[
-    {title:"科目概要",content:"担当：保坂 敏子\nICTを利用した言語教育やその研究に必要な専門性を修得する。インストラクショナルデザイン（ID）・OER教材を使ったオンデマンド授業を実施。"},
-    {title:"成績評価",content:"・レポート 80%（前期1・2と後期1は最終稿で評価、後期2は初稿で評価）\n・観察記録 20%"},
-    {title:"レポート課題（前期）",content:"【基本教材1】鄭仁星ほか『最適インストラクショナル・デザイン』（東京電機大学出版局, 2008）\n\n課題1（3,000〜4,000字）：IDの定義・学習理論・各種モデルをまとめ、OPTIMALモデルの概要・特徴・利点・問題点を論じる。\n\n課題2（3,000〜4,000字）：ICT利用実践例（論文）を2つ取り上げ、OPTIMALモデルを枠組みに分析する。"},
-    {title:"レポート課題（後期）",content:"【基本教材2】栗田佳代子ほか『インタラクティブ・ティーチング』（河合出版, 2017）\n\n課題1（3,000〜4,000字）：8週間の講義動画受講に基づき、①重要だと思ったこと、②OER教材を使った学習経験の振り返りと一般化の可能性を論じる。\n\n課題2（3,000〜5,000字）：ICTを利用したインタラクティブな授業デザインのシラバスを作成し、特徴や期待される効果を論じる。"},
+    {title:"科目概要",content:"担当：保坂 敏子\nICTを利用した言語教育やその研究に必要な専門性を修得する。"},
+    {title:"成績評価",content:"・レポート 80%（前期1・2と後期1は最終稿、後期2は初稿で評価）\n・観察記録 20%"},
+    {title:"レポート課題（前期）",content:"【基本教材1】鄭仁星ほか『最適インストラクショナル・デザイン』（東京電機大学出版局, 2008）\n\n課題1（3,000〜4,000字）：IDの定義・学習理論・各種モデルをまとめ、OPTIMALモデルを論じる。\n\n課題2（3,000〜4,000字）：ICT利用実践例（論文）を2つ取り上げ、OPTIMALモデルで分析。"},
+    {title:"レポート課題（後期）",content:"【基本教材2】栗田佳代子ほか『インタラクティブ・ティーチング』（河合出版, 2017）\n\n課題1（3,000〜4,000字）：①重要だと思ったこと、②OER教材学習経験の振り返りと一般化の可能性を論じる。\n\n課題2（3,000〜5,000字）：ICTを利用したインタラクティブな授業デザインのシラバスを作成し特徴や効果を論じる。"},
   ]},
 };
 
-// ── State ──────────────────────────────────────────────
-let projects = null;
-let selected = "thesis";
-let currentView = "project";
-let newTaskText = "";
-let newDeadline = "";
-let saveTimer = null;
+// ── STATE ──────────────────────────────────────────────
+let projects=null,selected="thesis",currentView="project",saveTimer=null;
 
-// ── Persistence ────────────────────────────────────────
-const STORAGE_KEY = "tracker_v17";
-function loadData() {
-  try { const s = localStorage.getItem(STORAGE_KEY); return s ? JSON.parse(s) : null; } catch { return null; }
-}
-function saveData() {
+// ── UTILS ──────────────────────────────────────────────
+const esc=s=>String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+const daysLeft=d=>d?Math.ceil((new Date(d)-new Date())/86400000):null;
+const c2n=s=>s.replace(/①/g," 1").replace(/②/g," 2").replace(/③/g," 3").replace(/④/g," 4");
+function badge(dl){const d=daysLeft(dl);if(d===null)return "";const col=d<0?"#ef4444":d<=7?"#f59e0b":d<=30?"#3b82f6":"#10b981",bg=d<0?"#fef2f2":d<=7?"#fffbeb":d<=30?"#eff6ff":"#ecfdf5";return `<span class="badge" style="color:${col};background:${bg};">${d<0?Math.abs(d)+"日超過":d===0?"今日！":d+"日"}</span>`;}
+function pbar(pct,col,id=""){return `<div class="pbar-wrap"${id?` id="${id}"`:""}><div class="pbar-fill" style="width:${pct}%;background:${col};"></div></div>`;}
+function calcPct(p){if(p.tasks){const a=[...p.tasks,...(p.subtasks||[])];return a.length?Math.round(a.filter(t=>t.done).length/a.length*100):0;}if(p.reports){const tot=p.reports.reduce((a,r)=>a+r.steps.length,0),dn=p.reports.reduce((a,r)=>a+r.steps.filter(s=>s.done).length,0);return tot?Math.round(dn/tot*100):0;}return 0;}
+const getProj=()=>projects.find(p=>p.id===selected);
+
+// ── PERSIST ────────────────────────────────────────────
+const KEY="tracker_v17";
+function load(){try{const s=localStorage.getItem(KEY);return s?JSON.parse(s):null;}catch{return null;}}
+function save(){
   clearTimeout(saveTimer);
-  saveTimer = setTimeout(() => {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(projects)); } catch(e) { console.error(e); }
-    renderSaveStatus();
-  }, 700);
-  renderSaveStatus(true);
+  const el=document.getElementById("save-status");if(el)el.textContent="Saving…";
+  saveTimer=setTimeout(()=>{try{localStorage.setItem(KEY,JSON.stringify(projects));}catch(e){console.error(e);}const el2=document.getElementById("save-status");if(el2)el2.textContent=`✓ Saved (${(JSON.stringify(projects).length/1024).toFixed(1)}kb)`;},700);
 }
 
-// ── Helpers ────────────────────────────────────────────
-function daysLeft(d) { if(!d) return null; return Math.ceil((new Date(d) - new Date()) / 86400000); }
-function circleToNum(s) { return s.replace(/①/g," 1").replace(/②/g," 2").replace(/③/g," 3").replace(/④/g," 4"); }
-function esc(s) { return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
-
-function badgeHtml(deadline) {
-  const d = daysLeft(deadline);
-  if (d === null) return "";
-  const col = d<0?"#ef4444":d<=7?"#f59e0b":d<=30?"#3b82f6":"#10b981";
-  const bg  = d<0?"#fef2f2":d<=7?"#fffbeb":d<=30?"#eff6ff":"#ecfdf5";
-  const lbl = d<0?`${Math.abs(d)}日超過`:d===0?"今日！":`${d}日`;
-  return `<span class="badge" style="color:${col};background:${bg};">${lbl}</span>`;
-}
-
-function pbarHtml(pct, color) {
-  return `<div class="pbar-wrap"><div class="pbar-fill" style="width:${pct}%;background:${color};"></div></div>`;
-}
-
-function calcPct(p) {
-  if (p.tasks) {
-    const all = [...p.tasks, ...(p.subtasks||[])];
-    return all.length ? Math.round(all.filter(t=>t.done).length / all.length * 100) : 0;
-  }
-  if (p.reports) {
-    const tot = p.reports.reduce((a,r)=>a+r.steps.length, 0);
-    const dn  = p.reports.reduce((a,r)=>a+r.steps.filter(s=>s.done).length, 0);
-    return tot ? Math.round(dn/tot*100) : 0;
-  }
-  return 0;
-}
-
-function getProj() { return projects.find(p=>p.id===selected); }
-function updateProj(fn) { projects = projects.map(p=>p.id===selected?fn(p):p); saveData(); render(); }
-
-// ── Mutations ──────────────────────────────────────────
-window.toggleTask = tid => updateProj(p=>({...p, tasks:p.tasks.map(t=>t.id===tid?{...t,done:!t.done}:t)}));
-window.deleteTask = tid => updateProj(p=>({...p, tasks:p.tasks.filter(t=>t.id!==tid)}));
-window.addTask = () => {
-  const txt = document.getElementById('new-task-input')?.value?.trim();
-  const dl  = document.getElementById('new-deadline-input')?.value || "";
-  if (!txt) return;
-  updateProj(p=>({...p, tasks:[...p.tasks, {id:Date.now().toString(),text:txt,done:false,deadline:dl}]}));
-  document.getElementById('new-task-input').value="";
-  document.getElementById('new-deadline-input').value="";
-};
-window.toggleSubtask = sid => updateProj(p=>({...p, subtasks:p.subtasks.map(s=>
-  s.id===sid ? {...s,done:!s.done} :
-  s.children ? {...s,children:s.children.map(c=>c.id===sid?{...c,done:!c.done}:c)} : s
-)}));
-window.setSubtaskUrl = (sid,url) => updateProj(p=>({...p, subtasks:p.subtasks.map(s=>s.id===sid?{...s,url}:s)}));
-window.setSubtaskNote = (sid,note) => updateProj(p=>({...p, subtasks:p.subtasks.map(s=>
-  s.id===sid ? {...s,note} :
-  s.children ? {...s,children:s.children.map(c=>c.id===sid?{...c,note}:c)} : s
-)}));
-window.toggleParent = sid => updateProj(p=>({...p, subtasks:p.subtasks.map(s=>s.id===sid?{...s,open:!s.open}:s)}));
-window.toggleReport = rid => updateProj(p=>({...p, reports:p.reports.map(r=>r.id===rid?{...r,open:!r.open}:r)}));
-window.toggleStep = (rid,sid) => updateProj(p=>({...p, reports:p.reports.map(r=>r.id===rid?{...r,steps:r.steps.map(s=>s.id===sid?{...s,done:!s.done}:s)}:r)}));
-window.setReportUrl = (rid,url) => updateProj(p=>({...p, reports:p.reports.map(r=>r.id===rid?{...r,url}:r)}));
-window.clearReportUrl = rid => window.setReportUrl(rid,"");
-window.updateMemo = (pid,val) => { projects = projects.map(p=>p.id===pid?{...p,memo:val}:p); saveData(); };
-
-window.setView = v => { currentView=v; render(); };
-window.selectProject = id => { selected=id; currentView="project"; render(); };
-
-// ── UI toggles (no state change) ───────────────────────
-window.toggleSubtaskBody = id => {
-  const el=document.getElementById('stbody-'+id);
-  if(el) el.style.display=el.style.display==="block"?"none":"block";
-};
-window.toggleChildNote = id => {
-  const el=document.getElementById('cnote-'+id);
-  if(el) el.style.display=el.style.display==="block"?"none":"block";
-};
-window.toggleAccordion = id => {
-  const btn=document.getElementById('abtn-'+id);
-  const body=document.getElementById('abody-'+id);
-  if(!btn||!body) return;
-  const open=body.style.display==="block";
-  body.style.display=open?"none":"block";
-  btn.classList.toggle("open",!open);
-  btn.querySelector('.ac-arrow').textContent=open?"▼":"▲";
-};
-window.toggleAccordionSec = (aid,idx) => {
-  const el=document.getElementById(`asec-${aid}-${idx}`);
-  const arr=document.getElementById(`asec-arr-${aid}-${idx}`);
-  const secBtn=document.getElementById(`asec-btn-${aid}-${idx}`);
-  if(!el) return;
-  const open=el.style.display==="block";
-  // close all in same accordion
-  const wrap=document.getElementById('abody-'+aid);
-  if(wrap) {
-    wrap.querySelectorAll('[id^="asec-"]').forEach(e=>{ if(e.tagName!=="BUTTON"&&!e.id.includes('-arr-')&&!e.id.includes('-btn-')) e.style.display="none"; });
-    wrap.querySelectorAll('[id^="asec-arr-"]').forEach(e=>e.textContent="▼");
-    wrap.querySelectorAll('[id^="asec-btn-"]').forEach(e=>e.style.color="#374151");
-  }
-  if(!open){ el.style.display="block"; if(arr) arr.textContent="▲"; }
-};
-window.toggleTimelineDone = () => {
-  const chk=document.getElementById('hide-done-chk');
-  renderMain();
-};
-window.toggleReportBody = rid => {
-  const r = getProj().reports?.find(r=>r.id===rid);
-  if(r) window.toggleReport(rid); // uses state update
-};
-
-// ── Render helpers ─────────────────────────────────────
-function accordionHtml(id, icon, title, color, sections) {
-  let inner = sections.map((s,i)=>{
-    const content = s.items
-      ? `<ul class="sec-list">${s.items.map(it=>`<li>${esc(it)}</li>`).join("")}</ul>`
-      : `<div class="sec-content" id="asec-${id}-${i}" style="display:none;">${esc(s.content)}</div>`;
-    const realContent = s.items
-      ? `<ul class="sec-list" id="asec-${id}-${i}" style="display:none;">${s.items.map(it=>`<li>${esc(it)}</li>`).join("")}</ul>`
-      : `<div class="sec-content" id="asec-${id}-${i}" style="display:none;">${esc(s.content)}</div>`;
-    return `<div style="border-bottom:${i<sections.length-1?"1px solid #f3f4f6":"none"};">
-      <button id="asec-btn-${id}-${i}" class="sec-btn" onclick="toggleAccordionSec('${id}',${i})">
-        ${esc(s.title)}<span id="asec-arr-${id}-${i}" style="color:#9ca3af;font-weight:400;font-size:11px;">▼</span>
-      </button>
-      ${realContent}
-    </div>`;
+// ── SIDEBAR ────────────────────────────────────────────
+function updateSidebar(){
+  const bp=document.getElementById("btn-project"),bt=document.getElementById("btn-timeline");
+  [bp,bt].forEach(b=>{b.style.background="transparent";b.style.color="#9ca3af";b.style.boxShadow="none";});
+  const ab=currentView==="project"?bp:bt;ab.style.background="#fff";ab.style.color="#111";ab.style.boxShadow="0 1px 3px rgba(0,0,0,.1)";
+  document.getElementById("sidebar-projects").innerHTML=projects.map(p=>{
+    const tot=p.tasks?[...p.tasks,...(p.subtasks||[])].length:p.reports?p.reports.reduce((a,r)=>a+r.steps.length,0):0;
+    const dn=p.tasks?[...p.tasks,...(p.subtasks||[])].filter(t=>t.done).length:p.reports?p.reports.reduce((a,r)=>a+r.steps.filter(s=>s.done).length,0):0;
+    const act=selected===p.id&&currentView==="project";
+    return `<div onclick="selectProject('${p.id}')" style="padding:8px 18px;cursor:pointer;border-left:${act?`3px solid ${p.color}`:"3px solid transparent"};background:${act?"#f3f4f6":"transparent"};"><div style="display:flex;align-items:center;gap:7px;"><span style="width:8px;height:8px;border-radius:50%;background:${p.color};flex-shrink:0;"></span><span style="flex:1;font-size:12px;color:#1f2937;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${esc(p.title)}</span><span style="font-size:11px;color:#9ca3af;">${dn}/${tot}</span></div><div style="margin-left:15px;">${pbar(calcPct(p),p.color)}</div></div>`;
   }).join("");
-  return `<div class="accordion-wrap">
-    <button id="abtn-${id}" class="accordion-btn" onclick="toggleAccordion('${id}')">
-      <span>${esc(icon)} ${esc(title)}</span>
-      <span class="ac-arrow" style="margin-left:auto;color:#9ca3af;font-size:11px;">▼</span>
-    </button>
-    <div id="abody-${id}" class="accordion-inner">${inner}</div>
-  </div>`;
+}
+function refreshProgress(){
+  updateSidebar();
+  const proj=getProj(),pct=calcPct(proj);
+  const pb=document.getElementById("proj-pbar");if(pb)pb.querySelector(".pbar-fill").style.width=pct+"%";
+  const pp=document.getElementById("proj-pct");if(pp)pp.textContent=pct+"%";
 }
 
-function subtaskItemHtml(s, idx, color, isChild, isResearch) {
-  const bullet = isResearch
-    ? `<span style="width:20px;font-size:14px;text-align:center;flex-shrink:0;color:#9ca3af;">●</span>`
-    : `<span style="width:20px;height:20px;border-radius:50%;background:${s.done?color:"#e5e7eb"};color:${s.done?"#fff":"#6b7280"};font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">${isChild?"·":idx+1}</span>`;
-  const urlSection = "url" in s ? `<div style="margin-top:8px;">${
-    s.url
-      ? `<div style="display:flex;align-items:center;gap:6px;"><a href="${esc(s.url)}" target="_blank" style="flex:1;font-size:12px;color:${color};text-decoration:none;background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;padding:4px 10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block;">🔗 ${esc(s.url.replace("https://","").slice(0,50))}…</a><button onclick="setSubtaskUrl('${s.id}','')" style="background:none;border:none;color:#d1d5db;cursor:pointer;font-size:14px;">×</button></div>`
-      : `<input class="url-input" placeholder="URL or Google Drive link…" onblur="if(this.value){setSubtaskUrl('${s.id}',this.value);this.value='';}">`
-  }</div>` : "";
-  return `<div class="subtask-item" style="background:${s.done?"#f9fafb":"#fff"};opacity:${s.done?0.7:1};">
-    <div class="subtask-header" onclick="toggleSubtaskBody('${s.id}')">
-      ${bullet}
-      <span style="flex:1;font-size:${isChild?12:13}px;color:${s.done?"#9ca3af":"#1f2937"};text-decoration:${s.done?"line-through":"none"};">${esc(s.text)}</span>
-      <span style="font-size:11px;color:#9ca3af;">▼</span>
-    </div>
-    <div id="stbody-${s.id}" class="subtask-body">
-      <textarea style="width:100%;border:1px solid #e5e7eb;border-radius:6px;padding:8px 10px;font-size:12px;resize:vertical;min-height:80px;outline:none;box-sizing:border-box;color:#374151;margin-top:8px;" placeholder="Notes…" oninput="setSubtaskNote('${s.id}',this.value)">${esc(s.note||"")}</textarea>
-      ${urlSection}
-      <div style="margin-top:10px;display:flex;justify-content:flex-end;">
-        <button onclick="toggleSubtask('${s.id}')" style="font-size:12px;color:${color};background:none;border:1px solid ${color};border-radius:6px;padding:4px 12px;cursor:pointer;">${s.done?"✓ Done":"Mark as done"}</button>
-      </div>
-    </div>
-  </div>`;
-}
+// ── VIEW ───────────────────────────────────────────────
+window.setView=v=>{currentView=v;fullRender();};
+window.selectProject=id=>{selected=id;currentView="project";fullRender();};
 
-function renderTimeline() {
-  const hideDone = document.getElementById('hide-done-chk')?.checked ?? true;
-  const allItems = projects.flatMap(p => {
-    if (p.tasks) return p.tasks.filter(t=>t.deadline).map(t=>({key:t.id,label:t.text,deadline:t.deadline,done:t.done,color:p.color,proj:p.title}));
-    if (p.reports) return p.reports.flatMap(r=>[
-      {key:r.id+"_d",label:circleToNum(r.label.replace(/〈前期〉|〈後期〉/g,"").trim().replace("レポート","Report"))+" — Draft",deadline:r.deadline,done:r.steps[0]?.done,color:p.color,proj:p.title},
-      {key:r.id+"_f",label:circleToNum(r.label.replace(/〈前期〉|〈後期〉/g,"").trim().replace("レポート","Report"))+" — Final",deadline:r.finalDeadline,done:r.steps[3]?.done,color:p.color,proj:p.title},
-    ]);
-    return [];
+// ── MUTATIONS ──────────────────────────────────────────
+window.toggleTask=tid=>{
+  const t=getProj().tasks.find(t=>t.id===tid);if(!t)return;t.done=!t.done;save();
+  const row=document.getElementById("task-"+tid);
+  if(row){row.style.background=t.done?"#f9fafb":"#fff";row.style.opacity=t.done?"0.55":"1";row.querySelector("input").checked=t.done;const l=row.querySelector(".tlbl");l.style.color=t.done?"#9ca3af":"#1f2937";l.style.textDecoration=t.done?"line-through":"none";}
+  refreshProgress();
+};
+window.deleteTask=tid=>{projects=projects.map(p=>p.id===selected?{...p,tasks:p.tasks.filter(t=>t.id!==tid)}:p);save();document.getElementById("task-"+tid)?.remove();refreshProgress();};
+window.addTask=()=>{
+  const ti=document.getElementById("new-task-input"),di=document.getElementById("new-deadline-input");
+  const txt=ti.value.trim();if(!txt)return;
+  const nt={id:Date.now().toString(),text:txt,done:false,deadline:di.value||""};
+  projects=projects.map(p=>p.id===selected?{...p,tasks:[...p.tasks,nt]}:p);save();ti.value="";di.value="";
+  const c=document.getElementById("task-list");if(c){const d=document.createElement("div");d.innerHTML=taskRowHtml(nt,getProj().color);c.appendChild(d.firstElementChild);}
+  refreshProgress();
+};
+
+function findSt(sid){for(const s of getProj().subtasks||[]){if(s.id===sid)return s;if(s.children){const c=s.children.find(c=>c.id===sid);if(c)return c;}}return null;}
+function mutateSt(sid,fn){projects=projects.map(p=>p.id!==selected?p:{...p,subtasks:p.subtasks.map(s=>{if(s.id===sid)return fn(s);if(s.children)return{...s,children:s.children.map(c=>c.id===sid?fn(c):c)};return s;})});}
+
+window.toggleSubtask=sid=>{
+  mutateSt(sid,s=>({...s,done:!s.done}));save();
+  const s=findSt(sid),col=getProj().color;
+  const wrap=document.getElementById("stwrap-"+sid);if(wrap){wrap.style.background=s.done?"#f9fafb":"#fff";wrap.style.opacity=s.done?"0.7":"1";}
+  const lbl=document.getElementById("stlbl-"+sid);if(lbl){lbl.style.color=s.done?"#9ca3af":"#1f2937";lbl.style.textDecoration=s.done?"line-through":"none";}
+  const bul=document.getElementById("stbul-"+sid);if(bul&&!bul.dataset.dot){bul.style.background=s.done?col:"#e5e7eb";bul.style.color=s.done?"#fff":"#6b7280";}
+  document.querySelectorAll(`.markbtn-${sid}`).forEach(b=>b.textContent=s.done?"✓ Done":"Mark as done");
+  refreshProgress();
+};
+window.setSubtaskNote=(sid,note)=>{mutateSt(sid,s=>({...s,note}));save();};
+window.setSubtaskUrl=(sid,url)=>{mutateSt(sid,s=>({...s,url}));save();const sec=document.getElementById("sturl-"+sid);if(sec)sec.innerHTML=urlSec(sid,url,getProj().color);};
+window.toggleParent=sid=>{const p=getProj(),s=p.subtasks.find(s=>s.id===sid);if(!s)return;s.open=!s.open;save();const cw=document.getElementById("children-"+sid),ar=document.getElementById("par-arrow-"+sid);if(cw)cw.style.display=s.open?"block":"none";if(ar)ar.textContent=s.open?"▲":"▼";};
+window.toggleStBody=sid=>{const b=document.getElementById("stbody-"+sid),ar=document.getElementById("starrow-"+sid);if(!b)return;const o=b.style.display==="block";b.style.display=o?"none":"block";if(ar)ar.textContent=o?"▼":"▲";};
+window.toggleChildBody=sid=>{const b=document.getElementById("cbody-"+sid),ar=document.getElementById("carrow-"+sid);if(!b)return;const o=b.style.display==="block";b.style.display=o?"none":"block";if(ar)ar.textContent=o?"▼":"▲";};
+
+window.toggleReport=rid=>{const p=getProj(),r=p.reports.find(r=>r.id===rid);if(!r)return;r.open=!r.open;save();const b=document.getElementById("rbody-"+rid),ar=document.getElementById("rarrow-"+rid);if(b)b.style.display=r.open?"block":"none";if(ar)ar.textContent=r.open?"▲":"▼";};
+window.toggleStep=(rid,sid)=>{
+  const p=getProj(),r=p.reports.find(r=>r.id===rid);if(!r)return;const s=r.steps.find(s=>s.id===sid);if(!s)return;s.done=!s.done;save();
+  const row=document.getElementById("step-"+sid);if(row){row.querySelector("input").checked=s.done;const l=row.querySelector(".slbl");l.style.color=s.done?"#9ca3af":"#374151";l.style.textDecoration=s.done?"line-through":"none";}
+  const dn=r.steps.filter(s=>s.done).length,rPct=Math.round(dn/r.steps.length*100);
+  const rb=document.getElementById("rbar-"+rid);if(rb)rb.querySelector(".pbar-fill").style.width=rPct+"%";
+  const rp=document.getElementById("rprog-"+rid);if(rp)rp.textContent=`Progress: ${dn}/${r.steps.length} steps completed　／　Final: ${r.finalDeadline?.slice(5).replace("-","/")}`;
+  refreshProgress();
+};
+window.setReportUrl=(rid,url)=>{const p=getProj(),r=p.reports.find(r=>r.id===rid);if(!r)return;r.url=url;save();const w=document.getElementById("rurl-"+rid);if(w)w.innerHTML=reportUrl(rid,url,p.color);};
+window.clearReportUrl=rid=>setReportUrl(rid,"");
+window.updateMemo=(pid,val)=>{const p=projects.find(p=>p.id===pid);if(p)p.memo=val;save();};
+
+window.toggleAccordion=id=>{const btn=document.getElementById("abtn-"+id),body=document.getElementById("abody-"+id);if(!btn||!body)return;const o=body.style.display==="block";body.style.display=o?"none":"block";btn.classList.toggle("open",!o);btn.querySelector(".ac-arrow").textContent=o?"▼":"▲";};
+window.toggleAccSec=(aid,idx)=>{const body=document.getElementById("abody-"+aid);if(!body)return;body.querySelectorAll("[data-sec]").forEach((el,i)=>{const ar=document.getElementById(`asarr-${aid}-${i}`);if(i===idx){const o=el.style.display==="block";el.style.display=o?"none":"block";if(ar)ar.textContent=o?"▼":"▲";}else{el.style.display="none";if(ar)ar.textContent="▼";}});};
+window.toggleTimelineDone=()=>renderMain();
+
+// ── HTML BUILDERS ──────────────────────────────────────
+function urlSec(sid,url,col){if(url)return `<div style="display:flex;align-items:center;gap:6px;"><a href="${esc(url)}" target="_blank" style="flex:1;font-size:12px;color:${col};text-decoration:none;background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;padding:4px 10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block;">🔗 ${esc(url.replace("https://","").slice(0,50))}…</a><button onclick="setSubtaskUrl('${sid}','')" style="background:none;border:none;color:#d1d5db;cursor:pointer;font-size:14px;">×</button></div>`;return `<input class="url-input" placeholder="URL or Google Drive link…" onblur="if(this.value){setSubtaskUrl('${sid}',this.value);this.value='';}">"`+`>`;}
+function reportUrl(rid,url,col){if(url)return `<div style="display:flex;align-items:center;gap:6px;"><a href="${esc(url)}" target="_blank" style="flex:1;font-size:12px;color:${col};text-decoration:none;background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;padding:5px 10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block;">📄 ${esc(url.replace("https://","").slice(0,45))}…</a><button onclick="clearReportUrl('${rid}')" style="background:none;border:none;color:#d1d5db;cursor:pointer;font-size:14px;">×</button></div>`;return `<input class="url-input" placeholder="Google Drive URL…" onblur="if(this.value){setReportUrl('${rid}',this.value);this.value='';}">"`+`>`;}
+function accordionHtml(id,icon,title,sections){
+  const inner=sections.map((s,i)=>{const content=s.items?`<ul data-sec style="margin:0 0 10px;padding:0 16px 0 32px;display:none;">${s.items.map(it=>`<li style="font-size:12px;color:#4b5563;line-height:1.9;">${esc(it)}</li>`).join("")}</ul>`:`<div data-sec style="font-size:12px;color:#4b5563;line-height:1.9;padding:0 16px 12px;white-space:pre-wrap;display:none;">${esc(s.content)}</div>`;return `<div style="border-bottom:${i<sections.length-1?"1px solid #f3f4f6":"none"};"><button class="sec-btn" onclick="toggleAccSec('${id}',${i})">${esc(s.title)}<span id="asarr-${id}-${i}" style="color:#9ca3af;font-weight:400;font-size:11px;">▼</span></button>${content}</div>`;}).join("");
+  return `<div class="accordion-wrap"><button id="abtn-${id}" class="accordion-btn" onclick="toggleAccordion('${id}')"><span>${icon} ${esc(title)}</span><span class="ac-arrow" style="margin-left:auto;color:#9ca3af;font-size:11px;">▼</span></button><div id="abody-${id}" class="accordion-inner" style="display:none;">${inner}</div></div>`;
+}
+function stBodyHtml(s,col,hasUrl){
+  return `<div id="stbody-${s.id}" class="subtask-body" style="display:none;"><textarea style="width:100%;border:1px solid #e5e7eb;border-radius:6px;padding:8px 10px;font-size:12px;resize:vertical;min-height:80px;outline:none;box-sizing:border-box;color:#374151;margin-top:8px;" placeholder="Notes…" oninput="setSubtaskNote('${s.id}',this.value)">${esc(s.note||"")}</textarea>${hasUrl?`<div id="sturl-${s.id}" style="margin-top:8px;">${urlSec(s.id,s.url||"",col)}</div>`:""}<div style="margin-top:10px;display:flex;justify-content:flex-end;"><button class="markbtn-${s.id}" onclick="toggleSubtask('${s.id}')" style="font-size:12px;color:${col};background:none;border:1px solid ${col};border-radius:6px;padding:4px 12px;cursor:pointer;">${s.done?"✓ Done":"Mark as done"}</button></div></div>`;
+}
+function stItemHtml(s,idx,col,isResearch){
+  const bul=isResearch?`<span data-dot="1" id="stbul-${s.id}" style="width:20px;font-size:14px;text-align:center;flex-shrink:0;color:#9ca3af;">●</span>`:`<span id="stbul-${s.id}" style="width:20px;height:20px;border-radius:50%;background:${s.done?col:"#e5e7eb"};color:${s.done?"#fff":"#6b7280"};font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">${idx+1}</span>`;
+  return `<div id="stwrap-${s.id}" class="subtask-item" style="background:${s.done?"#f9fafb":"#fff"};opacity:${s.done?0.7:1};"><div class="subtask-header" onclick="toggleStBody('${s.id}')">${bul}<span id="stlbl-${s.id}" style="flex:1;font-size:13px;color:${s.done?"#9ca3af":"#1f2937"};text-decoration:${s.done?"line-through":"none"};">${esc(s.text)}</span><span id="starrow-${s.id}" style="font-size:11px;color:#9ca3af;">▼</span></div>${stBodyHtml(s,col,"url" in s)}</div>`;
+}
+function parentHtml(s,idx,col){
+  const childDone=s.children.filter(c=>c.done).length;
+  const children=s.children.map((c,ci)=>`<div id="stwrap-${c.id}" class="child-row" style="background:${c.done?"#f9fafb":"#fff"};opacity:${c.done?0.7:1};"><div class="child-header" onclick="toggleChildBody('${c.id}')"><span style="color:#9ca3af;font-size:12px;width:20px;flex-shrink:0;">${ci+1}.</span><span id="stlbl-${c.id}" style="flex:1;font-size:12px;color:${c.done?"#9ca3af":"#374151"};text-decoration:${c.done?"line-through":"none"};">${esc(c.text)}</span><span id="carrow-${c.id}" style="font-size:10px;color:#9ca3af;">▼</span></div><div id="cbody-${c.id}" class="child-body" style="display:none;"><textarea style="width:100%;border:1px solid #e5e7eb;border-radius:6px;padding:6px 10px;font-size:12px;resize:vertical;min-height:60px;outline:none;box-sizing:border-box;color:#374151;" placeholder="Notes…" oninput="setSubtaskNote('${c.id}',this.value)">${esc(c.note||"")}</textarea><div style="margin-top:6px;display:flex;justify-content:flex-end;"><button class="markbtn-${c.id}" onclick="toggleSubtask('${c.id}')" style="font-size:11px;color:${col};background:none;border:1px solid ${col};border-radius:6px;padding:3px 10px;cursor:pointer;">${c.done?"✓ Done":"Mark as done"}</button></div></div></div>`).join("");
+  return `<div style="margin-bottom:5px;"><div style="border:1px solid #e5e7eb;border-radius:8px;background:#fff;"><div id="stwrap-${s.id}" onclick="toggleParent('${s.id}')" style="display:flex;align-items:center;gap:10px;padding:9px 12px;cursor:pointer;user-select:none;"><span id="stbul-${s.id}" style="width:20px;height:20px;border-radius:50%;background:${s.done?col:"#e5e7eb"};color:${s.done?"#fff":"#6b7280"};font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">${idx+1}</span><span id="stlbl-${s.id}" style="flex:1;font-size:13px;color:${s.done?"#9ca3af":"#1f2937"};text-decoration:${s.done?"line-through":"none"};">${esc(s.text)}</span><span style="font-size:11px;color:#9ca3af;margin-right:4px;">${childDone}/${s.children.length}</span><span id="par-arrow-${s.id}" style="font-size:11px;color:#9ca3af;">${s.open?"▲":"▼"}</span></div></div><div id="children-${s.id}" style="margin-left:20px;border-left:2px solid #e5e7eb;padding-left:10px;margin-top:3px;display:${s.open?"block":"none"};">${children}</div></div>`;
+}
+function taskRowHtml(t,col){return `<div id="task-${t.id}" class="task-row" style="background:${t.done?"#f9fafb":"#fff"};opacity:${t.done?0.55:1};"><input type="checkbox" ${t.done?"checked":""} onchange="toggleTask('${t.id}')" style="width:15px;height:15px;accent-color:${col};flex-shrink:0;"><span class="tlbl" style="flex:1;font-size:13px;color:${t.done?"#9ca3af":"#1f2937"};text-decoration:${t.done?"line-through":"none"};">${esc(t.text)}</span>${t.deadline?`<span style="font-size:11px;color:#6b7280;white-space:nowrap;">${t.deadline.slice(5).replace("-","/")} </span>`:""}${t.deadline?badge(t.deadline):""}<button onclick="deleteTask('${t.id}')" style="background:none;border:none;color:#d1d5db;cursor:pointer;font-size:15px;padding:0 2px;">×</button></div>`;}
+
+// ── RENDER ─────────────────────────────────────────────
+function renderTimeline(){
+  const hd=document.getElementById("hide-done-chk"),hideDone=hd?hd.checked:true;
+  const all=projects.flatMap(p=>{
+    if(p.tasks)return p.tasks.filter(t=>t.deadline).map(t=>({key:t.id,label:t.text,deadline:t.deadline,done:t.done,color:p.color,proj:p.title}));
+    if(p.reports)return p.reports.flatMap(r=>[{key:r.id+"_d",label:c2n(r.label.replace(/〈前期〉|〈後期〉/g,"").trim().replace("レポート","Report"))+" — Draft",deadline:r.deadline,done:r.steps[0]?.done,color:p.color,proj:p.title},{key:r.id+"_f",label:c2n(r.label.replace(/〈前期〉|〈後期〉/g,"").trim().replace("レポート","Report"))+" — Final",deadline:r.finalDeadline,done:r.steps[3]?.done,color:p.color,proj:p.title}]);
+    return[];
   }).sort((a,b)=>new Date(a.deadline)-new Date(b.deadline));
+  const filtered=hideDone?all.filter(t=>!t.done):all;
+  const groups={};filtered.forEach(t=>{const k=t.deadline?.slice(0,7)||"未定";if(!groups[k])groups[k]=[];groups[k].push(t);});
+  const now=new Date(),cm=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,"0")}`;
+  const sem=k=>{const m=parseInt(k.split("-")[1]);if(m>=6&&m<=9)return "〈前期〉";if(m>=10||m<=1)return "〈後期〉";return "";};
+  const ml=k=>{if(k==="未定")return "TBD";const[y,m]=k.split("-");return `${sem(k)} ${y}年${parseInt(m)}月`;};
+  let h=`<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;"><div style="font-size:18px;font-weight:700;color:#111;">📅 Tasks &amp; Deadlines</div><label style="display:flex;align-items:center;gap:6px;font-size:12px;color:#6b7280;cursor:pointer;user-select:none;"><input type="checkbox" id="hide-done-chk" ${hideDone?"checked":""} onchange="toggleTimelineDone()" style="accent-color:#4f46e5;">完了済みを隠す</label></div>`;
+  if(!filtered.length)return h+`<div style="text-align:center;padding:60px 0;color:#9ca3af;font-size:14px;">🎉 All done!</div>`;
+  Object.keys(groups).forEach(mo=>{
+    const isCur=mo===cm;
+    h+=`<div style="margin-bottom:22px;"><div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><span style="font-size:13px;font-weight:700;color:${isCur?"#4f46e5":"#374151"};">${isCur?"▶ ":""}${ml(mo)}</span><div style="flex:1;height:1px;background:#e5e7eb;"></div><span style="font-size:11px;color:#9ca3af;">${groups[mo].length}件</span></div>`;
+    groups[mo].forEach(t=>{const lbl=t.proj.length>8?t.proj.slice(0,8)+"…":t.proj;h+=`<div class="timeline-row" style="border-left:3px solid ${t.color};opacity:${t.done?0.4:1};"><span style="font-size:12px;color:#9ca3af;width:28px;flex-shrink:0;">${t.deadline?.slice(8)}日</span><span style="flex:1;font-size:13px;color:#1f2937;text-decoration:${t.done?"line-through":"none"};">${esc(t.label)}<span style="font-size:10px;font-weight:700;color:${t.color};margin-left:6px;">${esc(lbl)}</span></span>${badge(t.deadline)}</div>`;});
+    h+=`</div>`;
+  });
+  return h;
+}
 
-  const filtered = hideDone ? allItems.filter(t=>!t.done) : allItems;
-  const groups = {};
-  filtered.forEach(t=>{ const k=t.deadline?.slice(0,7)||"未定"; if(!groups[k]) groups[k]=[]; groups[k].push(t); });
-  const now = new Date();
-  const currentMonth = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,"0")}`;
-  const semOf = k => { const m=parseInt(k.split("-")[1]); if(m>=6&&m<=9)return "〈前期〉"; if(m>=10||m<=1)return "〈後期〉"; return ""; };
-  const mLabel = k => { if(k==="未定")return "TBD"; const[y,m]=k.split("-"); return `${semOf(k)} ${y}年${parseInt(m)}月`; };
+function renderProjectView(){
+  const proj=getProj(),isThesis=proj.id==="thesis",pct=calcPct(proj),col=proj.color;
+  let h=`<div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;"><span style="width:12px;height:12px;border-radius:50%;background:${col};flex-shrink:0;"></span><div style="font-size:20px;font-weight:700;color:#111;">${esc(proj.title)}</div></div>${pbar(pct,col,"proj-pbar")}<div style="display:flex;justify-content:space-between;font-size:12px;color:#6b7280;margin-bottom:20px;"><span>Progress</span><span id="proj-pct" style="font-weight:700;color:${col};">${pct}%</span></div>`;
 
-  let html = `<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
-    <div style="font-size:18px;font-weight:700;color:#111;">📅 Tasks &amp; Deadlines</div>
-    <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:#6b7280;cursor:pointer;user-select:none;">
-      <input type="checkbox" id="hide-done-chk" ${hideDone?"checked":""} onchange="renderMain()" style="accent-color:#4f46e5;">完了済みを隠す
-    </label>
-  </div>`;
+  if(isThesis){
+    // ── LEFT: Outline + Research + Memo ──
+    let left="";
+    ["研究内容","Research"].forEach(group=>{
+      const items=proj.subtasks.filter(s=>s.group===group);
+      const allSub=items.flatMap(s=>s.children?[s,...s.children]:[s]);
+      const dn=allSub.filter(s=>s.done).length;
+      const label=group==="研究内容"?"Outline":"Research";
+      left+=`<div style="margin-bottom:20px;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><div class="slbl" style="margin-bottom:0;">${label}</div><div style="flex:1;height:1px;background:#e5e7eb;"></div><span style="font-size:11px;color:#9ca3af;">${dn}/${items.length}</span></div>`;
+      items.forEach((s,idx)=>{if(s.isParent)left+=parentHtml(s,idx,col);else left+=stItemHtml(s,idx,col,group==="Research");});
+      left+=`</div>`;
+    });
+    left+=`<div style="margin-top:4px;"><div class="slbl">Memo</div><textarea class="memo-area" placeholder="Notes, references, feedback…" oninput="updateMemo('${proj.id}',this.value)">${esc(proj.memo||"")}</textarea></div>`;
 
-  if (!filtered.length) {
-    html += `<div style="text-align:center;padding:60px 0;color:#9ca3af;font-size:14px;">🎉 All done!</div>`;
+    // ── RIGHT: Links + 覚書accordion + Tasks ──
+    let right=`<div class="slbl">Links &amp; Reference</div><div style="display:flex;flex-direction:column;gap:6px;margin-bottom:4px;"><a href="https://www.myendnoteweb.com/EndNoteWeb.html" target="_blank" class="link-btn" style="color:${col};">🔗 EndNote Web</a><a href="https://docs.google.com/spreadsheets/d/1cIJRqCX5O-vT-tAwC5mpi9WARtgT6D0umUuBo27tXkg/edit?resourcekey=&gid=329566813#gid=329566813" target="_blank" class="link-btn" style="color:${col};">📊 アンケート結果</a></div>${accordionHtml("guide","📄","覚書：レポート・修論の書き方",GUIDE_SECTIONS)}<div style="margin-top:20px;"><div class="slbl">Tasks</div><div id="task-list">${proj.tasks.map(t=>taskRowHtml(t,col)).join("")}</div><div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;"><input id="new-task-input" class="add-input" placeholder="New task…" onkeydown="if(event.key==='Enter')addTask();"><input id="new-deadline-input" type="date" style="border:1px solid #e5e7eb;border-radius:8px;padding:7px 8px;font-size:12px;outline:none;color:#374151;"><button onclick="addTask()" style="background:${col};color:#fff;border:none;border-radius:8px;padding:7px 14px;font-size:12px;cursor:pointer;font-weight:600;">Add</button></div></div>`;
+
+    h+=`<div class="two-col"><div class="col-left">${left}</div><div class="col-right">${right}</div></div>`;
+
   } else {
-    Object.keys(groups).forEach(month => {
-      const isCurrent = month===currentMonth;
-      html += `<div style="margin-bottom:22px;">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-          <span style="font-size:13px;font-weight:700;color:${isCurrent?"#4f46e5":"#374151"};">${isCurrent?"▶ ":""}${mLabel(month)}</span>
-          <div style="flex:1;height:1px;background:#e5e7eb;"></div>
-          <span style="font-size:11px;color:#9ca3af;">${groups[month].length}件</span>
-        </div>`;
-      groups[month].forEach(t => {
-        const proj = t.proj.length>8?t.proj.slice(0,8)+"…":t.proj;
-        html += `<div class="timeline-row" style="border-left:3px solid ${t.color};opacity:${t.done?0.4:1};">
-          <span style="font-size:12px;color:#9ca3af;width:28px;flex-shrink:0;">${t.deadline?.slice(8)}日</span>
-          <span style="flex:1;font-size:13px;color:#1f2937;line-height:1.4;text-decoration:${t.done?"line-through":"none"};">
-            ${esc(t.label)}<span style="font-size:10px;font-weight:700;color:${t.color};margin-left:6px;opacity:.85;">${esc(proj)}</span>
-          </span>
-          ${badgeHtml(t.deadline)}
-        </div>`;
+    // ── course (single col) ──
+    if(SYLLABUS[proj.id])h+=accordionHtml("syl-"+proj.id,"🤍","Syllabus",SYLLABUS[proj.id].sections);
+    h+=`<div class="slbl" style="margin-top:20px;">Reports</div>`;
+    ["前期","後期"].forEach(sem=>{
+      const semR=proj.reports.filter(r=>r.label.includes(`〈${sem}〉`));if(!semR.length)return;
+      h+=`<div><div style="display:flex;align-items:center;gap:8px;margin:10px 0 6px;"><span style="font-size:12px;font-weight:700;color:${col};">〈${sem}〉</span><div style="flex:1;height:1px;background:#e5e7eb;"></div></div>`;
+      semR.forEach(r=>{
+        const dn=r.steps.filter(s=>s.done).length,rPct=Math.round(dn/r.steps.length*100);
+        const sl=c2n(r.label.replace(/〈前期〉|〈後期〉/g,"").trim().replace("レポート","Report"));
+        h+=`<div class="report-card"><div class="report-header" onclick="toggleReport('${r.id}')"><div style="flex:1;"><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;"><span style="font-size:13px;font-weight:600;color:#1f2937;">${esc(sl)}</span><span style="font-size:11px;color:#6b7280;">Due ${r.deadline?.slice(5).replace("-","/")}</span>${badge(r.deadline)}</div>${pbar(rPct,col,"rbar-"+r.id)}<span id="rprog-${r.id}" style="font-size:11px;color:#9ca3af;">Progress: ${dn}/${r.steps.length} steps completed　／　Final: ${r.finalDeadline?.slice(5).replace("-","/")}</span></div><span id="rarrow-${r.id}" style="font-size:12px;color:#9ca3af;">${r.open?"▲":"▼"}</span></div><div id="rbody-${r.id}" class="report-body" style="display:${r.open?"block":"none"};">`;
+        r.steps.forEach((s,i)=>{h+=`<div id="step-${s.id}" style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:${i<r.steps.length-1?"1px solid #f9fafb":"none"};"><input type="checkbox" ${s.done?"checked":""} onchange="toggleStep('${r.id}','${s.id}')" style="width:15px;height:15px;accent-color:${col};flex-shrink:0;"><span class="slbl2" style="flex:1;font-size:13px;color:${s.done?"#9ca3af":"#374151"};text-decoration:${s.done?"line-through":"none"};"><span style="font-size:11px;color:#d1d5db;margin-right:6px;">${i+1}.</span>${esc(s.text)}</span>${i===3?badge(r.finalDeadline):""}</div>`;});
+        h+=`<div id="rurl-${r.id}" style="margin-top:10px;">${reportUrl(r.id,r.url,col)}</div></div></div>`;
       });
-      html += `</div>`;
+      h+=`</div>`;
     });
+    h+=`<div style="margin-top:24px;"><div class="slbl">Memo</div><textarea class="memo-area" placeholder="Notes, references, feedback…" oninput="updateMemo('${proj.id}',this.value)">${esc(proj.memo||"")}</textarea></div>`;
   }
-  return html;
+  h+=`<div id="save-status" style="font-size:11px;color:#9ca3af;margin-top:16px;">✓ Saved</div>`;
+  return h;
 }
+// Fix: step labels selector collision with .slbl class
+function renderProjectView_fixStepLabel(html){return html.replace(/class="slbl2"/g,'class="slbl"');}
 
-function renderProjectView() {
-  const proj = getProj();
-  const isThesis = proj.id==="thesis";
-  const pct = calcPct(proj);
-  let html = `<div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
-    <span style="width:12px;height:12px;border-radius:50%;background:${proj.color};flex-shrink:0;"></span>
-    <div style="font-size:20px;font-weight:700;color:#111;">${esc(proj.title)}</div>
-  </div>
-  ${pbarHtml(pct,proj.color)}
-  <div style="display:flex;justify-content:space-between;font-size:12px;color:#6b7280;margin-bottom:20px;">
-    <span>Progress</span><span style="font-weight:700;color:${proj.color};">${pct}%</span>
-  </div>`;
-
-  // Links (thesis only)
-  if (isThesis) {
-    html += `<div style="margin-bottom:24px;">
-      <div style="font-size:10px;font-weight:700;color:#9ca3af;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">Links</div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;">
-        <a href="https://www.myendnoteweb.com/EndNoteWeb.html" target="_blank" class="link-btn" style="color:${proj.color};">🔗 EndNote Web</a>
-        <a href="https://docs.google.com/spreadsheets/d/1cIJRqCX5O-vT-tAwC5mpi9WARtgT6D0umUuBo27tXkg/edit?resourcekey=&gid=329566813#gid=329566813" target="_blank" class="link-btn" style="color:${proj.color};">📊 アンケート結果</a>
-      </div>
-    </div>`;
-  }
-
-  // Tasks (thesis)
-  if (isThesis) {
-    html += `<div><div style="font-size:10px;font-weight:700;color:#9ca3af;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">Tasks</div>`;
-    proj.tasks.forEach(t => {
-      html += `<div class="task-row${t.done?" done":""}">
-        <input type="checkbox" ${t.done?"checked":""} onchange="toggleTask('${t.id}')" style="width:15px;height:15px;accent-color:${proj.color};flex-shrink:0;">
-        <span style="flex:1;font-size:13px;color:${t.done?"#9ca3af":"#1f2937"};text-decoration:${t.done?"line-through":"none"};">${esc(t.text)}</span>
-        ${t.deadline?`<span style="font-size:11px;color:#6b7280;white-space:nowrap;">Due ${t.deadline.slice(5).replace("-","/")} </span>`:""} 
-        ${t.deadline?badgeHtml(t.deadline):""}
-        <button onclick="deleteTask('${t.id}')" style="background:none;border:none;color:#d1d5db;cursor:pointer;font-size:15px;padding:0 2px;">×</button>
-      </div>`;
-    });
-    html += `<div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
-      <input id="new-task-input" class="add-input" placeholder="Add a new task…" onkeydown="if(event.key==='Enter')addTask();">
-      <input id="new-deadline-input" type="date" style="border:1px solid #e5e7eb;border-radius:8px;padding:8px 10px;font-size:13px;outline:none;color:#374151;">
-      <button onclick="addTask()" style="background:${proj.color};color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:13px;cursor:pointer;font-weight:600;">Add</button>
-    </div></div>`;
-  }
-
-  // Subtasks (thesis)
-  if (isThesis && proj.subtasks) {
-    html += `<div style="margin-top:24px;">`;
-    ["研究内容","Research"].forEach(group => {
-      const items = proj.subtasks.filter(s=>s.group===group);
-      const allSub = items.flatMap(s=>s.children?[s,...s.children]:[s]);
-      const dn = allSub.filter(s=>s.done).length;
-      const label = group==="研究内容"?"Outline":"Research";
-      html += `<div style="margin-bottom:20px;">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
-          <div style="font-size:10px;font-weight:700;color:#9ca3af;letter-spacing:1px;text-transform:uppercase;">${label}</div>
-          <div style="flex:1;height:1px;background:#e5e7eb;"></div>
-          <span style="font-size:11px;color:#9ca3af;">${dn}/${items.length}</span>
-        </div>`;
-      items.forEach((s,idx) => {
-        if (s.isParent) {
-          const childDone = s.children.filter(c=>c.done).length;
-          html += `<div style="margin-bottom:5px;">
-            <div style="border:1px solid #e5e7eb;border-radius:8px;background:#fff;">
-              <div onclick="toggleParent('${s.id}')" style="display:flex;align-items:center;gap:10px;padding:9px 12px;cursor:pointer;">
-                <span style="width:20px;height:20px;border-radius:50%;background:${s.done?proj.color:"#e5e7eb"};color:${s.done?"#fff":"#6b7280"};font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">${idx+1}</span>
-                <span style="flex:1;font-size:13px;color:${s.done?"#9ca3af":"#1f2937"};text-decoration:${s.done?"line-through":"none"};">${esc(s.text)}</span>
-                <span style="font-size:11px;color:#9ca3af;margin-right:4px;">${childDone}/${s.children.length}</span>
-                <span style="font-size:11px;color:#9ca3af;">${s.open?"▲":"▼"}</span>
-              </div>
-            </div>`;
-          if (s.open) {
-            html += `<div style="margin-left:20px;border-left:2px solid #e5e7eb;padding-left:10px;margin-top:3px;">`;
-            s.children.forEach((c,ci) => {
-              html += `<div style="border:1px solid #e5e7eb;border-radius:8px;margin-bottom:4px;background:${c.done?"#f9fafb":"#fff"};opacity:${c.done?0.7:1};">
-                <div onclick="toggleChildNote('${c.id}')" style="display:flex;align-items:center;gap:8px;padding:7px 12px;cursor:pointer;">
-                  <span style="color:#9ca3af;font-size:12px;width:20px;flex-shrink:0;">${ci+1}.</span>
-                  <span style="flex:1;font-size:12px;color:${c.done?"#9ca3af":"#374151"};text-decoration:${c.done?"line-through":"none"};">${esc(c.text)}</span>
-                  <span style="font-size:10px;color:#9ca3af;">▼</span>
-                </div>
-                <div id="cnote-${c.id}" class="child-note" style="padding:6px 12px 10px 40px;">
-                  <textarea style="width:100%;border:1px solid #e5e7eb;border-radius:6px;padding:6px 10px;font-size:12px;resize:vertical;min-height:60px;outline:none;box-sizing:border-box;color:#374151;" placeholder="Notes…" oninput="setSubtaskNote('${c.id}',this.value)">${esc(c.note||"")}</textarea>
-                  <div style="margin-top:6px;display:flex;justify-content:flex-end;">
-                    <button onclick="toggleSubtask('${c.id}')" style="font-size:11px;color:${proj.color};background:none;border:1px solid ${proj.color};border-radius:6px;padding:3px 10px;cursor:pointer;">${c.done?"✓ Done":"Mark as done"}</button>
-                  </div>
-                </div>
-              </div>`;
-            });
-            html += `</div>`;
-          }
-          html += `</div>`;
-        } else {
-          html += subtaskItemHtml(s, idx, proj.color, false, group==="Research");
-        }
-      });
-      html += `</div>`;
-    });
-    html += `</div>`;
-  }
-
-  // Reports (courses)
-  if (!isThesis) {
-    if (SYLLABUS[proj.id]) {
-      html += accordionHtml("syl-"+proj.id, "🤍", "Syllabus", proj.color, SYLLABUS[proj.id].sections);
-    }
-    html += `<div style="font-size:10px;font-weight:700;color:#9ca3af;letter-spacing:1px;text-transform:uppercase;margin:20px 0 8px;">Reports</div>`;
-    ["前期","後期"].forEach(sem => {
-      const semReports = proj.reports.filter(r=>r.label.includes(`〈${sem}〉`));
-      if (!semReports.length) return;
-      html += `<div>
-        <div style="display:flex;align-items:center;gap:8px;margin:10px 0 6px;">
-          <span style="font-size:12px;font-weight:700;color:${proj.color};">〈${sem}〉</span>
-          <div style="flex:1;height:1px;background:#e5e7eb;"></div>
-        </div>`;
-      semReports.forEach(r => {
-        const dn = r.steps.filter(s=>s.done).length;
-        const rPct = Math.round(dn/r.steps.length*100);
-        const shortLabel = circleToNum(r.label.replace(/〈前期〉|〈後期〉/g,"").trim().replace("レポート","Report"));
-        html += `<div class="report-card">
-          <div class="report-header" onclick="toggleReport('${r.id}')">
-            <div style="flex:1;">
-              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-                <span style="font-size:13px;font-weight:600;color:#1f2937;">${esc(shortLabel)}</span>
-                <span style="font-size:11px;color:#6b7280;">Due ${r.deadline?.slice(5).replace("-","/")}</span>
-                ${badgeHtml(r.deadline)}
-              </div>
-              ${pbarHtml(rPct,proj.color)}
-              <span style="font-size:11px;color:#9ca3af;">Progress: ${dn}/${r.steps.length} steps completed　／　Final: ${r.finalDeadline?.slice(5).replace("-","/")} </span>
-            </div>
-            <span style="font-size:12px;color:#9ca3af;">${r.open?"▲":"▼"}</span>
-          </div>`;
-        if (r.open) {
-          html += `<div class="report-body">`;
-          r.steps.forEach((s,i) => {
-            html += `<div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:${i<r.steps.length-1?"1px solid #f9fafb":"none"};">
-              <input type="checkbox" ${s.done?"checked":""} onchange="toggleStep('${r.id}','${s.id}')" style="width:15px;height:15px;accent-color:${proj.color};flex-shrink:0;">
-              <span style="flex:1;font-size:13px;color:${s.done?"#9ca3af":"#374151"};text-decoration:${s.done?"line-through":"none"};">
-                <span style="font-size:11px;color:#d1d5db;margin-right:6px;">${i+1}.</span>${esc(s.text)}
-              </span>
-              ${i===3?badgeHtml(r.finalDeadline):""}
-            </div>`;
-          });
-          html += `<div style="margin-top:10px;">${
-            r.url
-              ? `<div style="display:flex;align-items:center;gap:6px;"><a href="${esc(r.url)}" target="_blank" style="flex:1;font-size:12px;color:${proj.color};text-decoration:none;background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;padding:5px 10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block;">📄 ${esc(r.url.replace("https://","").slice(0,45))}…</a><button onclick="clearReportUrl('${r.id}')" style="background:none;border:none;color:#d1d5db;cursor:pointer;font-size:14px;">×</button></div>`
-              : `<input class="url-input" placeholder="Google Drive URL…" onblur="if(this.value){setReportUrl('${r.id}',this.value);this.value='';}"`+`>`
-          }</div></div>`;
-        }
-        html += `</div>`;
-      });
-      html += `</div>`;
-    });
-  }
-
-  // Memo
-  html += `<div style="margin-top:24px;">
-    <div style="font-size:10px;font-weight:700;color:#9ca3af;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">Memo</div>
-    <textarea class="memo-area" placeholder="Notes, references, feedback…" oninput="updateMemo('${proj.id}',this.value)">${esc(proj.memo||"")}</textarea>
-  </div>`;
-
-  if (isThesis) {
-    html += accordionHtml("guide", "📄", "覚書：レポート・修論の書き方", proj.color, GUIDE_SECTIONS);
-  }
-
-  html += `<div id="save-status" style="font-size:11px;color:#9ca3af;margin-top:12px;">✓ Saved</div>`;
-  return html;
+function renderMain(){
+  let html=currentView==="timeline"?renderTimeline():renderProjectView();
+  document.getElementById("main").innerHTML=html;
 }
-
-function renderSaveStatus(saving=false) {
-  const el = document.getElementById('save-status');
-  if (el) el.textContent = saving ? "Saving…" : `✓ Saved (${(JSON.stringify(projects).length/1024).toFixed(1)}kb)`;
-}
-
-function renderSidebar() {
-  const sideProjects = document.getElementById('sidebar-projects');
-  sideProjects.innerHTML = projects.map(p => {
-    const tot = p.tasks ? [...p.tasks,...(p.subtasks||[])].length : p.reports ? p.reports.reduce((a,r)=>a+r.steps.length,0) : 0;
-    const dn  = p.tasks ? [...p.tasks,...(p.subtasks||[])].filter(t=>t.done).length : p.reports ? p.reports.reduce((a,r)=>a+r.steps.filter(s=>s.done).length,0) : 0;
-    const active = selected===p.id && currentView==="project";
-    return `<div onclick="selectProject('${p.id}')" style="padding:8px 18px;cursor:pointer;border-left:${active?`3px solid ${p.color}`:"3px solid transparent"};background:${active?"#f3f4f6":"transparent"};">
-      <div style="display:flex;align-items:center;gap:7px;">
-        <span style="width:8px;height:8px;border-radius:50%;background:${p.color};flex-shrink:0;"></span>
-        <span style="flex:1;font-size:12px;color:#1f2937;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${esc(p.title)}</span>
-        <span style="font-size:11px;color:#9ca3af;">${dn}/${tot}</span>
-      </div>
-      <div style="margin-left:15px;">${pbarHtml(calcPct(p),p.color)}</div>
-    </div>`;
-  }).join("");
-
-  // view toggle buttons
-  const btnP = document.getElementById('btn-project');
-  const btnT = document.getElementById('btn-timeline');
-  [btnP,btnT].forEach(b=>b&&(b.style.background="transparent",b.style.color="#9ca3af",b.style.boxShadow="none"));
-  const active = currentView==="project"?btnP:btnT;
-  if(active){ active.style.background="#fff"; active.style.color="#111"; active.style.boxShadow="0 1px 3px rgba(0,0,0,.1)"; }
-}
-
-function renderMain() {
-  const main = document.getElementById('main');
-  main.innerHTML = currentView==="timeline" ? renderTimeline() : renderProjectView();
-}
-
-function render() {
-  renderSidebar();
-  renderMain();
-}
-
-// ── Init ───────────────────────────────────────────────
-(function init(){
-  const saved = loadData();
-  projects = saved || DEFAULT_PROJECTS;
-  render();
-})();
+function fullRender(){updateSidebar();renderMain();}
+projects=load()||DEFAULT_PROJECTS;
+fullRender();
 </script>
 </body>
 </html>
