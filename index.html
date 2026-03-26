@@ -209,6 +209,27 @@ window.toggleAccordion=id=>{const btn=document.getElementById("abtn-"+id),body=d
 window.toggleAccSec=(aid,idx)=>{const body=document.getElementById("abody-"+aid);if(!body)return;body.querySelectorAll("[data-sec]").forEach((el,i)=>{const ar=document.getElementById(`asarr-${aid}-${i}`);if(i===idx){const o=el.style.display==="block";el.style.display=o?"none":"block";if(ar)ar.textContent=o?"▼":"▲";}else{el.style.display="none";if(ar)ar.textContent="▼";}});};
 window.toggleTimelineDone=()=>renderMain();
 
+// bullet color: call on note input to update indicator in real time
+window.updateBulletColor=(sid,note,col)=>{
+  const hasNote=!!(note&&note.trim());
+  const bul=document.getElementById("stbul-"+sid);
+  if(!bul)return;
+  if(bul.dataset.dot){
+    // ● Research dot
+    bul.style.color=hasNote?col:"#d1d5db";
+  } else {
+    // numbered circle or "N." text
+    const isCircle=bul.style.borderRadius==="50%"||bul.style.width==="20px"&&bul.style.height==="20px";
+    if(isCircle){
+      bul.style.background=hasNote?col:"#e5e7eb";
+      bul.style.color=hasNote?"#fff":"#6b7280";
+    } else {
+      // child "N." span
+      bul.style.color=hasNote?col:"#d1d5db";
+    }
+  }
+};
+
 // ── HTML BUILDERS ──────────────────────────────────────
 function urlSec(sid,url,col){if(url)return `<div style="display:flex;align-items:center;gap:6px;"><a href="${esc(url)}" target="_blank" style="flex:1;font-size:12px;color:${col};text-decoration:none;background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;padding:4px 10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block;">🔗 ${esc(url.replace("https://","").slice(0,50))}…</a><button onclick="setSubtaskUrl('${sid}','')" style="background:none;border:none;color:#d1d5db;cursor:pointer;font-size:14px;">×</button></div>`;return `<input class="url-input" placeholder="URL or Google Drive link…" onblur="if(this.value){setSubtaskUrl('${sid}',this.value);this.value='';}">"`+`>`;}
 function reportUrl(rid,url,col){if(url)return `<div style="display:flex;align-items:center;gap:6px;"><a href="${esc(url)}" target="_blank" style="flex:1;font-size:12px;color:${col};text-decoration:none;background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;padding:5px 10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block;">📄 ${esc(url.replace("https://","").slice(0,45))}…</a><button onclick="clearReportUrl('${rid}')" style="background:none;border:none;color:#d1d5db;cursor:pointer;font-size:14px;">×</button></div>`;return `<input class="url-input" placeholder="Google Drive URL…" onblur="if(this.value){setReportUrl('${rid}',this.value);this.value='';}">"`+`>`;}
@@ -217,15 +238,26 @@ function accordionHtml(id,icon,title,sections){
   return `<div class="accordion-wrap"><button id="abtn-${id}" class="accordion-btn" onclick="toggleAccordion('${id}')"><span>${icon} ${esc(title)}</span><span class="ac-arrow" style="margin-left:auto;color:#9ca3af;font-size:11px;">▼</span></button><div id="abody-${id}" class="accordion-inner" style="display:none;">${inner}</div></div>`;
 }
 function stBodyHtml(s,col,hasUrl){
-  return `<div id="stbody-${s.id}" class="subtask-body" style="display:none;"><textarea style="width:100%;border:1px solid #e5e7eb;border-radius:6px;padding:8px 10px;font-size:12px;resize:vertical;min-height:80px;outline:none;box-sizing:border-box;color:#374151;margin-top:8px;" placeholder="Notes…" oninput="setSubtaskNote('${s.id}',this.value)">${esc(s.note||"")}</textarea>${hasUrl?`<div id="sturl-${s.id}" style="margin-top:8px;">${urlSec(s.id,s.url||"",col)}</div>`:""}<div style="margin-top:10px;display:flex;justify-content:flex-end;"><button class="markbtn-${s.id}" onclick="toggleSubtask('${s.id}')" style="font-size:12px;color:${col};background:none;border:1px solid ${col};border-radius:6px;padding:4px 12px;cursor:pointer;">${s.done?"✓ Done":"Mark as done"}</button></div></div>`;
+  // oninput: save note + update bullet color
+  const oninput=`setSubtaskNote('${s.id}',this.value);updateBulletColor('${s.id}',this.value,'${col}')`;
+  return `<div id="stbody-${s.id}" class="subtask-body" style="display:none;"><textarea style="width:100%;border:1px solid #e5e7eb;border-radius:6px;padding:8px 10px;font-size:12px;resize:vertical;min-height:80px;outline:none;box-sizing:border-box;color:#374151;margin-top:8px;" placeholder="Notes…" oninput="${oninput}">${esc(s.note||"")}</textarea>${hasUrl?`<div id="sturl-${s.id}" style="margin-top:8px;">${urlSec(s.id,s.url||"",col)}</div>`:""}<div style="margin-top:10px;display:flex;justify-content:flex-end;"><button class="markbtn-${s.id}" onclick="toggleSubtask('${s.id}')" style="font-size:12px;color:${col};background:none;border:1px solid ${col};border-radius:6px;padding:4px 12px;cursor:pointer;">${s.done?"✓ Done":"Mark as done"}</button></div></div>`;
 }
 function stItemHtml(s,idx,col,isResearch){
-  const bul=isResearch?`<span data-dot="1" id="stbul-${s.id}" style="width:20px;font-size:14px;text-align:center;flex-shrink:0;color:#9ca3af;">●</span>`:`<span id="stbul-${s.id}" style="width:20px;height:20px;border-radius:50%;background:${s.done?col:"#e5e7eb"};color:${s.done?"#fff":"#6b7280"};font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">${idx+1}</span>`;
+  const hasNote=!!(s.note&&s.note.trim());
+  const dotCol=s.done?"#9ca3af":hasNote?col:"#d1d5db";
+  const bul=isResearch
+    ?`<span data-dot="1" id="stbul-${s.id}" style="width:20px;font-size:14px;text-align:center;flex-shrink:0;color:${dotCol};">●</span>`
+    :`<span id="stbul-${s.id}" style="width:20px;height:20px;border-radius:50%;background:${s.done?col:hasNote?col:"#e5e7eb"};color:${s.done||hasNote?"#fff":"#6b7280"};font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">${idx+1}</span>`;
   return `<div id="stwrap-${s.id}" class="subtask-item" style="background:${s.done?"#f9fafb":"#fff"};opacity:${s.done?0.7:1};"><div class="subtask-header" onclick="toggleStBody('${s.id}')">${bul}<span id="stlbl-${s.id}" style="flex:1;font-size:13px;color:${s.done?"#9ca3af":"#1f2937"};text-decoration:${s.done?"line-through":"none"};">${esc(s.text)}</span><span id="starrow-${s.id}" style="font-size:11px;color:#9ca3af;">▼</span></div>${stBodyHtml(s,col,"url" in s)}</div>`;
 }
 function parentHtml(s,idx,col){
   const childDone=s.children.filter(c=>c.done).length;
-  const children=s.children.map((c,ci)=>`<div id="stwrap-${c.id}" class="child-row" style="background:${c.done?"#f9fafb":"#fff"};opacity:${c.done?0.7:1};"><div class="child-header" onclick="toggleChildBody('${c.id}')"><span style="color:#9ca3af;font-size:12px;width:20px;flex-shrink:0;">${ci+1}.</span><span id="stlbl-${c.id}" style="flex:1;font-size:12px;color:${c.done?"#9ca3af":"#374151"};text-decoration:${c.done?"line-through":"none"};">${esc(c.text)}</span><span id="carrow-${c.id}" style="font-size:10px;color:#9ca3af;">▼</span></div><div id="cbody-${c.id}" class="child-body" style="display:none;"><textarea style="width:100%;border:1px solid #e5e7eb;border-radius:6px;padding:6px 10px;font-size:12px;resize:vertical;min-height:60px;outline:none;box-sizing:border-box;color:#374151;" placeholder="Notes…" oninput="setSubtaskNote('${c.id}',this.value)">${esc(c.note||"")}</textarea><div style="margin-top:6px;display:flex;justify-content:flex-end;"><button class="markbtn-${c.id}" onclick="toggleSubtask('${c.id}')" style="font-size:11px;color:${col};background:none;border:1px solid ${col};border-radius:6px;padding:3px 10px;cursor:pointer;">${c.done?"✓ Done":"Mark as done"}</button></div></div></div>`).join("");
+  const children=s.children.map((c,ci)=>{
+    const hasNote=!!(c.note&&c.note.trim());
+    const numCol=c.done?"#9ca3af":hasNote?col:"#d1d5db";
+    const oninput=`setSubtaskNote('${c.id}',this.value);updateBulletColor('${c.id}',this.value,'${col}')`;
+    return `<div id="stwrap-${c.id}" class="child-row" style="background:${c.done?"#f9fafb":"#fff"};opacity:${c.done?0.7:1};"><div class="child-header" onclick="toggleChildBody('${c.id}')"><span id="stbul-${c.id}" style="color:${numCol};font-size:12px;width:20px;flex-shrink:0;">${ci+1}.</span><span id="stlbl-${c.id}" style="flex:1;font-size:12px;color:${c.done?"#9ca3af":"#374151"};text-decoration:${c.done?"line-through":"none"};">${esc(c.text)}</span><span id="carrow-${c.id}" style="font-size:10px;color:#9ca3af;">▼</span></div><div id="cbody-${c.id}" class="child-body" style="display:none;"><textarea style="width:100%;border:1px solid #e5e7eb;border-radius:6px;padding:6px 10px;font-size:12px;resize:vertical;min-height:60px;outline:none;box-sizing:border-box;color:#374151;" placeholder="Notes…" oninput="${oninput}">${esc(c.note||"")}</textarea><div style="margin-top:6px;display:flex;justify-content:flex-end;"><button class="markbtn-${c.id}" onclick="toggleSubtask('${c.id}')" style="font-size:11px;color:${col};background:none;border:1px solid ${col};border-radius:6px;padding:3px 10px;cursor:pointer;">${c.done?"✓ Done":"Mark as done"}</button></div></div></div>`;
+  }).join("");
   return `<div style="margin-bottom:5px;"><div style="border:1px solid #e5e7eb;border-radius:8px;background:#fff;"><div id="stwrap-${s.id}" onclick="toggleParent('${s.id}')" style="display:flex;align-items:center;gap:10px;padding:9px 12px;cursor:pointer;user-select:none;"><span id="stbul-${s.id}" style="width:20px;height:20px;border-radius:50%;background:${s.done?col:"#e5e7eb"};color:${s.done?"#fff":"#6b7280"};font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">${idx+1}</span><span id="stlbl-${s.id}" style="flex:1;font-size:13px;color:${s.done?"#9ca3af":"#1f2937"};text-decoration:${s.done?"line-through":"none"};">${esc(s.text)}</span><span style="font-size:11px;color:#9ca3af;margin-right:4px;">${childDone}/${s.children.length}</span><span id="par-arrow-${s.id}" style="font-size:11px;color:#9ca3af;">${s.open?"▲":"▼"}</span></div></div><div id="children-${s.id}" style="margin-left:20px;border-left:2px solid #e5e7eb;padding-left:10px;margin-top:3px;display:${s.open?"block":"none"};">${children}</div></div>`;
 }
 function taskRowHtml(t,col){return `<div id="task-${t.id}" class="task-row" style="background:${t.done?"#f9fafb":"#fff"};opacity:${t.done?0.55:1};"><input type="checkbox" ${t.done?"checked":""} onchange="toggleTask('${t.id}')" style="width:15px;height:15px;accent-color:${col};flex-shrink:0;"><span class="tlbl" style="flex:1;font-size:13px;color:${t.done?"#9ca3af":"#1f2937"};text-decoration:${t.done?"line-through":"none"};">${esc(t.text)}</span>${t.deadline?`<span style="font-size:11px;color:#6b7280;white-space:nowrap;">${t.deadline.slice(5).replace("-","/")} </span>`:""}${t.deadline?badge(t.deadline):""}<button onclick="deleteTask('${t.id}')" style="background:none;border:none;color:#d1d5db;cursor:pointer;font-size:15px;padding:0 2px;">×</button></div>`;}
