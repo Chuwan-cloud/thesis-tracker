@@ -68,10 +68,10 @@ input,textarea,button{font-family:inherit;}
 <div id="main"></div>
 <script>
 const YEAR=2026;
-function mkRep(pfx,n,label,dl,fdl){return{id:`${pfx}_r${n}`,label,deadline:dl,finalDeadline:fdl,steps:[{id:`${pfx}_r${n}_s1`,text:"Draft",done:false},{id:`${pfx}_r${n}_s2`,text:"Prof Feedback",done:false},{id:`${pfx}_r${n}_s3`,text:"Peer Review",done:false},{id:`${pfx}_r${n}_s4`,text:"Final",done:false}],url:"",urls:[],pdfs:[],open:false};}
+function mkRep(pfx,n,label,dl,fdl){return{id:`${pfx}_r${n}`,label,deadline:dl,finalDeadline:fdl,steps:[{id:`${pfx}_r${n}_s1`,text:"Draft",done:false},{id:`${pfx}_r${n}_s2`,text:"Prof Feedback",done:false},{id:`${pfx}_r${n}_s3`,text:"Peer Review",done:false},{id:`${pfx}_r${n}_s4`,text:"Final",done:false}],url:"",urls:[],pdfs:[],words:[],open:false};}
 
-// ── 先行研究の子アイテムは urls:[{id,href,label}] と pdfs:[{id,name,data}] を持つ
-function mkLitChild(id,text){return{id,text,done:false,note:"",urls:[],pdfs:[]};}
+// ── 先行研究の子アイテムは urls:[{id,href,label}], pdfs:[{id,name,data}], words:[{id,name,data}] を持つ
+function mkLitChild(id,text){return{id,text,done:false,note:"",urls:[],pdfs:[],words:[]};}
 
 const DEFAULT_PROJECTS=[
   {id:"thesis",title:"修士論文",color:"#4f46e5",memo:"",
@@ -177,18 +177,19 @@ function migrateData(ps){
           if(!c.urls){
             const urls=c.url?[{id:uid(),href:c.url,label:""}]:[];
             const {url,...rest}=c;
-            return {...rest,urls,pdfs:c.pdfs||[]};
+            return {...rest,urls,pdfs:c.pdfs||[],words:c.words||[]};
           }
-          return c;
+          return {...c,words:c.words||[]};
         })};
       })};
     }
-    // migrate reports: ensure urls/pdfs arrays exist
+    // migrate reports: ensure urls/pdfs/words arrays exist
     if(np.reports){
       np={...np,reports:np.reports.map(r=>({
         ...r,
         urls:r.urls||[],
         pdfs:r.pdfs||[],
+        words:r.words||[],
       }))};
     }
     return np;
@@ -276,21 +277,13 @@ window.updateMemo=(pid,val)=>{const p=projects.find(p=>p.id===pid);if(p)p.memo=v
 // ── REPORT RESOURCE MUTATIONS ──────────────────────────
 window.setRepTab=(rid,tab)=>{
   repTabState[rid]=tab;
-  const urlSec=document.getElementById(`repurl-sec-${rid}`);
-  const pdfSec=document.getElementById(`reppdf-sec-${rid}`);
-  const tabUrl=document.getElementById(`reptab-url-${rid}`);
-  const tabPdf=document.getElementById(`reptab-pdf-${rid}`);
-  if(!urlSec)return;
   const col=getProj().color;
-  if(tab==="url"){
-    urlSec.style.display="block";pdfSec.style.display="none";
-    tabUrl.style.background=col;tabUrl.style.color="#fff";tabUrl.style.borderColor=col;
-    tabPdf.style.background="#fff";tabPdf.style.color="#6b7280";tabPdf.style.borderColor="#e5e7eb";
-  } else {
-    urlSec.style.display="none";pdfSec.style.display="block";
-    tabPdf.style.background=col;tabPdf.style.color="#fff";tabPdf.style.borderColor=col;
-    tabUrl.style.background="#fff";tabUrl.style.color="#6b7280";tabUrl.style.borderColor="#e5e7eb";
-  }
+  ["url","file"].forEach(t=>{
+    const sec=document.getElementById(`rep${t}-sec-${rid}`);
+    const btn=document.getElementById(`reptab-${t}-${rid}`);
+    if(sec)sec.style.display=tab===t?"block":"none";
+    if(btn){btn.style.background=tab===t?col:"#fff";btn.style.color=tab===t?"#fff":"#6b7280";btn.style.borderColor=tab===t?col:"#e5e7eb";}
+  });
 };
 
 window.addRepUrl=(rid)=>{
@@ -309,14 +302,16 @@ window.delRepUrl=(rid,eid)=>{
   rerenderRepResources(rid);
 };
 
-window.addRepPdf=(rid)=>{
-  const inp=document.getElementById(`reppdfinput-${rid}`);
+window.addRepFile=(rid)=>{
+  const inp=document.getElementById(`repfileinput-${rid}`);
   const file=inp.files[0];if(!file)return;
+  const isPdf=file.type==="application/pdf"||file.name.endsWith(".pdf");
   const reader=new FileReader();
   reader.onload=e=>{
     const entry={id:uid(),name:file.name,data:e.target.result};
-    mutateReport(rid,r=>({...r,pdfs:[...(r.pdfs||[]),entry]}));save();
-    inp.value="";
+    if(isPdf){mutateReport(rid,r=>({...r,pdfs:[...(r.pdfs||[]),entry]}));}
+    else{mutateReport(rid,r=>({...r,words:[...(r.words||[]),entry]}));}
+    save();inp.value="";
     rerenderRepResources(rid);
   };
   reader.readAsDataURL(file);
@@ -325,6 +320,30 @@ window.addRepPdf=(rid)=>{
 window.delRepPdf=(rid,eid)=>{
   mutateReport(rid,r=>({...r,pdfs:(r.pdfs||[]).filter(p=>p.id!==eid)}));save();
   rerenderRepResources(rid);
+};
+
+window.addRepWord=(rid)=>{
+  const inp=document.getElementById(`repwordinput-${rid}`);
+  const file=inp.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const entry={id:uid(),name:file.name,data:e.target.result};
+    mutateReport(rid,r=>({...r,words:[...(r.words||[]),entry]}));save();
+    inp.value="";
+    rerenderRepResources(rid);
+  };
+  reader.readAsDataURL(file);
+};
+
+window.delRepWord=(rid,eid)=>{
+  mutateReport(rid,r=>({...r,words:(r.words||[]).filter(w=>w.id!==eid)}));save();
+  rerenderRepResources(rid);
+};
+
+window.downloadRepWord=(rid,eid)=>{
+  const r=findReport(rid);if(!r)return;
+  const w=(r.words||[]).find(w=>w.id===eid);if(!w)return;
+  const a=document.createElement("a");a.href=w.data;a.download=w.name;a.click();
 };
 
 window.openRepPdf=(rid,eid)=>{
@@ -343,23 +362,29 @@ function rerenderRepResources(rid){
 // ── LITERATURE RESOURCE MUTATIONS ──────────────────────
 window.setLitTab=(cid,tab)=>{
   litTabState[cid]=tab;
-  const urlSec=document.getElementById(`liturl-sec-${cid}`);
-  const pdfSec=document.getElementById(`litpdf-sec-${cid}`);
-  const tabUrl=document.getElementById(`littab-url-${cid}`);
-  const tabPdf=document.getElementById(`littab-pdf-${cid}`);
-  if(!urlSec)return;
   const col=getProj().color;
-  if(tab==="url"){
-    urlSec.style.display="block";pdfSec.style.display="none";
-    tabUrl.style.background=col;tabUrl.style.color="#fff";tabUrl.style.borderColor=col;
-    tabPdf.style.background="#fff";tabPdf.style.color="#6b7280";tabPdf.style.borderColor="#e5e7eb";
-  } else {
-    urlSec.style.display="none";pdfSec.style.display="block";
-    tabPdf.style.background=col;tabPdf.style.color="#fff";tabPdf.style.borderColor=col;
-    tabUrl.style.background="#fff";tabUrl.style.color="#6b7280";tabUrl.style.borderColor="#e5e7eb";
-  }
+  ["url","file"].forEach(t=>{
+    const sec=document.getElementById(`lit${t}-sec-${cid}`);
+    const btn=document.getElementById(`littab-${t}-${cid}`);
+    if(sec)sec.style.display=tab===t?"block":"none";
+    if(btn){btn.style.background=tab===t?col:"#fff";btn.style.color=tab===t?"#fff":"#6b7280";btn.style.borderColor=tab===t?col:"#e5e7eb";}
+  });
 };
 
+window.addLitFile=(cid)=>{
+  const inp=document.getElementById(`litfileinput-${cid}`);
+  const file=inp.files[0];if(!file)return;
+  const isPdf=file.type==="application/pdf"||file.name.endsWith(".pdf");
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const entry={id:uid(),name:file.name,data:e.target.result};
+    if(isPdf){mutateSt(cid,c=>({...c,pdfs:[...(c.pdfs||[]),entry]}));}
+    else{mutateSt(cid,c=>({...c,words:[...(c.words||[]),entry]}));}
+    save();inp.value="";
+    rerenderLitResources(cid);
+  };
+  reader.readAsDataURL(file);
+};
 window.addLitUrl=(cid)=>{
   const inp=document.getElementById(`liturlinput-${cid}`);
   const labelInp=document.getElementById(`liturllabel-${cid}`);
@@ -374,21 +399,18 @@ window.delLitUrl=(cid,eid)=>{
   mutateSt(cid,c=>({...c,urls:(c.urls||[]).filter(u=>u.id!==eid)}));save();
   rerenderLitResources(cid);
 };
-window.addLitPdf=(cid)=>{
-  const inp=document.getElementById(`litpdfinput-${cid}`);
-  const file=inp.files[0];if(!file)return;
-  const reader=new FileReader();
-  reader.onload=e=>{
-    const entry={id:uid(),name:file.name,data:e.target.result};
-    mutateSt(cid,c=>({...c,pdfs:[...(c.pdfs||[]),entry]}));save();
-    inp.value="";
-    rerenderLitResources(cid);
-  };
-  reader.readAsDataURL(file);
-};
 window.delLitPdf=(cid,eid)=>{
   mutateSt(cid,c=>({...c,pdfs:(c.pdfs||[]).filter(p=>p.id!==eid)}));save();
   rerenderLitResources(cid);
+};
+window.delLitWord=(cid,eid)=>{
+  mutateSt(cid,c=>({...c,words:(c.words||[]).filter(w=>w.id!==eid)}));save();
+  rerenderLitResources(cid);
+};
+window.downloadLitWord=(cid,eid)=>{
+  const c=findSt(cid);if(!c)return;
+  const w=(c.words||[]).find(w=>w.id===eid);if(!w)return;
+  const a=document.createElement("a");a.href=w.data;a.download=w.name;a.click();
 };
 window.openLitPdf=(cid,eid)=>{
   const c=findSt(cid);if(!c)return;
@@ -438,118 +460,66 @@ function stItemHtml(s,idx,col,isResearch){
 function repResourcesHtml(r,col){
   const urls=r.urls||[];
   const pdfs=r.pdfs||[];
+  const words=r.words||[];
   const tab=repTabState[r.id]||"url";
-  const urlActive=tab==="url";
-  const urlBg=urlActive?col:"#fff";
-  const urlTxtCol=urlActive?"#fff":"#6b7280";
-  const pdfBg=!urlActive?col:"#fff";
-  const pdfTxtCol=!urlActive?"#fff":"#6b7280";
-  const totalCount=urls.length+pdfs.length;
+  const fileCount=pdfs.length+words.length;
+  const totalCount=urls.length+fileCount;
   const countBadge=totalCount>0?`<span style="font-size:10px;font-weight:700;background:${col};color:#fff;border-radius:99px;padding:1px 6px;margin-left:4px;">${totalCount}</span>`:"";
 
-  const urlEntries=urls.map(u=>`
-    <div class="res-entry">
-      <span class="res-entry-icon">🔗</span>
-      <a href="${esc(u.href)}" target="_blank" class="res-entry-link" style="color:${col};" title="${esc(u.href)}">${esc(u.label||u.href.replace(/^https?:\/\//,"").slice(0,45))}</a>
-      <button class="res-del-btn" onclick="delRepUrl('${r.id}','${u.id}')">×</button>
-    </div>`).join("");
+  const tabBtn=(t,icon,label,count)=>{
+    const active=tab===t;
+    const cnt=count>0?`<span style="font-size:9px;font-weight:700;background:${active?"rgba(255,255,255,0.35)":col};color:${active?"#fff":"#fff"};border-radius:99px;padding:0 4px;margin-left:3px;">${count}</span>`:"";
+    return `<button id="reptab-${t}-${r.id}" class="res-tab" style="background:${active?col:"#fff"};color:${active?"#fff":"#6b7280"};border-color:${active?col:"#e5e7eb"};" onclick="setRepTab('${r.id}','${t}')">${icon} ${label}${cnt}</button>`;
+  };
 
-  const urlAdd=`
-    <div class="res-add-row" style="flex-wrap:wrap;gap:4px;">
-      <input id="repurllabel-${r.id}" class="res-add-input" placeholder="Label (optional)" style="width:110px;flex:none;">
-      <input id="repurlinput-${r.id}" class="res-add-input" placeholder="https://…" style="flex:1;min-width:120px;">
-      <button class="res-add-btn" style="background:${col};color:#fff;" onclick="addRepUrl('${r.id}')">Add</button>
-    </div>`;
+  const urlEntries=urls.map(u=>`<div class="res-entry"><span class="res-entry-icon">🔗</span><a href="${esc(u.href)}" target="_blank" class="res-entry-link" style="color:${col};" title="${esc(u.href)}">${esc(u.label||u.href.replace(/^https?:\/\//,"").slice(0,45))}</a><button class="res-del-btn" onclick="delRepUrl('${r.id}','${u.id}')">×</button></div>`).join("");
+  const urlAdd=`<div class="res-add-row" style="flex-wrap:wrap;gap:4px;"><input id="repurllabel-${r.id}" class="res-add-input" placeholder="Label (optional)" style="width:110px;flex:none;"><input id="repurlinput-${r.id}" class="res-add-input" placeholder="https://…" style="flex:1;min-width:120px;"><button class="res-add-btn" style="background:${col};color:#fff;" onclick="addRepUrl('${r.id}')">Add</button></div>`;
 
-  const pdfEntries=pdfs.map(p=>`
-    <div class="res-entry">
-      <span class="res-entry-icon">📄</span>
-      <span class="res-entry-name" style="cursor:pointer;color:${col};" onclick="openRepPdf('${r.id}','${p.id}')" title="${esc(p.name)}">${esc(p.name)}</span>
-      <button class="res-del-btn" onclick="delRepPdf('${r.id}','${p.id}')">×</button>
-    </div>`).join("");
+  const pdfEntries=pdfs.map(p=>`<div class="res-entry"><span class="res-entry-icon">📄</span><span class="res-entry-name" style="cursor:pointer;color:${col};" onclick="openRepPdf('${r.id}','${p.id}')" title="${esc(p.name)}">${esc(p.name)}</span><button class="res-del-btn" onclick="delRepPdf('${r.id}','${p.id}')">×</button></div>`).join("");
+  const wordEntries=words.map(w=>`<div class="res-entry"><span class="res-entry-icon">📝</span><span class="res-entry-name" style="cursor:pointer;color:${col};" onclick="downloadRepWord('${r.id}','${w.id}')" title="${esc(w.name)}">${esc(w.name)}</span><button class="res-del-btn" onclick="delRepWord('${r.id}','${w.id}')">×</button></div>`).join("");
+  const fileAdd=`<div class="res-add-row"><input id="repfileinput-${r.id}" type="file" accept="application/pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" style="display:none;" onchange="addRepFile('${r.id}')"><button class="res-add-btn" style="background:#f3f4f6;color:#374151;border:1px solid #e5e7eb;" onclick="document.getElementById('repfileinput-${r.id}').click()">📎 Choose file…</button></div>`;
 
-  const pdfAdd=`
-    <div class="res-add-row">
-      <input id="reppdfinput-${r.id}" type="file" accept="application/pdf" style="flex:1;font-size:11px;color:#374151;" onchange="addRepPdf('${r.id}')">
-    </div>`;
-
-  return `
-    <div style="margin-top:12px;border-top:1px solid #f3f4f6;padding-top:10px;">
-      <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
-        <span style="font-size:10px;font-weight:700;color:#9ca3af;letter-spacing:1px;text-transform:uppercase;">Resources</span>${countBadge}
-        <div style="margin-left:auto;display:flex;gap:4px;">
-          <button id="reptab-url-${r.id}" class="res-tab ${urlActive?"active":""}" style="background:${urlBg};color:${urlTxtCol};border-color:${urlActive?col:"#e5e7eb"};" onclick="setRepTab('${r.id}','url')">🔗 URL</button>
-          <button id="reptab-pdf-${r.id}" class="res-tab ${!urlActive?"active":""}" style="background:${pdfBg};color:${pdfTxtCol};border-color:${!urlActive?col:"#e5e7eb"};" onclick="setRepTab('${r.id}','pdf')">📄 PDF</button>
-        </div>
-      </div>
-      <div id="repurl-sec-${r.id}" style="display:${urlActive?"block":"none"};">
-        ${urlEntries}
-        ${urlAdd}
-      </div>
-      <div id="reppdf-sec-${r.id}" style="display:${urlActive?"none":"block"};">
-        ${pdfEntries}
-        ${pdfAdd}
-      </div>
-    </div>`;
+  return `<div style="margin-top:12px;border-top:1px solid #f3f4f6;padding-top:10px;">
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
+      <span style="font-size:10px;font-weight:700;color:#9ca3af;letter-spacing:1px;text-transform:uppercase;">Resources</span>${countBadge}
+      <div style="margin-left:auto;display:flex;gap:4px;">${tabBtn("url","🔗","URL",urls.length)}${tabBtn("file","📎","File",fileCount)}</div>
+    </div>
+    <div id="repurl-sec-${r.id}" style="display:${tab==="url"?"block":"none"};">${urlEntries}${urlAdd}</div>
+    <div id="repfile-sec-${r.id}" style="display:${tab==="file"?"block":"none"};">${pdfEntries}${wordEntries}${fileAdd}</div>
+  </div>`;
 }
 
 // ── 先行研究リソースUI ─────────────────────────────────
 function litResourcesHtml(c,col){
   const urls=c.urls||[];
   const pdfs=c.pdfs||[];
+  const words=c.words||[];
   const tab=litTabState[c.id]||"url";
-  const urlActive=tab==="url";
-  const urlBg=urlActive?col:"#fff";
-  const urlTxtCol=urlActive?"#fff":"#6b7280";
-  const pdfBg=!urlActive?col:"#fff";
-  const pdfTxtCol=!urlActive?"#fff":"#6b7280";
-  const totalCount=urls.length+pdfs.length;
+  const fileCount=pdfs.length+words.length;
+  const totalCount=urls.length+fileCount;
   const countBadge=totalCount>0?`<span style="font-size:10px;font-weight:700;background:${col};color:#fff;border-radius:99px;padding:1px 6px;margin-left:4px;">${totalCount}</span>`:"";
 
-  const urlEntries=urls.map(u=>`
-    <div class="res-entry">
-      <span class="res-entry-icon">🔗</span>
-      <a href="${esc(u.href)}" target="_blank" class="res-entry-link" style="color:${col};" title="${esc(u.href)}">${esc(u.label||u.href.replace(/^https?:\/\//,"").slice(0,45))}</a>
-      <button class="res-del-btn" onclick="delLitUrl('${c.id}','${u.id}')">×</button>
-    </div>`).join("");
+  const tabBtn=(t,icon,label,count)=>{
+    const active=tab===t;
+    const cnt=count>0?`<span style="font-size:9px;font-weight:700;background:${active?"rgba(255,255,255,0.35)":col};color:#fff;border-radius:99px;padding:0 4px;margin-left:3px;">${count}</span>`:"";
+    return `<button id="littab-${t}-${c.id}" class="res-tab" style="background:${active?col:"#fff"};color:${active?"#fff":"#6b7280"};border-color:${active?col:"#e5e7eb"};" onclick="setLitTab('${c.id}','${t}')">${icon} ${label}${cnt}</button>`;
+  };
 
-  const urlAdd=`
-    <div class="res-add-row" style="flex-wrap:wrap;gap:4px;">
-      <input id="liturllabel-${c.id}" class="res-add-input" placeholder="Label (optional)" style="width:110px;flex:none;">
-      <input id="liturlinput-${c.id}" class="res-add-input" placeholder="https://…" style="flex:1;min-width:120px;">
-      <button class="res-add-btn" style="background:${col};color:#fff;" onclick="addLitUrl('${c.id}')">Add</button>
-    </div>`;
+  const urlEntries=urls.map(u=>`<div class="res-entry"><span class="res-entry-icon">🔗</span><a href="${esc(u.href)}" target="_blank" class="res-entry-link" style="color:${col};" title="${esc(u.href)}">${esc(u.label||u.href.replace(/^https?:\/\//,"").slice(0,45))}</a><button class="res-del-btn" onclick="delLitUrl('${c.id}','${u.id}')">×</button></div>`).join("");
+  const urlAdd=`<div class="res-add-row" style="flex-wrap:wrap;gap:4px;"><input id="liturllabel-${c.id}" class="res-add-input" placeholder="Label (optional)" style="width:110px;flex:none;"><input id="liturlinput-${c.id}" class="res-add-input" placeholder="https://…" style="flex:1;min-width:120px;"><button class="res-add-btn" style="background:${col};color:#fff;" onclick="addLitUrl('${c.id}')">Add</button></div>`;
 
-  const pdfEntries=pdfs.map(p=>`
-    <div class="res-entry">
-      <span class="res-entry-icon">📄</span>
-      <span class="res-entry-name" style="cursor:pointer;color:${col};" onclick="openLitPdf('${c.id}','${p.id}')" title="${esc(p.name)}">${esc(p.name)}</span>
-      <button class="res-del-btn" onclick="delLitPdf('${c.id}','${p.id}')">×</button>
-    </div>`).join("");
+  const pdfEntries=pdfs.map(p=>`<div class="res-entry"><span class="res-entry-icon">📄</span><span class="res-entry-name" style="cursor:pointer;color:${col};" onclick="openLitPdf('${c.id}','${p.id}')" title="${esc(p.name)}">${esc(p.name)}</span><button class="res-del-btn" onclick="delLitPdf('${c.id}','${p.id}')">×</button></div>`).join("");
+  const wordEntries=words.map(w=>`<div class="res-entry"><span class="res-entry-icon">📝</span><span class="res-entry-name" style="cursor:pointer;color:${col};" onclick="downloadLitWord('${c.id}','${w.id}')" title="${esc(w.name)}">${esc(w.name)}</span><button class="res-del-btn" onclick="delLitWord('${c.id}','${w.id}')">×</button></div>`).join("");
+  const fileAdd=`<div class="res-add-row"><input id="litfileinput-${c.id}" type="file" accept="application/pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" style="display:none;" onchange="addLitFile('${c.id}')"><button class="res-add-btn" style="background:#f3f4f6;color:#374151;border:1px solid #e5e7eb;" onclick="document.getElementById('litfileinput-${c.id}').click()">📎 Choose file…</button></div>`;
 
-  const pdfAdd=`
-    <div class="res-add-row">
-      <input id="litpdfinput-${c.id}" type="file" accept="application/pdf" style="flex:1;font-size:11px;color:#374151;" onchange="addLitPdf('${c.id}')">
-    </div>`;
-
-  return `
-    <div style="margin-top:10px;">
-      <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
-        <span style="font-size:10px;font-weight:700;color:#9ca3af;letter-spacing:1px;text-transform:uppercase;">Resources</span>${countBadge}
-        <div style="margin-left:auto;display:flex;gap:4px;">
-          <button id="littab-url-${c.id}" class="res-tab ${urlActive?"active":""}" style="background:${urlBg};color:${urlTxtCol};border-color:${urlActive?col:"#e5e7eb"};" onclick="setLitTab('${c.id}','url')">🔗 URL</button>
-          <button id="littab-pdf-${c.id}" class="res-tab ${!urlActive?"active":""}" style="background:${pdfBg};color:${pdfTxtCol};border-color:${!urlActive?col:"#e5e7eb"};" onclick="setLitTab('${c.id}','pdf')">📄 PDF</button>
-        </div>
-      </div>
-      <div id="liturl-sec-${c.id}" style="display:${urlActive?"block":"none"};">
-        ${urlEntries}
-        ${urlAdd}
-      </div>
-      <div id="litpdf-sec-${c.id}" style="display:${urlActive?"none":"block"};">
-        ${pdfEntries}
-        ${pdfAdd}
-      </div>
-    </div>`;
+  return `<div style="margin-top:10px;">
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
+      <span style="font-size:10px;font-weight:700;color:#9ca3af;letter-spacing:1px;text-transform:uppercase;">Resources</span>${countBadge}
+      <div style="margin-left:auto;display:flex;gap:4px;">${tabBtn("url","🔗","URL",urls.length)}${tabBtn("file","📎","File",fileCount)}</div>
+    </div>
+    <div id="liturl-sec-${c.id}" style="display:${tab==="url"?"block":"none"};">${urlEntries}${urlAdd}</div>
+    <div id="litfile-sec-${c.id}" style="display:${tab==="file"?"block":"none"};">${pdfEntries}${wordEntries}${fileAdd}</div>
+  </div>`;
 }
 
 // ── 先行研究子アイテム ─────────────────────────────────
