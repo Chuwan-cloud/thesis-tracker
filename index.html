@@ -37,12 +37,7 @@ input,textarea,button{font-family:inherit;}
 .link-btn{display:flex;align-items:center;gap:6px;font-size:12px;text-decoration:none;background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:7px 12px;}
 .slbl{font-size:10px;font-weight:700;color:#9ca3af;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;}
 .timeline-row{display:flex;align-items:center;gap:8px;padding:8px 12px;background:#fff;border:1px solid #e5e7eb;border-radius:8px;margin-bottom:4px;}
-
-/* ── 先行研究 multi-resource styles ── */
-.res-section{margin-top:10px;}
-.res-section-label{font-size:10px;font-weight:700;color:#9ca3af;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;}
 .res-entry{display:flex;align-items:center;gap:6px;background:#f9fafb;border:1px solid #e5e7eb;border-radius:7px;padding:5px 8px;margin-bottom:4px;}
-.res-entry-icon{font-size:13px;flex-shrink:0;}
 .res-entry-name{flex:1;font-size:12px;color:#374151;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .res-entry-link{font-size:12px;color:inherit;text-decoration:none;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .res-del-btn{background:none;border:none;color:#d1d5db;cursor:pointer;font-size:15px;padding:0 2px;flex-shrink:0;line-height:1;}
@@ -50,10 +45,38 @@ input,textarea,button{font-family:inherit;}
 .res-add-row{display:flex;gap:5px;margin-top:5px;align-items:center;}
 .res-add-input{flex:1;border:1px solid #e5e7eb;border-radius:6px;padding:5px 9px;font-size:12px;outline:none;color:#374151;background:#fff;}
 .res-add-btn{border:none;border-radius:6px;padding:5px 11px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;}
-.res-tab-bar{display:flex;gap:4px;margin-bottom:8px;}
 .res-tab{border:1px solid #e5e7eb;border-radius:6px;padding:4px 10px;font-size:11px;font-weight:600;cursor:pointer;background:#fff;color:#6b7280;}
-.res-tab.active{color:#fff;}
-.pdf-label-input{width:120px;border:1px solid #e5e7eb;border-radius:6px;padding:5px 8px;font-size:12px;outline:none;}
+/* Schedule */
+.sch-phase{display:flex;align-items:center;gap:10px;margin:24px 0 10px;}
+.sch-phase-line{flex:1;height:2px;background:#e5e7eb;}
+.sch-phase-label{font-size:11px;font-weight:700;color:#6b7280;letter-spacing:.8px;white-space:nowrap;text-transform:uppercase;}
+.sch-seg{border-radius:12px;border:1px solid #e5e7eb;background:#fff;margin-bottom:10px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.04);}
+.sch-seg-head{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;user-select:none;}
+.sch-seg-head:hover{background:#f9fafb;}
+.sch-seg-bar{width:4px;border-radius:99px;align-self:stretch;flex-shrink:0;min-height:40px;}
+.sch-seg-info{flex:1;min-width:0;}
+.sch-seg-title{font-size:14px;font-weight:700;color:#1f2937;}
+.sch-seg-period{font-size:12px;color:#6b7280;margin-top:2px;}
+.sch-seg-stat{font-size:11px;color:#9ca3af;margin-top:3px;}
+.sch-seg-arr{font-size:11px;color:#9ca3af;flex-shrink:0;}
+.sch-seg-body{border-top:2px solid #f3f4f6;}
+.sch-wk{border-bottom:1px solid #f0f0f0;}
+.sch-wk:last-child{border-bottom:none;}
+.sch-wk-head{display:flex;align-items:center;gap:10px;padding:9px 14px;cursor:pointer;user-select:none;background:#f7f7f7;}
+.sch-wk-head:hover{background:#f0f0f0;}
+.sch-wk-lbl{font-size:12px;font-weight:700;color:#374151;min-width:90px;flex-shrink:0;}
+.sch-wk-date{font-size:11px;color:#6b7280;flex:1;}
+.sch-wk-cnt{font-size:11px;color:#9ca3af;font-weight:600;}
+.sch-wk-body{padding:8px 14px 10px 18px;}
+.sch-task{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px solid #f5f5f5;}
+.sch-task:last-child{border-bottom:none;padding-bottom:0;}
+.sch-task input{width:15px;height:15px;flex-shrink:0;margin-top:2px;cursor:pointer;}
+.sch-task-t{font-size:13px;color:#374151;line-height:1.5;flex:1;}
+.sch-task-t.done{text-decoration:line-through;color:#9ca3af;}
+.sch-tg{font-size:10px;font-weight:700;border-radius:99px;padding:2px 8px;white-space:nowrap;flex-shrink:0;margin-top:3px;letter-spacing:.3px;}
+.sch-dead-bar{display:flex;align-items:center;gap:8px;padding:7px 14px;background:#fff5f5;font-size:12px;font-weight:700;color:#c0392b;border-bottom:1px solid #fde8e8;border-left:4px solid #c0392b;}
+.sch-sum{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;}
+.sch-sum-card{border-radius:10px;padding:11px 14px;border:1px solid #e5e7eb;}
 </style>
 </head>
 <body>
@@ -61,6 +84,7 @@ input,textarea,button{font-family:inherit;}
   <div style="display:flex;margin:0 14px 16px;background:#f3f4f6;border-radius:8px;padding:3px;">
     <button id="btn-project" onclick="setView('project')" style="flex:1;border:none;border-radius:6px;padding:5px 0;font-size:11px;font-weight:600;cursor:pointer;">Subjects</button>
     <button id="btn-timeline" onclick="setView('timeline')" style="flex:1;border:none;border-radius:6px;padding:5px 0;font-size:11px;font-weight:600;cursor:pointer;">Timeline</button>
+    <button id="btn-schedule" onclick="setView('schedule')" style="flex:1;border:none;border-radius:6px;padding:5px 0;font-size:11px;font-weight:600;cursor:pointer;">Schedule</button>
   </div>
   <div style="font-size:10px;font-weight:700;color:#9ca3af;letter-spacing:1px;padding:0 18px 8px;text-transform:uppercase;">PROJECTS</div>
   <div id="sidebar-projects"></div>
@@ -69,22 +93,14 @@ input,textarea,button{font-family:inherit;}
 <script>
 const YEAR=2026;
 function mkRep(pfx,n,label,dl,fdl){return{id:`${pfx}_r${n}`,label,deadline:dl,finalDeadline:fdl,steps:[{id:`${pfx}_r${n}_s1`,text:"Draft",done:false},{id:`${pfx}_r${n}_s2`,text:"Prof Feedback",done:false},{id:`${pfx}_r${n}_s3`,text:"Peer Review",done:false},{id:`${pfx}_r${n}_s4`,text:"Final",done:false}],url:"",urls:[],pdfs:[],words:[],open:false};}
-
-// ── 先行研究の子アイテムは urls:[{id,href,label}], pdfs:[{id,name,data}], words:[{id,name,data}] を持つ
 function mkLitChild(id,text){return{id,text,done:false,note:"",urls:[],pdfs:[],words:[]};}
 
 const DEFAULT_PROJECTS=[
-  {id:"thesis",title:"修士論文",color:"#5b1f11",memo:"",
+  {id:"thesis",title:"修士論文",color:"#322470",memo:"",
    tasks:[{id:"th1",text:"題目提出",done:false,deadline:`${YEAR}-06-30`},{id:"th2",text:"背景・先行研究・目的・方法 提出（50%）",done:false,deadline:`${YEAR}-08-31`},{id:"th3",text:"中間発表",done:false,deadline:`${YEAR}-09-30`},{id:"th4",text:"初稿 ピア・レビュー",done:false,deadline:`${YEAR}-10-07`},{id:"th5",text:"初稿修正版 提出（70%）",done:false,deadline:`${YEAR}-10-15`},{id:"th6",text:"第2稿 提出（90%）",done:false,deadline:`${YEAR}-11-15`},{id:"th7",text:"修士論文 提出",done:false,deadline:`${YEAR}-12-31`},{id:"th8",text:"面接試問",done:false,deadline:`${YEAR+1}-01-31`}],
    subtasks:[
      {id:"st1",group:"研究内容",text:"研究背景",done:false,isParent:true,open:false,urls:[],pdfs:[],words:[],children:[{id:"st1a",urls:[],pdfs:[],words:[],text:"海外中等教育段階の日本語教育の制度・理念",done:false,note:""},{id:"st1b",urls:[],pdfs:[],words:[],text:"外国語環境における日本語教育の課題",done:false,note:""},{id:"st1c",urls:[],pdfs:[],words:[],text:"メキシコの言語状況",done:false,note:""},{id:"st1d",urls:[],pdfs:[],words:[],text:"メキシコの日本語教育の歴史と現状",done:false,note:""},{id:"st1e",urls:[],pdfs:[],words:[],text:"LMJ概要",done:false,note:""}]},
-     {id:"st6",group:"研究内容",text:"先行研究",done:false,isParent:true,isLiterature:true,open:false,children:[
-       mkLitChild("st6a","外国語環境における日本語学習動機"),
-       mkLitChild("st6b","実益のない日本語学習の意味"),
-       mkLitChild("st6c","学習経験の意味・興味の変容"),
-       mkLitChild("st6d","中南米における日本語教育の現状と課題"),
-       mkLitChild("st6e","海外中等教育段階の日本語教育"),
-     ]},
+     {id:"st6",group:"研究内容",text:"先行研究",done:false,isParent:true,isLiterature:true,open:false,children:[mkLitChild("st6a","外国語環境における日本語学習動機"),mkLitChild("st6b","実益のない日本語学習の意味"),mkLitChild("st6c","学習経験の意味・興味の変容"),mkLitChild("st6d","中南米における日本語教育の現状と課題"),mkLitChild("st6e","海外中等教育段階の日本語教育")]},
      {id:"st7",group:"研究内容",text:"研究目的",done:false,note:"",urls:[],pdfs:[],words:[]},
      {id:"st8",group:"研究内容",text:"研究課題",done:false,note:"",urls:[],pdfs:[],words:[]},
      {id:"st9",group:"研究内容",text:"研究方法",done:false,note:"",urls:[],pdfs:[],words:[]},
@@ -97,11 +113,12 @@ const DEFAULT_PROJECTS=[
      {id:"st14",group:"Research",text:"Intv. 2",done:false,note:"",urls:[],pdfs:[],words:[]},
      {id:"st15",group:"Research",text:"Intv. 3",done:false,note:"",urls:[],pdfs:[],words:[]},
    ]},
-  {id:"c1",title:"異文化間コミュニケーション論",color:"#e7ba80",memo:"",reports:[mkRep("c1",1,"〈前期〉レポート①",`${YEAR}-06-15`,`${YEAR}-08-14`),mkRep("c1",2,"〈前期〉レポート②",`${YEAR}-08-15`,`${YEAR}-09-07`),mkRep("c1",3,"〈後期〉レポート③",`${YEAR}-10-15`,`${YEAR}-12-14`),mkRep("c1",4,"〈後期〉レポート④",`${YEAR}-12-15`,`${YEAR+1}-01-11`)]},
-  {id:"c2",title:"言語教育学",color:"#5474a1",memo:"",reports:[mkRep("c2",1,"〈前期〉レポート①",`${YEAR}-06-15`,`${YEAR}-08-14`),mkRep("c2",2,"〈前期〉レポート②",`${YEAR}-08-15`,`${YEAR}-09-07`),mkRep("c2",3,"〈後期〉レポート③",`${YEAR}-10-15`,`${YEAR}-12-14`),mkRep("c2",4,"〈後期〉レポート④",`${YEAR}-12-15`,`${YEAR+1}-01-11`)]},
-  {id:"c3",title:"日本語教育方法論",color:"#323659",memo:"",reports:[mkRep("c3",1,"〈前期〉レポート①",`${YEAR}-06-15`,`${YEAR}-08-14`),mkRep("c3",2,"〈前期〉レポート②",`${YEAR}-08-15`,`${YEAR}-09-07`),mkRep("c3",3,"〈後期〉レポート③",`${YEAR}-10-15`,`${YEAR}-12-14`),mkRep("c3",4,"〈後期〉レポート④",`${YEAR}-12-15`,`${YEAR+1}-01-11`)]},
-  {id:"c4",title:"言語教育工学",color:"#b36633",memo:"",reports:[mkRep("c4",1,"〈前期〉レポート①",`${YEAR}-06-15`,`${YEAR}-08-14`),mkRep("c4",2,"〈前期〉レポート②",`${YEAR}-08-15`,`${YEAR}-09-07`),mkRep("c4",3,"〈後期〉レポート③",`${YEAR}-10-15`,`${YEAR}-12-14`),mkRep("c4",4,"〈後期〉レポート④",`${YEAR}-12-15`,`${YEAR+1}-01-11`)]},
+  {id:"c1",title:"異文化間コミュニケーション論",color:"#FB5022",memo:"",reports:[mkRep("c1",1,"〈前期〉レポート1",`${YEAR}-06-15`,`${YEAR}-08-14`),mkRep("c1",2,"〈前期〉レポート2",`${YEAR}-08-15`,`${YEAR}-09-07`),mkRep("c1",3,"〈後期〉レポート3",`${YEAR}-10-15`,`${YEAR}-12-14`),mkRep("c1",4,"〈後期〉レポート4",`${YEAR}-12-15`,`${YEAR+1}-01-11`)]},
+  {id:"c2",title:"言語教育学",color:"#EFA119",memo:"",reports:[mkRep("c2",1,"〈前期〉レポート1",`${YEAR}-06-15`,`${YEAR}-08-14`),mkRep("c2",2,"〈前期〉レポート2",`${YEAR}-08-15`,`${YEAR}-09-07`),mkRep("c2",3,"〈後期〉レポート3",`${YEAR}-10-15`,`${YEAR}-12-14`),mkRep("c2",4,"〈後期〉レポート4",`${YEAR}-12-15`,`${YEAR+1}-01-11`)]},
+  {id:"c3",title:"日本語教育方法論",color:"#7F4826",memo:"",reports:[mkRep("c3",1,"〈前期〉レポート1",`${YEAR}-06-15`,`${YEAR}-08-14`),mkRep("c3",2,"〈前期〉レポート2",`${YEAR}-08-15`,`${YEAR}-09-07`),mkRep("c3",3,"〈後期〉レポート3",`${YEAR}-10-15`,`${YEAR}-12-14`),mkRep("c3",4,"〈後期〉レポート4",`${YEAR}-12-15`,`${YEAR+1}-01-11`)]},
+  {id:"c4",title:"言語教育工学",color:"#D7C2A7",memo:"",reports:[mkRep("c4",1,"〈前期〉レポート1",`${YEAR}-06-15`,`${YEAR}-08-14`),mkRep("c4",2,"〈前期〉レポート2",`${YEAR}-08-15`,`${YEAR}-09-07`),mkRep("c4",3,"〈後期〉レポート3",`${YEAR}-10-15`,`${YEAR}-12-14`),mkRep("c4",4,"〈後期〉レポート4",`${YEAR}-12-15`,`${YEAR+1}-01-11`)]},
 ];
+
 const GUIDE_SECTIONS=[
   {title:"体裁・書式",items:["A4サイズ，縦40字×横40字（レポート・修論共通）","日本語：MS明朝体　英語：Times New Roman","「両端揃え」を使用（文字間隔崩れ防止）","２行以上の文頭揃えは「インデント」を使用","章・節の区切りは「改ページ」を使用","注釈は「脚注の挿入」または「文末脚注の挿入」を使用"]},
   {title:"数字・記号",items:["２桁以上の数字・２字以上のアルファベット → 半角","（ ）は全角（日本語本文）/ 半角（英語要旨）","読点は全角カンマ「，」。英数字間は半角カンマ＋半角スペース","統計数式：等号・不等号の前後は半角カンマ＋半角スペース　例：t (18) = 3.2, p < .01"]},
@@ -109,6 +126,7 @@ const GUIDE_SECTIONS=[
   {title:"本文中の出典",items:["文頭：田中（2022）　← （）全角","文末・文中：（田中，2022）　← （）とカンマ全角，年号はTimes New Roman","ページ付き：（鈴木，2009, p. 35）／（佐藤，2015, pp. 47-49）","増刷書籍は第１刷の年を使用","先行研究に別論文の引用がある場合，その論文も取り寄せ・引用文献に載せる","直接引用は「 」使用。複数ページ：（pp. 285-286）"]},
   {title:"引用文献・調査資料",items:["「調査資料」と「引用文献」は分けて記載","Webサイトはハイパーリンクを外すこと","日本語文献は著者名五十音順，２行以上は全角２字分字下げ","英語文献はAPA準拠，著者名は姓名順，書名は斜体"]},
 ];
+
 const SYLLABUS={
   c1:{title:"異文化間コミュニケーション論",sections:[
     {title:"科目概要",content:"担当：小川 直人\n異文化コミュニケーション能力の向上のため、知っておくべき様々な重要性について考察しつつ理解を深める。"},
@@ -140,11 +158,131 @@ const SYLLABUS={
   ]},
 };
 
+// ── SCHEDULE DATA ──────────────────────────────────────
+const SCH_KEY="tracker_sch_v2";
+function schLoad(){try{const s=localStorage.getItem(SCH_KEY);return s?JSON.parse(s):{};}catch{return {};}}
+function schSave(){try{localStorage.setItem(SCH_KEY,JSON.stringify(schCk));}catch(e){}}
+let schCk=schLoad();
+let schOpenS={},schOpenW={};
+
+const SCOL={異文化:"#FB5022",方法論:"#7F4826",工学:"#D7C2A7",言語教育:"#EFA119",fb:"#FB5022",th:"#322470"};
+const STAGS={
+  finish:{l:"推敲",bg:"#F0EDE8",tc:"#5A3010"},
+  write:{l:"執筆",bg:"#ECEAF8",tc:"#1E1650"},
+  plan:{l:"構成",bg:"#FEF4E0",tc:"#7A5000"},
+  read:{l:"精読",bg:"#FEE8E0",tc:"#8A2008"},
+  dead:{l:"締切",bg:"#FEEAE0",tc:"#8A2808"},
+  th:{l:"修論",bg:"#ECEAF8",tc:"#1E1650"},
+  check:{l:"確認",bg:"#F5F0E8",tc:"#4A3018"},
+};
+function stag(k){const t=STAGS[k];return `<span class="sch-tg" style="background:${t.bg};color:${t.tc};">${t.l}</span>`;}
+function sk(id,tx,k){return{id,t:tx,k:k||"write"};}
+
+const SCH_PHASES=[
+  {label:"推敲・提出のみ（3/30〜4/4）",segs:[
+    {id:"s_h3",col:SCOL.方法論,title:"日本語教育方法論 R1〜R4",period:"3/30〜4/1（2日）",weeks:[
+      {id:"w_h3",lbl:"3/30〜4/1",date:"2日で4本",dead:"日本語教育方法論 R1〜R4 提出目標 4/1",tasks:[
+        sk("h3_1","R1〜R3 推敲・提出","finish"),
+        sk("h3_2","R4 推敲・提出（初稿＝最終評価）","finish"),
+      ]},
+    ]},
+    {id:"s_i1",col:SCOL.異文化,title:"異文化間コミュニケーション論 R1〜R4",period:"4/2〜4/3（2日）",weeks:[
+      {id:"w_i1",lbl:"4/2〜4/3",date:"2日で4本",dead:"異文化間コミュニケーション論 R1〜R4 提出目標 4/3",tasks:[
+        sk("i1_1","R1〜R3 推敲・提出","finish"),
+        sk("i1_2","R4 推敲・提出（初稿＝最終評価）","finish"),
+      ]},
+    ]},
+    {id:"s_g1",col:SCOL.工学,title:"言語教育工学 R1・R2",period:"4/4（1日）",weeks:[
+      {id:"w_g1",lbl:"4/4",date:"1日で2本",dead:"言語教育工学 R1・R2 提出目標 4/4",tasks:[
+        sk("g1_1","R1・R2 推敲・提出","finish"),
+      ]},
+    ]},
+  ]},
+  {label:"言語教育学 新規執筆（4/5〜4/11　7日間）",segs:[
+    {id:"s_l12",col:SCOL.言語教育,title:"言語教育学 R1・R2",period:"4/5〜4/8（4日）",weeks:[
+      {id:"w_l_pre",lbl:"4/5〜4/7",date:"精読・論点整理",tasks:[
+        sk("l_pre1","笹島『教育としてのCLIL』精読（2〜3日）","read"),
+        sk("l_pre2","CLILの基本理念・優れている点3つ選んで論点メモ","plan"),
+      ]},
+      {id:"w_l12",lbl:"4/7〜4/8",date:"R1・R2 執筆",dead:"言語教育学 R1・R2 提出目標 4/8",tasks:[
+        sk("l_r1","R1 構成案・執筆・提出（3,000〜4,000字）","write"),
+        sk("l_r2","R2 構成案・執筆・提出（3,000〜4,000字）","write"),
+      ]},
+    ]},
+    {id:"s_l34",col:SCOL.言語教育,title:"言語教育学 R3・R4",period:"4/9〜4/11（3日）— R4初稿評価",weeks:[
+      {id:"w_l3",lbl:"4/9〜4/10",date:"R3 執筆",tasks:[
+        sk("l_r3_1","和泉ほか『CLIL 内容言語統合型』速読","read"),
+        sk("l_r3_2","R3 構成案・執筆・提出（3,000〜4,000字）","write"),
+      ]},
+      {id:"w_l4",lbl:"4/11",date:"R4 執筆（初稿＝最終評価）",dead:"言語教育学 R3・R4 提出目標 4/11",tasks:[
+        sk("l_r4_1","批判的考察できる論文1〜2編 収集・精読","read"),
+        sk("l_r4_2","R4 構成案・執筆・提出","write"),
+      ]},
+    ]},
+  ]},
+  {label:"言語教育工学 R3・R4 新規執筆（4/12〜4/17　6日間）",segs:[
+    {id:"s_g34",col:SCOL.工学,title:"言語教育工学 R3・R4",period:"4/12〜4/17（6日）— R4初稿評価",weeks:[
+      {id:"w_g3",lbl:"4/12〜4/14",date:"R3 執筆",tasks:[
+        sk("g_r3_1","栗田ほか『インタラクティブ・ティーチング』精読","read"),
+        sk("g_r3_2","OER学習経験の振り返りメモ（400字）","plan"),
+        sk("g_r3_3","R3 構成案・執筆・提出（3,000〜4,000字）","write"),
+      ]},
+      {id:"w_g4",lbl:"4/15〜4/17",date:"R4 執筆（初稿＝最終評価）",dead:"言語教育工学 R3・R4 提出目標 4/17",tasks:[
+        sk("g_r4_1","ICTを使ったインタラクティブ授業シラバス設計","plan"),
+        sk("g_r4_2","R4 本文執筆（3,000〜5,000字）・提出","write"),
+      ]},
+    ]},
+  ]},
+  {label:"4/18以降 — 修論に全集中＋FB対応",segs:[
+    {id:"s_fb",col:SCOL.fb,title:"FB対応（随時）・各 Final 提出",period:"FB来次第対応",weeks:[
+      {id:"w_fb1",lbl:"随時",date:"FB対応",tasks:[
+        sk("fb_1","各科目 教員FB対応・修正稿","check"),
+        sk("fb_2","Peer Review 対応（全科目）","check"),
+      ]},
+      {id:"w_fb2",lbl:"8/14",date:"前期 R1 Final",dead:"前期 R1（全科目）Final 締切 8/14",tasks:[sk("fb_3","全科目 R1 Final 提出","dead")]},
+      {id:"w_fb3",lbl:"9/7",date:"前期 R2 Final",dead:"前期 R2（全科目）Final 締切 9/7",tasks:[sk("fb_4","全科目 R2 Final 提出","dead")]},
+      {id:"w_fb4",lbl:"10/15",date:"後期 R3 Draft",dead:"後期 R3（全科目）Draft 締切 10/15",tasks:[sk("fb_5","全科目 R3 Draft 提出（提出済なら完了）","dead")]},
+      {id:"w_fb5",lbl:"12/14-15",date:"後期 Final",dead:"後期 R3 Final 12/14 ／ R4 締切 12/15",tasks:[
+        sk("fb_6","後期 R3 Final 提出（12/14）","dead"),
+        sk("fb_7","後期 R4 提出（12/15・提出済なら完了）","dead"),
+      ]},
+    ]},
+    {id:"s_th",col:SCOL.th,title:"修士論文（4/18〜12/31）",period:"レポート完了後、修論に全集中",weeks:[
+      {id:"w_th0",lbl:"4/18〜4/末",date:"プレインタビュー＋インタビュー1",tasks:[
+        sk("th0a","仮題目3案・指導教員に相談","th"),
+        sk("th0b","先行研究リスト作成・文献収集開始","th"),
+        sk("th0c","プレインタビュー 実施（4月中）","th"),
+        sk("th0d","インタビュー 1 実施（4月中）","th"),
+      ]},
+      {id:"w_th1",lbl:"5〜6月",date:"先行研究・背景",tasks:[
+        sk("th1","先行研究 文献精読（週2〜3本）","th"),
+        sk("th2","研究背景・目的・課題・方法 草稿","th"),
+        sk("th3","題目提出（6/30）","dead"),
+      ]},
+      {id:"w_th2",lbl:"7〜8月",date:"50%提出",tasks:[
+        sk("th5","先行研究章まとめ・Survey実施","th"),
+        sk("th6","背景・先行研究・目的・方法 最終整形","th"),
+        sk("th7","修論 50% 提出（8/31）","dead"),
+      ]},
+      {id:"w_th3",lbl:"9〜10月",date:"中間〜70%",tasks:[
+        sk("th8","中間発表（9/30）","dead"),
+        sk("th9","分析章執筆・インタビュー実施","th"),
+        sk("th10","初稿 Peer Review（10/7）","dead"),
+        sk("th11","初稿修正版（70%）提出（10/15）","dead"),
+      ]},
+      {id:"w_th4",lbl:"11〜12月",date:"完成",tasks:[
+        sk("th12","第2稿（90%）提出（11/15）","dead"),
+        sk("th13","全体推敲・形式チェック","th"),
+        sk("th14","修士論文 最終稿 提出（12/31）","dead"),
+        sk("th15","面接試問（2027/1月）","dead"),
+      ]},
+    ]},
+  ]},
+];
+
 // ── STATE ──────────────────────────────────────────────
 let projects=null,selected="thesis",currentView="project",saveTimer=null;
-const litTabState={};
-// レポートのタブ状態管理
-const repTabState={};
+const litTabState={},repTabState={};
 
 // ── UTILS ──────────────────────────────────────────────
 const esc=s=>String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
@@ -162,45 +300,23 @@ function load(){try{const s=localStorage.getItem(KEY);return s?JSON.parse(s):nul
 function save(){
   clearTimeout(saveTimer);
   const el=document.getElementById("save-status");if(el)el.textContent="Saving…";
-  saveTimer=setTimeout(()=>{try{localStorage.setItem(KEY,JSON.stringify(projects));}catch(e){console.error(e);}const el2=document.getElementById("save-status");if(el2)el2.textContent=`✓ Saved (${(JSON.stringify(projects).length/1024).toFixed(1)}kb)`;},700);
+  saveTimer=setTimeout(()=>{try{localStorage.setItem(KEY,JSON.stringify(projects));}catch(e){}const el2=document.getElementById("save-status");if(el2)el2.textContent=`✓ Saved (${(JSON.stringify(projects).length/1024).toFixed(1)}kb)`;},700);
 }
-
-// ── migrate: ensure reports have urls/pdfs arrays ──────
 function migrateData(ps){
   return ps.map(p=>{
-    // migrate subtasks (先行研究)
     let np={...p};
-    if(np.subtasks){
-      np={...np,subtasks:np.subtasks.map(s=>{
-        if(!s.isLiterature||!s.children)return s;
-        return {...s,children:s.children.map(c=>{
-          if(!c.urls){
-            const urls=c.url?[{id:uid(),href:c.url,label:""}]:[];
-            const {url,...rest}=c;
-            return {...rest,urls,pdfs:c.pdfs||[],words:c.words||[]};
-          }
-          return {...c,words:c.words||[]};
-        })};
-      })};
-    }
-    // migrate reports: ensure urls/pdfs/words arrays exist
-    if(np.reports){
-      np={...np,reports:np.reports.map(r=>({
-        ...r,
-        urls:r.urls||[],
-        pdfs:r.pdfs||[],
-        words:r.words||[],
-      }))};
-    }
+    if(np.subtasks){np={...np,subtasks:np.subtasks.map(s=>{if(!s.isLiterature||!s.children)return s;return{...s,children:s.children.map(c=>{if(!c.urls){const urls=c.url?[{id:uid(),href:c.url,label:""}]:[];const{url,...rest}=c;return{...rest,urls,pdfs:c.pdfs||[],words:c.words||[]};}return{...c,words:c.words||[]};})};})}}
+    if(np.reports){np={...np,reports:np.reports.map(r=>({...r,urls:r.urls||[],pdfs:r.pdfs||[],words:r.words||[]}))}}
     return np;
   });
 }
 
 // ── SIDEBAR ────────────────────────────────────────────
 function updateSidebar(){
-  const bp=document.getElementById("btn-project"),bt=document.getElementById("btn-timeline");
-  [bp,bt].forEach(b=>{b.style.background="transparent";b.style.color="#9ca3af";b.style.boxShadow="none";});
-  const ab=currentView==="project"?bp:bt;ab.style.background="#fff";ab.style.color="#111";ab.style.boxShadow="0 1px 3px rgba(0,0,0,.1)";
+  const bp=document.getElementById("btn-project"),bt=document.getElementById("btn-timeline"),bs=document.getElementById("btn-schedule");
+  [bp,bt,bs].forEach(b=>{if(b){b.style.background="transparent";b.style.color="#9ca3af";b.style.boxShadow="none";}});
+  const ab=currentView==="project"?bp:currentView==="timeline"?bt:bs;
+  if(ab){ab.style.background="#fff";ab.style.color="#111";ab.style.boxShadow="0 1px 3px rgba(0,0,0,.1)";}
   document.getElementById("sidebar-projects").innerHTML=projects.map(p=>{
     const tot=p.tasks?[...p.tasks,...(p.subtasks||[])].length:p.reports?p.reports.reduce((a,r)=>a+r.steps.length,0):0;
     const dn=p.tasks?[...p.tasks,...(p.subtasks||[])].filter(t=>t.done).length:p.reports?p.reports.reduce((a,r)=>a+r.steps.filter(s=>s.done).length,0):0;
@@ -214,41 +330,18 @@ function refreshProgress(){
   const pb=document.getElementById("proj-pbar");if(pb)pb.querySelector(".pbar-fill").style.width=pct+"%";
   const pp=document.getElementById("proj-pct");if(pp)pp.textContent=pct+"%";
 }
-
-// ── VIEW ───────────────────────────────────────────────
 window.setView=v=>{currentView=v;fullRender();};
 window.selectProject=id=>{selected=id;currentView="project";fullRender();};
 
 // ── MUTATIONS (tasks) ──────────────────────────────────
-window.toggleTask=tid=>{
-  const t=getProj().tasks.find(t=>t.id===tid);if(!t)return;t.done=!t.done;save();
-  const row=document.getElementById("task-"+tid);
-  if(row){row.style.background=t.done?"#f9fafb":"#fff";row.style.opacity=t.done?"0.55":"1";row.querySelector("input").checked=t.done;const l=row.querySelector(".tlbl");l.style.color=t.done?"#9ca3af":"#1f2937";l.style.textDecoration=t.done?"line-through":"none";}
-  refreshProgress();
-};
+window.toggleTask=tid=>{const t=getProj().tasks.find(t=>t.id===tid);if(!t)return;t.done=!t.done;save();const row=document.getElementById("task-"+tid);if(row){row.style.background=t.done?"#f9fafb":"#fff";row.style.opacity=t.done?"0.55":"1";row.querySelector("input").checked=t.done;const l=row.querySelector(".tlbl");l.style.color=t.done?"#9ca3af":"#1f2937";l.style.textDecoration=t.done?"line-through":"none";}refreshProgress();};
 window.deleteTask=tid=>{projects=projects.map(p=>p.id===selected?{...p,tasks:p.tasks.filter(t=>t.id!==tid)}:p);save();document.getElementById("task-"+tid)?.remove();refreshProgress();};
-window.addTask=()=>{
-  const ti=document.getElementById("new-task-input"),di=document.getElementById("new-deadline-input");
-  const txt=ti.value.trim();if(!txt)return;
-  const nt={id:Date.now().toString(),text:txt,done:false,deadline:di.value||""};
-  projects=projects.map(p=>p.id===selected?{...p,tasks:[...p.tasks,nt]}:p);save();ti.value="";di.value="";
-  const c=document.getElementById("task-list");if(c){const d=document.createElement("div");d.innerHTML=taskRowHtml(nt,getProj().color);c.appendChild(d.firstElementChild);}
-  refreshProgress();
-};
+window.addTask=()=>{const ti=document.getElementById("new-task-input"),di=document.getElementById("new-deadline-input");const txt=ti.value.trim();if(!txt)return;const nt={id:Date.now().toString(),text:txt,done:false,deadline:di.value||""};projects=projects.map(p=>p.id===selected?{...p,tasks:[...p.tasks,nt]}:p);save();ti.value="";di.value="";const c=document.getElementById("task-list");if(c){const d=document.createElement("div");d.innerHTML=taskRowHtml(nt,getProj().color);c.appendChild(d.firstElementChild);}refreshProgress();};
 
 // ── MUTATIONS (subtasks) ───────────────────────────────
 function findSt(sid){for(const s of getProj().subtasks||[]){if(s.id===sid)return s;if(s.children){const c=s.children.find(c=>c.id===sid);if(c)return c;}}return null;}
 function mutateSt(sid,fn){projects=projects.map(p=>p.id!==selected?p:{...p,subtasks:p.subtasks.map(s=>{if(s.id===sid)return fn(s);if(s.children)return{...s,children:s.children.map(c=>c.id===sid?fn(c):c)};return s;})});}
-
-window.toggleSubtask=sid=>{
-  mutateSt(sid,s=>({...s,done:!s.done}));save();
-  const s=findSt(sid),col=getProj().color;
-  const wrap=document.getElementById("stwrap-"+sid);if(wrap){wrap.style.background=s.done?"#f9fafb":"#fff";wrap.style.opacity=s.done?"0.7":"1";}
-  const lbl=document.getElementById("stlbl-"+sid);if(lbl){lbl.style.color=s.done?"#9ca3af":"#1f2937";lbl.style.textDecoration=s.done?"line-through":"none";}
-  const bul=document.getElementById("stbul-"+sid);if(bul&&!bul.dataset.dot){bul.style.background=s.done?col:"#e5e7eb";bul.style.color=s.done?"#fff":"#6b7280";}
-  document.querySelectorAll(`.markbtn-${sid}`).forEach(b=>b.textContent=s.done?"✓ Done":"Mark as done");
-  refreshProgress();
-};
+window.toggleSubtask=sid=>{mutateSt(sid,s=>({...s,done:!s.done}));save();const s=findSt(sid),col=getProj().color;const wrap=document.getElementById("stwrap-"+sid);if(wrap){wrap.style.background=s.done?"#f9fafb":"#fff";wrap.style.opacity=s.done?"0.7":"1";}const lbl=document.getElementById("stlbl-"+sid);if(lbl){lbl.style.color=s.done?"#9ca3af":"#1f2937";lbl.style.textDecoration=s.done?"line-through":"none";}const bul=document.getElementById("stbul-"+sid);if(bul&&!bul.dataset.dot){bul.style.background=s.done?col:"#e5e7eb";bul.style.color=s.done?"#fff":"#6b7280";}document.querySelectorAll(`.markbtn-${sid}`).forEach(b=>b.textContent=s.done?"✓ Done":"Mark as done");refreshProgress();};
 window.setSubtaskNote=(sid,note)=>{mutateSt(sid,s=>({...s,note}));save();};
 window.setSubtaskUrl=(sid,url)=>{mutateSt(sid,s=>({...s,url}));save();const sec=document.getElementById("sturl-"+sid);if(sec)sec.innerHTML=urlSec(sid,url,getProj().color);};
 window.toggleParent=sid=>{const p=getProj(),s=p.subtasks.find(s=>s.id===sid);if(!s)return;s.open=!s.open;save();const cw=document.getElementById("children-"+sid),ar=document.getElementById("par-arrow-"+sid);if(cw)cw.style.display=s.open?"block":"none";if(ar)ar.textContent=s.open?"▲":"▼";};
@@ -257,446 +350,194 @@ window.toggleChildBody=sid=>{const b=document.getElementById("cbody-"+sid),ar=do
 
 // ── MUTATIONS (reports) ────────────────────────────────
 function findReport(rid){return getProj().reports?.find(r=>r.id===rid);}
-function mutateReport(rid,fn){
-  projects=projects.map(p=>p.id!==selected?p:{...p,reports:p.reports.map(r=>r.id===rid?fn(r):r)});
-}
-
+function mutateReport(rid,fn){projects=projects.map(p=>p.id!==selected?p:{...p,reports:p.reports.map(r=>r.id===rid?fn(r):r)});}
 window.toggleReport=rid=>{const p=getProj(),r=p.reports.find(r=>r.id===rid);if(!r)return;r.open=!r.open;save();const b=document.getElementById("rbody-"+rid),ar=document.getElementById("rarrow-"+rid);if(b)b.style.display=r.open?"block":"none";if(ar)ar.textContent=r.open?"▲":"▼";};
-window.toggleStep=(rid,sid)=>{
-  const p=getProj(),r=p.reports.find(r=>r.id===rid);if(!r)return;const s=r.steps.find(s=>s.id===sid);if(!s)return;s.done=!s.done;save();
-  const row=document.getElementById("step-"+sid);if(row){row.querySelector("input").checked=s.done;const l=row.querySelector(".slbl2");l.style.color=s.done?"#9ca3af":"#374151";l.style.textDecoration=s.done?"line-through":"none";}
-  const dn=r.steps.filter(s=>s.done).length,rPct=Math.round(dn/r.steps.length*100);
-  const rb=document.getElementById("rbar-"+rid);if(rb)rb.querySelector(".pbar-fill").style.width=rPct+"%";
-  const rp=document.getElementById("rprog-"+rid);if(rp)rp.textContent=`Progress: ${dn}/${r.steps.length} steps completed　／　Final: ${r.finalDeadline?.slice(5).replace("-","/")}`;
-  refreshProgress();
-};
+window.toggleStep=(rid,sid)=>{const p=getProj(),r=p.reports.find(r=>r.id===rid);if(!r)return;const s=r.steps.find(s=>s.id===sid);if(!s)return;s.done=!s.done;save();const row=document.getElementById("step-"+sid);if(row){row.querySelector("input").checked=s.done;const l=row.querySelector(".slbl2");l.style.color=s.done?"#9ca3af":"#374151";l.style.textDecoration=s.done?"line-through":"none";}const dn=r.steps.filter(s=>s.done).length,rPct=Math.round(dn/r.steps.length*100);const rb=document.getElementById("rbar-"+rid);if(rb)rb.querySelector(".pbar-fill").style.width=rPct+"%";const rp=document.getElementById("rprog-"+rid);if(rp)rp.textContent=`Progress: ${dn}/${r.steps.length} steps completed　／　Final: ${r.finalDeadline?.slice(5).replace("-","/")}`;refreshProgress();};
 window.setReportUrl=(rid,url)=>{const p=getProj(),r=p.reports.find(r=>r.id===rid);if(!r)return;r.url=url;save();const w=document.getElementById("rurl-"+rid);if(w)w.innerHTML=reportUrl(rid,url,p.color);};
 window.clearReportUrl=rid=>setReportUrl(rid,"");
 window.updateMemo=(pid,val)=>{const p=projects.find(p=>p.id===pid);if(p)p.memo=val;save();};
+window.setRepTab=(rid,tab)=>{repTabState[rid]=tab;const col=getProj().color;["url","file"].forEach(t=>{const sec=document.getElementById(`rep${t}-sec-${rid}`);const btn=document.getElementById(`reptab-${t}-${rid}`);if(sec)sec.style.display=tab===t?"block":"none";if(btn){btn.style.background=tab===t?col:"#fff";btn.style.color=tab===t?"#fff":"#6b7280";btn.style.borderColor=tab===t?col:"#e5e7eb";}});};
+window.addRepUrl=(rid)=>{const inp=document.getElementById(`repurlinput-${rid}`);const labelInp=document.getElementById(`repurllabel-${rid}`);const href=inp.value.trim();if(!href)return;const label=labelInp.value.trim()||href.replace(/^https?:\/\//,"").slice(0,40);mutateReport(rid,r=>({...r,urls:[...(r.urls||[]),{id:uid(),href,label}]}));save();inp.value="";labelInp.value="";rerenderRepResources(rid);};
+window.delRepUrl=(rid,eid)=>{mutateReport(rid,r=>({...r,urls:(r.urls||[]).filter(u=>u.id!==eid)}));save();rerenderRepResources(rid);};
+window.addRepFile=(rid)=>{const inp=document.getElementById(`repfileinput-${rid}`);const file=inp.files[0];if(!file)return;const isPdf=file.type==="application/pdf"||file.name.endsWith(".pdf");const reader=new FileReader();reader.onload=e=>{const entry={id:uid(),name:file.name,data:e.target.result};if(isPdf){mutateReport(rid,r=>({...r,pdfs:[...(r.pdfs||[]),entry]}));}else{mutateReport(rid,r=>({...r,words:[...(r.words||[]),entry]}));}save();inp.value="";rerenderRepResources(rid);};reader.readAsDataURL(file);};
+window.delRepPdf=(rid,eid)=>{mutateReport(rid,r=>({...r,pdfs:(r.pdfs||[]).filter(p=>p.id!==eid)}));save();rerenderRepResources(rid);};
+window.delRepWord=(rid,eid)=>{mutateReport(rid,r=>({...r,words:(r.words||[]).filter(w=>w.id!==eid)}));save();rerenderRepResources(rid);};
+window.downloadRepWord=(rid,eid)=>{const r=findReport(rid);if(!r)return;const w=(r.words||[]).find(w=>w.id===eid);if(!w)return;const a=document.createElement("a");a.href=w.data;a.download=w.name;a.click();};
+window.openRepPdf=(rid,eid)=>{const r=findReport(rid);if(!r)return;const pdf=(r.pdfs||[]).find(p=>p.id===eid);if(!pdf)return;const win=window.open();win.document.write(`<iframe src="${pdf.data}" width="100%" height="100%" style="border:none;position:fixed;top:0;left:0;width:100%;height:100%;"></iframe>`);};
+function rerenderRepResources(rid){const wrap=document.getElementById(`repres-${rid}`);if(!wrap)return;const r=findReport(rid);if(!r)return;wrap.innerHTML=repResourcesHtml(r,getProj().color);}
 
-// ── REPORT RESOURCE MUTATIONS ──────────────────────────
-window.setRepTab=(rid,tab)=>{
-  repTabState[rid]=tab;
-  const col=getProj().color;
-  ["url","file"].forEach(t=>{
-    const sec=document.getElementById(`rep${t}-sec-${rid}`);
-    const btn=document.getElementById(`reptab-${t}-${rid}`);
-    if(sec)sec.style.display=tab===t?"block":"none";
-    if(btn){btn.style.background=tab===t?col:"#fff";btn.style.color=tab===t?"#fff":"#6b7280";btn.style.borderColor=tab===t?col:"#e5e7eb";}
-  });
-};
+window.setLitTab=(cid,tab)=>{litTabState[cid]=tab;const col=getProj().color;["url","file"].forEach(t=>{const sec=document.getElementById(`lit${t}-sec-${cid}`);const btn=document.getElementById(`littab-${t}-${cid}`);if(sec)sec.style.display=tab===t?"block":"none";if(btn){btn.style.background=tab===t?col:"#fff";btn.style.color=tab===t?"#fff":"#6b7280";btn.style.borderColor=tab===t?col:"#e5e7eb";}});};
+window.addLitFile=(cid)=>{const inp=document.getElementById(`litfileinput-${cid}`);const file=inp.files[0];if(!file)return;const isPdf=file.type==="application/pdf"||file.name.endsWith(".pdf");const reader=new FileReader();reader.onload=e=>{const entry={id:uid(),name:file.name,data:e.target.result};if(isPdf){mutateSt(cid,c=>({...c,pdfs:[...(c.pdfs||[]),entry]}));}else{mutateSt(cid,c=>({...c,words:[...(c.words||[]),entry]}));}save();inp.value="";rerenderLitResources(cid);};reader.readAsDataURL(file);};
+window.addLitUrl=(cid)=>{const inp=document.getElementById(`liturlinput-${cid}`);const labelInp=document.getElementById(`liturllabel-${cid}`);const href=inp.value.trim();if(!href)return;const label=labelInp.value.trim()||href.replace(/^https?:\/\//,"").slice(0,40);mutateSt(cid,c=>({...c,urls:[...(c.urls||[]),{id:uid(),href,label}]}));save();inp.value="";labelInp.value="";rerenderLitResources(cid);};
+window.delLitUrl=(cid,eid)=>{mutateSt(cid,c=>({...c,urls:(c.urls||[]).filter(u=>u.id!==eid)}));save();rerenderLitResources(cid);};
+window.delLitPdf=(cid,eid)=>{mutateSt(cid,c=>({...c,pdfs:(c.pdfs||[]).filter(p=>p.id!==eid)}));save();rerenderLitResources(cid);};
+window.delLitWord=(cid,eid)=>{mutateSt(cid,c=>({...c,words:(c.words||[]).filter(w=>w.id!==eid)}));save();rerenderLitResources(cid);};
+window.downloadLitWord=(cid,eid)=>{const c=findSt(cid);if(!c)return;const w=(c.words||[]).find(w=>w.id===eid);if(!w)return;const a=document.createElement("a");a.href=w.data;a.download=w.name;a.click();};
+window.openLitPdf=(cid,eid)=>{const c=findSt(cid);if(!c)return;const pdf=(c.pdfs||[]).find(p=>p.id===eid);if(!pdf)return;const win=window.open();win.document.write(`<iframe src="${pdf.data}" width="100%" height="100%" style="border:none;position:fixed;top:0;left:0;width:100%;height:100%;"></iframe>`);};
+function rerenderLitResources(cid){const wrap=document.getElementById(`litres-${cid}`);if(!wrap)return;const c=findSt(cid);if(!c)return;wrap.innerHTML=litResourcesHtml(c,getProj().color);}
 
-window.addRepUrl=(rid)=>{
-  const inp=document.getElementById(`repurlinput-${rid}`);
-  const labelInp=document.getElementById(`repurllabel-${rid}`);
-  const href=inp.value.trim();if(!href)return;
-  const label=labelInp.value.trim()||href.replace(/^https?:\/\//,"").slice(0,40);
-  const entry={id:uid(),href,label};
-  mutateReport(rid,r=>({...r,urls:[...(r.urls||[]),entry]}));save();
-  inp.value="";labelInp.value="";
-  rerenderRepResources(rid);
+// ── SCHEDULE MUTATIONS ─────────────────────────────────
+window.toggleSchTask=id=>{schCk[id]=!schCk[id];schSave();const row=document.getElementById("scht-"+id);if(row){const cb=row.querySelector("input");if(cb)cb.checked=!!schCk[id];const lbl=row.querySelector(".sch-task-t");if(lbl)lbl.classList.toggle("done",!!schCk[id]);}updateSchStats();};
+window.toggleSchSeg=id=>{
+  schOpenS[id]=!(schOpenS[id]!==false);
+  const body=document.getElementById("schbody-"+id);
+  const arr=document.getElementById("scharr-"+id);
+  if(body)body.style.display=schOpenS[id]!==false?"block":"none";
+  if(arr)arr.textContent=schOpenS[id]!==false?"▲":"▼";
 };
-
-window.delRepUrl=(rid,eid)=>{
-  mutateReport(rid,r=>({...r,urls:(r.urls||[]).filter(u=>u.id!==eid)}));save();
-  rerenderRepResources(rid);
+window.toggleSchWk=id=>{
+  schOpenW[id]=!(schOpenW[id]!==false);
+  const body=document.getElementById("schwkbody-"+id);
+  const arr=document.getElementById("schwkarr-"+id);
+  if(body)body.style.display=schOpenW[id]!==false?"block":"none";
+  if(arr)arr.textContent=schOpenW[id]!==false?"▲":"▼";
 };
-
-window.addRepFile=(rid)=>{
-  const inp=document.getElementById(`repfileinput-${rid}`);
-  const file=inp.files[0];if(!file)return;
-  const isPdf=file.type==="application/pdf"||file.name.endsWith(".pdf");
-  const reader=new FileReader();
-  reader.onload=e=>{
-    const entry={id:uid(),name:file.name,data:e.target.result};
-    if(isPdf){mutateReport(rid,r=>({...r,pdfs:[...(r.pdfs||[]),entry]}));}
-    else{mutateReport(rid,r=>({...r,words:[...(r.words||[]),entry]}));}
-    save();inp.value="";
-    rerenderRepResources(rid);
-  };
-  reader.readAsDataURL(file);
-};
-
-window.delRepPdf=(rid,eid)=>{
-  mutateReport(rid,r=>({...r,pdfs:(r.pdfs||[]).filter(p=>p.id!==eid)}));save();
-  rerenderRepResources(rid);
-};
-
-window.addRepWord=(rid)=>{
-  const inp=document.getElementById(`repwordinput-${rid}`);
-  const file=inp.files[0];if(!file)return;
-  const reader=new FileReader();
-  reader.onload=e=>{
-    const entry={id:uid(),name:file.name,data:e.target.result};
-    mutateReport(rid,r=>({...r,words:[...(r.words||[]),entry]}));save();
-    inp.value="";
-    rerenderRepResources(rid);
-  };
-  reader.readAsDataURL(file);
-};
-
-window.delRepWord=(rid,eid)=>{
-  mutateReport(rid,r=>({...r,words:(r.words||[]).filter(w=>w.id!==eid)}));save();
-  rerenderRepResources(rid);
-};
-
-window.downloadRepWord=(rid,eid)=>{
-  const r=findReport(rid);if(!r)return;
-  const w=(r.words||[]).find(w=>w.id===eid);if(!w)return;
-  const a=document.createElement("a");a.href=w.data;a.download=w.name;a.click();
-};
-
-window.openRepPdf=(rid,eid)=>{
-  const r=findReport(rid);if(!r)return;
-  const pdf=(r.pdfs||[]).find(p=>p.id===eid);if(!pdf)return;
-  const win=window.open();
-  win.document.write(`<iframe src="${pdf.data}" width="100%" height="100%" style="border:none;position:fixed;top:0;left:0;width:100%;height:100%;"></iframe>`);
-};
-
-function rerenderRepResources(rid){
-  const wrap=document.getElementById(`repres-${rid}`);if(!wrap)return;
-  const r=findReport(rid);if(!r)return;
-  wrap.innerHTML=repResourcesHtml(r,getProj().color);
-}
-
-// ── LITERATURE RESOURCE MUTATIONS ──────────────────────
-window.setLitTab=(cid,tab)=>{
-  litTabState[cid]=tab;
-  const col=getProj().color;
-  ["url","file"].forEach(t=>{
-    const sec=document.getElementById(`lit${t}-sec-${cid}`);
-    const btn=document.getElementById(`littab-${t}-${cid}`);
-    if(sec)sec.style.display=tab===t?"block":"none";
-    if(btn){btn.style.background=tab===t?col:"#fff";btn.style.color=tab===t?"#fff":"#6b7280";btn.style.borderColor=tab===t?col:"#e5e7eb";}
-  });
-};
-
-window.addLitFile=(cid)=>{
-  const inp=document.getElementById(`litfileinput-${cid}`);
-  const file=inp.files[0];if(!file)return;
-  const isPdf=file.type==="application/pdf"||file.name.endsWith(".pdf");
-  const reader=new FileReader();
-  reader.onload=e=>{
-    const entry={id:uid(),name:file.name,data:e.target.result};
-    if(isPdf){mutateSt(cid,c=>({...c,pdfs:[...(c.pdfs||[]),entry]}));}
-    else{mutateSt(cid,c=>({...c,words:[...(c.words||[]),entry]}));}
-    save();inp.value="";
-    rerenderLitResources(cid);
-  };
-  reader.readAsDataURL(file);
-};
-window.addLitUrl=(cid)=>{
-  const inp=document.getElementById(`liturlinput-${cid}`);
-  const labelInp=document.getElementById(`liturllabel-${cid}`);
-  const href=inp.value.trim();if(!href)return;
-  const label=labelInp.value.trim()||href.replace(/^https?:\/\//,"").slice(0,40);
-  const entry={id:uid(),href,label};
-  mutateSt(cid,c=>({...c,urls:[...(c.urls||[]),entry]}));save();
-  inp.value="";labelInp.value="";
-  rerenderLitResources(cid);
-};
-window.delLitUrl=(cid,eid)=>{
-  mutateSt(cid,c=>({...c,urls:(c.urls||[]).filter(u=>u.id!==eid)}));save();
-  rerenderLitResources(cid);
-};
-window.delLitPdf=(cid,eid)=>{
-  mutateSt(cid,c=>({...c,pdfs:(c.pdfs||[]).filter(p=>p.id!==eid)}));save();
-  rerenderLitResources(cid);
-};
-window.delLitWord=(cid,eid)=>{
-  mutateSt(cid,c=>({...c,words:(c.words||[]).filter(w=>w.id!==eid)}));save();
-  rerenderLitResources(cid);
-};
-window.downloadLitWord=(cid,eid)=>{
-  const c=findSt(cid);if(!c)return;
-  const w=(c.words||[]).find(w=>w.id===eid);if(!w)return;
-  const a=document.createElement("a");a.href=w.data;a.download=w.name;a.click();
-};
-window.openLitPdf=(cid,eid)=>{
-  const c=findSt(cid);if(!c)return;
-  const pdf=(c.pdfs||[]).find(p=>p.id===eid);if(!pdf)return;
-  const win=window.open();
-  win.document.write(`<iframe src="${pdf.data}" width="100%" height="100%" style="border:none;position:fixed;top:0;left:0;width:100%;height:100%;"></iframe>`);
-};
-function rerenderLitResources(cid){
-  const wrap=document.getElementById(`litres-${cid}`);if(!wrap)return;
-  const c=findSt(cid);if(!c)return;
-  wrap.innerHTML=litResourcesHtml(c,getProj().color);
+function updateSchStats(){
+  const all=SCH_PHASES.flatMap(p=>p.segs.flatMap(s=>s.weeks.flatMap(w=>w.tasks)));
+  const done=all.filter(t=>schCk[t.id]).length;
+  const pct=Math.round(done/all.length*100);
+  const pb=document.getElementById("sch-tot-bar");if(pb)pb.querySelector(".pbar-fill").style.width=pct+"%";
+  const pp=document.getElementById("sch-tot-pct");if(pp)pp.textContent=pct+"%";
+  SCH_PHASES.forEach(ph=>ph.segs.forEach(s=>{
+    const sa=s.weeks.flatMap(w=>w.tasks);const sd=sa.filter(t=>schCk[t.id]).length;
+    const sp=Math.round(sd/sa.length*100);
+    const spb=document.getElementById("spbar-"+s.id);if(spb)spb.querySelector(".pbar-fill").style.width=sp+"%";
+    const sst=document.getElementById("sstat-"+s.id);if(sst)sst.textContent=`${sd}/${sa.length} 完了`;
+  }));
 }
 
 // ── ACCORDION ──────────────────────────────────────────
 window.toggleAccordion=id=>{const btn=document.getElementById("abtn-"+id),body=document.getElementById("abody-"+id);if(!btn||!body)return;const o=body.style.display==="block";body.style.display=o?"none":"block";btn.classList.toggle("open",!o);btn.querySelector(".ac-arrow").textContent=o?"▼":"▲";};
 window.toggleAccSec=(aid,idx)=>{const body=document.getElementById("abody-"+aid);if(!body)return;body.querySelectorAll("[data-sec]").forEach((el,i)=>{const ar=document.getElementById(`asarr-${aid}-${i}`);if(i===idx){const o=el.style.display==="block";el.style.display=o?"none":"block";if(ar)ar.textContent=o?"▼":"▲";}else{el.style.display="none";if(ar)ar.textContent="▼";}});};
 window.toggleTimelineDone=()=>renderMain();
-window.updateBulletColor=(sid,note,col)=>{
-  const hasNote=!!(note&&note.trim());
-  const bul=document.getElementById("stbul-"+sid);
-  if(!bul)return;
-  if(bul.dataset.dot){bul.style.color=hasNote?col:"#d1d5db";}
-  else{const isCircle=bul.style.borderRadius==="50%"||bul.style.width==="20px"&&bul.style.height==="20px";if(isCircle){bul.style.background=hasNote?col:"#e5e7eb";bul.style.color=hasNote?"#fff":"#6b7280";}else{bul.style.color=hasNote?col:"#d1d5db";}}
-};
+window.updateBulletColor=(sid,note,col)=>{const hasNote=!!(note&&note.trim());const bul=document.getElementById("stbul-"+sid);if(!bul)return;if(bul.dataset.dot){bul.style.color=hasNote?col:"#d1d5db";}else{const isCircle=bul.style.borderRadius==="50%"||bul.style.width==="20px"&&bul.style.height==="20px";if(isCircle){bul.style.background=hasNote?col:"#e5e7eb";bul.style.color=hasNote?"#fff":"#6b7280";}else{bul.style.color=hasNote?col:"#d1d5db";}}};
 
 // ── HTML BUILDERS ──────────────────────────────────────
 function urlSec(sid,url,col){if(url)return `<div style="display:flex;align-items:center;gap:6px;"><a href="${esc(url)}" target="_blank" style="flex:1;font-size:12px;color:${col};text-decoration:none;background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;padding:4px 10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block;">🔗 ${esc(url.replace("https://","").slice(0,50))}…</a><button onclick="setSubtaskUrl('${sid}','')" style="background:none;border:none;color:#d1d5db;cursor:pointer;font-size:14px;">×</button></div>`;return `<input class="url-input" placeholder="URL or Google Drive link…" onblur="if(this.value){setSubtaskUrl('${sid}',this.value);this.value='';}">"`+`>`;}
 function reportUrl(rid,url,col){if(url)return `<div style="display:flex;align-items:center;gap:6px;"><a href="${esc(url)}" target="_blank" style="flex:1;font-size:12px;color:${col};text-decoration:none;background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;padding:5px 10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block;">📄 ${esc(url.replace("https://","").slice(0,45))}…</a><button onclick="clearReportUrl('${rid}')" style="background:none;border:none;color:#d1d5db;cursor:pointer;font-size:14px;">×</button></div>`;return `<input class="url-input" placeholder="Google Drive URL…" onblur="if(this.value){setReportUrl('${rid}',this.value);this.value='';}">"`+`>`;}
-function accordionHtml(id,icon,title,sections,weight){weight=weight||"600";
-  const inner=sections.map((s,i)=>{const content=s.items?`<ul data-sec style="margin:0 0 10px;padding:0 16px 0 32px;display:none;">${s.items.map(it=>`<li style="font-size:12px;color:#4b5563;line-height:1.9;">${esc(it)}</li>`).join("")}</ul>`:`<div data-sec style="font-size:12px;color:#4b5563;line-height:1.9;padding:0 16px 12px;white-space:pre-wrap;display:none;">${esc(s.content)}</div>`;return `<div style="border-bottom:${i<sections.length-1?"1px solid #f3f4f6":"none"};"><button class="sec-btn" onclick="toggleAccSec('${id}',${i})">${esc(s.title)}<span id="asarr-${id}-${i}" style="color:#9ca3af;font-weight:400;font-size:11px;">▼</span></button>${content}</div>`;}).join("");
-  return `<div class="accordion-wrap"><button id="abtn-${id}" class="accordion-btn" onclick="toggleAccordion('${id}')" style="font-weight:${weight};"><span>${icon} ${esc(title)}</span><span class="ac-arrow" style="margin-left:auto;color:#9ca3af;font-size:11px;">▼</span></button><div id="abody-${id}" class="accordion-inner" style="display:none;">${inner}</div></div>`;
-}
-function stBodyHtml(s,col,hasUrl){
-  const oninput=`setSubtaskNote('${s.id}',this.value);updateBulletColor('${s.id}',this.value,'${col}')`;
-  const hasRes=Array.isArray(s.urls);
-  const resHtml=hasRes?`<div id="stres-${s.id}" style="margin-top:8px;">${stResourcesHtml(s,col)}</div>`:"";
-  return `<div id="stbody-${s.id}" class="subtask-body" style="display:none;"><textarea style="width:100%;border:1px solid #e5e7eb;border-radius:6px;padding:8px 10px;font-size:12px;resize:vertical;min-height:80px;outline:none;box-sizing:border-box;color:#374151;margin-top:8px;" placeholder="Notes…" oninput="${oninput}">${esc(s.note||"")}</textarea>${resHtml}<div style="margin-top:10px;display:flex;justify-content:flex-end;"><button class="markbtn-${s.id}" onclick="toggleSubtask('${s.id}')" style="font-size:12px;color:${col};background:none;border:1px solid ${col};border-radius:6px;padding:4px 12px;cursor:pointer;">${s.done?"✓ Done":"Mark as done"}</button></div></div>`;
-}
-function stItemHtml(s,idx,col,isResearch){
-  const hasNote=!!(s.note&&s.note.trim());
-  const dotCol=s.done?"#9ca3af":hasNote?col:"#d1d5db";
-  const bul=isResearch
-    ?`<span data-dot="1" id="stbul-${s.id}" style="width:20px;font-size:14px;text-align:center;flex-shrink:0;color:${dotCol};">●</span>`
-    :`<span id="stbul-${s.id}" style="width:20px;height:20px;border-radius:50%;background:${s.done?col:hasNote?col:"#e5e7eb"};color:${s.done||hasNote?"#fff":"#6b7280"};font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">${idx+1}</span>`;
-  return `<div id="stwrap-${s.id}" class="subtask-item" style="background:${s.done?"#f9fafb":"#fff"};opacity:${s.done?0.7:1};"><div class="subtask-header" onclick="toggleStBody('${s.id}')">${bul}<span id="stlbl-${s.id}" style="flex:1;font-size:13px;color:${s.done?"#9ca3af":"#1f2937"};text-decoration:${s.done?"line-through":"none"};">${esc(s.text)}</span><span id="starrow-${s.id}" style="font-size:11px;color:#9ca3af;">▼</span></div>${stBodyHtml(s,col,false)}</div>`;
-}
+function accordionHtml(id,icon,title,sections,weight){weight=weight||"600";const inner=sections.map((s,i)=>{const content=s.items?`<ul data-sec style="margin:0 0 10px;padding:0 16px 0 32px;display:none;">${s.items.map(it=>`<li style="font-size:12px;color:#4b5563;line-height:1.9;">${esc(it)}</li>`).join("")}</ul>`:`<div data-sec style="font-size:12px;color:#4b5563;line-height:1.9;padding:0 16px 12px;white-space:pre-wrap;display:none;">${esc(s.content)}</div>`;return `<div style="border-bottom:${i<sections.length-1?"1px solid #f3f4f6":"none"};"><button class="sec-btn" onclick="toggleAccSec('${id}',${i})">${esc(s.title)}<span id="asarr-${id}-${i}" style="color:#9ca3af;font-weight:400;font-size:11px;">▼</span></button>${content}</div>`;}).join("");return `<div class="accordion-wrap"><button id="abtn-${id}" class="accordion-btn" onclick="toggleAccordion('${id}')" style="font-weight:${weight};"><span>${icon} ${esc(title)}</span><span class="ac-arrow" style="margin-left:auto;color:#9ca3af;font-size:11px;">▼</span></button><div id="abody-${id}" class="accordion-inner" style="display:none;">${inner}</div></div>`;}
+function stBodyHtml(s,col){const oninput=`setSubtaskNote('${s.id}',this.value);updateBulletColor('${s.id}',this.value,'${col}')`;const hasRes=Array.isArray(s.urls);const resHtml=hasRes?`<div id="stres-${s.id}" style="margin-top:8px;">${stResourcesHtml(s,col)}</div>`:"";return `<div id="stbody-${s.id}" class="subtask-body" style="display:none;"><textarea style="width:100%;border:1px solid #e5e7eb;border-radius:6px;padding:8px 10px;font-size:12px;resize:vertical;min-height:80px;outline:none;box-sizing:border-box;color:#374151;margin-top:8px;" placeholder="Notes…" oninput="${oninput}">${esc(s.note||"")}</textarea>${resHtml}<div style="margin-top:10px;display:flex;justify-content:flex-end;"><button class="markbtn-${s.id}" onclick="toggleSubtask('${s.id}')" style="font-size:12px;color:${col};background:none;border:1px solid ${col};border-radius:6px;padding:4px 12px;cursor:pointer;">${s.done?"✓ Done":"Mark as done"}</button></div></div>`;}
+function stItemHtml(s,idx,col,isResearch){const hasNote=!!(s.note&&s.note.trim());const dotCol=s.done?"#9ca3af":hasNote?col:"#d1d5db";const bul=isResearch?`<span data-dot="1" id="stbul-${s.id}" style="width:20px;font-size:14px;text-align:center;flex-shrink:0;color:${dotCol};">●</span>`:`<span id="stbul-${s.id}" style="width:20px;height:20px;border-radius:50%;background:${s.done?col:hasNote?col:"#e5e7eb"};color:${s.done||hasNote?"#fff":"#6b7280"};font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">${idx+1}</span>`;return `<div id="stwrap-${s.id}" class="subtask-item" style="background:${s.done?"#f9fafb":"#fff"};opacity:${s.done?0.7:1};"><div class="subtask-header" onclick="toggleStBody('${s.id}')">${bul}<span id="stlbl-${s.id}" style="flex:1;font-size:13px;color:${s.done?"#9ca3af":"#1f2937"};text-decoration:${s.done?"line-through":"none"};">${esc(s.text)}</span><span id="starrow-${s.id}" style="font-size:11px;color:#9ca3af;">▼</span></div>${stBodyHtml(s,col)}</div>`;}
 
-// ── subtask/child 汎用リソースUI & mutations ────────────
 const stTabState={};
-window.setStTab=(sid,tab)=>{
-  stTabState[sid]=tab;
-  const col=getProj().color;
-  ["url","file"].forEach(t=>{
-    const sec=document.getElementById(`st${t}-sec-${sid}`);
-    const btn=document.getElementById(`sttab-${t}-${sid}`);
-    if(sec)sec.style.display=tab===t?"block":"none";
-    if(btn){btn.style.background=tab===t?col:"#fff";btn.style.color=tab===t?"#fff":"#6b7280";btn.style.borderColor=tab===t?col:"#e5e7eb";}
-  });
-};
-window.addStUrl=(sid)=>{
-  const inp=document.getElementById(`sturlinput-${sid}`);
-  const labelInp=document.getElementById(`sturllabel-${sid}`);
-  const href=inp.value.trim();if(!href)return;
-  const label=labelInp.value.trim()||href.replace(/^https?:\/\//,"").slice(0,40);
-  mutateSt(sid,s=>({...s,urls:[...(s.urls||[]),{id:uid(),href,label}]}));save();
-  inp.value="";labelInp.value="";rerenderStResources(sid);
-};
+window.setStTab=(sid,tab)=>{stTabState[sid]=tab;const col=getProj().color;["url","file"].forEach(t=>{const sec=document.getElementById(`st${t}-sec-${sid}`);const btn=document.getElementById(`sttab-${t}-${sid}`);if(sec)sec.style.display=tab===t?"block":"none";if(btn){btn.style.background=tab===t?col:"#fff";btn.style.color=tab===t?"#fff":"#6b7280";btn.style.borderColor=tab===t?col:"#e5e7eb";}});};
+window.addStUrl=(sid)=>{const inp=document.getElementById(`sturlinput-${sid}`);const labelInp=document.getElementById(`sturllabel-${sid}`);const href=inp.value.trim();if(!href)return;const label=labelInp.value.trim()||href.replace(/^https?:\/\//,"").slice(0,40);mutateSt(sid,s=>({...s,urls:[...(s.urls||[]),{id:uid(),href,label}]}));save();inp.value="";labelInp.value="";rerenderStResources(sid);};
 window.delStUrl=(sid,eid)=>{mutateSt(sid,s=>({...s,urls:(s.urls||[]).filter(u=>u.id!==eid)}));save();rerenderStResources(sid);};
-window.addStFile=(sid)=>{
-  const inp=document.getElementById(`stfileinput-${sid}`);
-  const file=inp.files[0];if(!file)return;
-  const isPdf=file.type==="application/pdf"||file.name.endsWith(".pdf");
-  const reader=new FileReader();
-  reader.onload=e=>{
-    const entry={id:uid(),name:file.name,data:e.target.result};
-    if(isPdf){mutateSt(sid,s=>({...s,pdfs:[...(s.pdfs||[]),entry]}));}
-    else{mutateSt(sid,s=>({...s,words:[...(s.words||[]),entry]}));}
-    save();inp.value="";rerenderStResources(sid);
-  };
-  reader.readAsDataURL(file);
-};
+window.addStFile=(sid)=>{const inp=document.getElementById(`stfileinput-${sid}`);const file=inp.files[0];if(!file)return;const isPdf=file.type==="application/pdf"||file.name.endsWith(".pdf");const reader=new FileReader();reader.onload=e=>{const entry={id:uid(),name:file.name,data:e.target.result};if(isPdf){mutateSt(sid,s=>({...s,pdfs:[...(s.pdfs||[]),entry]}));}else{mutateSt(sid,s=>({...s,words:[...(s.words||[]),entry]}));}save();inp.value="";rerenderStResources(sid);};reader.readAsDataURL(file);};
 window.delStPdf=(sid,eid)=>{mutateSt(sid,s=>({...s,pdfs:(s.pdfs||[]).filter(p=>p.id!==eid)}));save();rerenderStResources(sid);};
 window.delStWord=(sid,eid)=>{mutateSt(sid,s=>({...s,words:(s.words||[]).filter(w=>w.id!==eid)}));save();rerenderStResources(sid);};
 window.openStPdf=(sid,eid)=>{const s=findSt(sid);if(!s)return;const p=(s.pdfs||[]).find(p=>p.id===eid);if(!p)return;const w=window.open();w.document.write(`<iframe src="${p.data}" width="100%" height="100%" style="border:none;position:fixed;top:0;left:0;width:100%;height:100%;"></iframe>`);};
 window.downloadStWord=(sid,eid)=>{const s=findSt(sid);if(!s)return;const w=(s.words||[]).find(w=>w.id===eid);if(!w)return;const a=document.createElement("a");a.href=w.data;a.download=w.name;a.click();};
 function rerenderStResources(sid){const wrap=document.getElementById(`stres-${sid}`);if(!wrap)return;const s=findSt(sid);if(!s)return;wrap.innerHTML=stResourcesHtml(s,getProj().color);}
-function stResourcesHtml(s,col){
-  const urls=s.urls||[];const pdfs=s.pdfs||[];const words=s.words||[];
-  const tab=stTabState[s.id]||"url";
-  const fileCount=pdfs.length+words.length;
-  const totalCount=urls.length+fileCount;
-  const countBadge=totalCount>0?`<span style="font-size:10px;font-weight:700;background:${col};color:#fff;border-radius:99px;padding:1px 5px;margin-left:4px;">${totalCount}</span>`:"";
-  const tabBtn=(t,label,count)=>{const active=tab===t;const cnt=count>0?`<span style="font-size:9px;font-weight:700;background:${active?"rgba(255,255,255,0.35)":col};color:#fff;border-radius:99px;padding:0 4px;margin-left:3px;">${count}</span>`:"";return `<button id="sttab-${t}-${s.id}" class="res-tab" style="background:${active?col:"#fff"};color:${active?"#fff":"#6b7280"};border-color:${active?col:"#e5e7eb"};" onclick="setStTab('${s.id}','${t}')">${label}${cnt}</button>`;};
-  const urlEntries=urls.map(u=>`<div class="res-entry"><a href="${esc(u.href)}" target="_blank" class="res-entry-link" style="color:${col};" title="${esc(u.href)}">${esc(u.label||u.href.replace(/^https?:\/\//,"").slice(0,45))}</a><button class="res-del-btn" onclick="delStUrl('${s.id}','${u.id}')">×</button></div>`).join("");
-  const urlAdd=`<div class="res-add-row" style="flex-wrap:wrap;gap:4px;"><input id="sturllabel-${s.id}" class="res-add-input" placeholder="Label (optional)" style="width:100px;flex:none;"><input id="sturlinput-${s.id}" class="res-add-input" placeholder="https://…" style="flex:1;min-width:100px;"><button class="res-add-btn" style="background:${col};color:#fff;" onclick="addStUrl('${s.id}')">Add</button></div>`;
-  const fileEntries=[...pdfs.map(p=>`<div class="res-entry"><span class="res-entry-name" style="cursor:pointer;color:${col};" onclick="openStPdf('${s.id}','${p.id}')">${esc(p.name)}</span><button class="res-del-btn" onclick="delStPdf('${s.id}','${p.id}')">×</button></div>`),...words.map(w=>`<div class="res-entry"><span class="res-entry-name" style="cursor:pointer;color:${col};" onclick="downloadStWord('${s.id}','${w.id}')">${esc(w.name)}</span><button class="res-del-btn" onclick="delStWord('${s.id}','${w.id}')">×</button></div>`)].join("");
-  const fileAdd=`<div class="res-add-row"><input id="stfileinput-${s.id}" type="file" accept="application/pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" style="display:none;" onchange="addStFile('${s.id}')"><button class="res-add-btn" style="background:#f3f4f6;color:#374151;border:1px solid #e5e7eb;" onclick="document.getElementById('stfileinput-${s.id}').click()">Choose file…</button></div>`;
-  return `<div style="margin-top:8px;border-top:1px solid #f3f4f6;padding-top:8px;"><div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;"><span style="font-size:10px;font-weight:700;color:#9ca3af;letter-spacing:1px;text-transform:uppercase;">Resources</span>${countBadge}<div style="margin-left:auto;display:flex;gap:4px;">${tabBtn("url","URL",urls.length)}${tabBtn("file","File",fileCount)}</div></div><div id="sturl-sec-${s.id}" style="display:${tab==="url"?"block":"none"};">${urlEntries}${urlAdd}</div><div id="stfile-sec-${s.id}" style="display:${tab==="file"?"block":"none"};">${fileEntries}${fileAdd}</div></div>`;
-}
-
-// ── レポート用リソースUI ───────────────────────────────
-function repResourcesHtml(r,col){
-  const urls=r.urls||[];
-  const pdfs=r.pdfs||[];
-  const words=r.words||[];
-  const tab=repTabState[r.id]||"url";
-  const fileCount=pdfs.length+words.length;
-  const totalCount=urls.length+fileCount;
-  const countBadge=totalCount>0?`<span style="font-size:10px;font-weight:700;background:${col};color:#fff;border-radius:99px;padding:1px 6px;margin-left:4px;">${totalCount}</span>`:"";
-
-  const tabBtn=(t,icon,label,count)=>{
-    const active=tab===t;
-    const cnt=count>0?`<span style="font-size:9px;font-weight:700;background:${active?"rgba(255,255,255,0.35)":col};color:${active?"#fff":"#fff"};border-radius:99px;padding:0 4px;margin-left:3px;">${count}</span>`:"";
-    return `<button id="reptab-${t}-${r.id}" class="res-tab" style="background:${active?col:"#fff"};color:${active?"#fff":"#6b7280"};border-color:${active?col:"#e5e7eb"};" onclick="setRepTab('${r.id}','${t}')">${label}${cnt}</button>`;
-  };
-
-  const urlEntries=urls.map(u=>`<div class="res-entry"><a href="${esc(u.href)}" target="_blank" class="res-entry-link" style="color:${col};" title="${esc(u.href)}">${esc(u.label||u.href.replace(/^https?:\/\//,"").slice(0,45))}</a><button class="res-del-btn" onclick="delRepUrl('${r.id}','${u.id}')">×</button></div>`).join("");
-  const urlAdd=`<div class="res-add-row" style="flex-wrap:wrap;gap:4px;"><input id="repurllabel-${r.id}" class="res-add-input" placeholder="Label (optional)" style="width:110px;flex:none;"><input id="repurlinput-${r.id}" class="res-add-input" placeholder="https://…" style="flex:1;min-width:120px;"><button class="res-add-btn" style="background:${col};color:#fff;" onclick="addRepUrl('${r.id}')">Add</button></div>`;
-
-  const pdfEntries=pdfs.map(p=>`<div class="res-entry"><span class="res-entry-name" style="cursor:pointer;color:${col};" onclick="openRepPdf('${r.id}','${p.id}')" title="${esc(p.name)}">${esc(p.name)}</span><button class="res-del-btn" onclick="delRepPdf('${r.id}','${p.id}')">×</button></div>`).join("");
-  const wordEntries=words.map(w=>`<div class="res-entry"><span class="res-entry-name" style="cursor:pointer;color:${col};" onclick="downloadRepWord('${r.id}','${w.id}')" title="${esc(w.name)}">${esc(w.name)}</span><button class="res-del-btn" onclick="delRepWord('${r.id}','${w.id}')">×</button></div>`).join("");
-  const fileAdd=`<div class="res-add-row"><input id="repfileinput-${r.id}" type="file" accept="application/pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" style="display:none;" onchange="addRepFile('${r.id}')"><button class="res-add-btn" style="background:#f3f4f6;color:#374151;border:1px solid #e5e7eb;" onclick="document.getElementById('repfileinput-${r.id}').click()">Choose file…</button></div>`;
-
-  return `<div style="margin-top:12px;border-top:1px solid #f3f4f6;padding-top:10px;">
-    <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
-      <span style="font-size:10px;font-weight:700;color:#9ca3af;letter-spacing:1px;text-transform:uppercase;">Resources</span>${countBadge}
-      <div style="margin-left:auto;display:flex;gap:4px;">${tabBtn("url","🔗","URL",urls.length)}${tabBtn("file","📎","File",fileCount)}</div>
-    </div>
-    <div id="repurl-sec-${r.id}" style="display:${tab==="url"?"block":"none"};">${urlEntries}${urlAdd}</div>
-    <div id="repfile-sec-${r.id}" style="display:${tab==="file"?"block":"none"};">${pdfEntries}${wordEntries}${fileAdd}</div>
-  </div>`;
-}
-
-// ── 先行研究リソースUI ─────────────────────────────────
-function litResourcesHtml(c,col){
-  const urls=c.urls||[];
-  const pdfs=c.pdfs||[];
-  const words=c.words||[];
-  const tab=litTabState[c.id]||"url";
-  const fileCount=pdfs.length+words.length;
-  const totalCount=urls.length+fileCount;
-  const countBadge=totalCount>0?`<span style="font-size:10px;font-weight:700;background:${col};color:#fff;border-radius:99px;padding:1px 6px;margin-left:4px;">${totalCount}</span>`:"";
-
-  const tabBtn=(t,icon,label,count)=>{
-    const active=tab===t;
-    const cnt=count>0?`<span style="font-size:9px;font-weight:700;background:${active?"rgba(255,255,255,0.35)":col};color:#fff;border-radius:99px;padding:0 4px;margin-left:3px;">${count}</span>`:"";
-    return `<button id="littab-${t}-${c.id}" class="res-tab" style="background:${active?col:"#fff"};color:${active?"#fff":"#6b7280"};border-color:${active?col:"#e5e7eb"};" onclick="setLitTab('${c.id}','${t}')">${label}${cnt}</button>`;
-  };
-
-  const urlEntries=urls.map(u=>`<div class="res-entry"><a href="${esc(u.href)}" target="_blank" class="res-entry-link" style="color:${col};" title="${esc(u.href)}">${esc(u.label||u.href.replace(/^https?:\/\//,"").slice(0,45))}</a><button class="res-del-btn" onclick="delLitUrl('${c.id}','${u.id}')">×</button></div>`).join("");
-  const urlAdd=`<div class="res-add-row" style="flex-wrap:wrap;gap:4px;"><input id="liturllabel-${c.id}" class="res-add-input" placeholder="Label (optional)" style="width:110px;flex:none;"><input id="liturlinput-${c.id}" class="res-add-input" placeholder="https://…" style="flex:1;min-width:120px;"><button class="res-add-btn" style="background:${col};color:#fff;" onclick="addLitUrl('${c.id}')">Add</button></div>`;
-
-  const pdfEntries=pdfs.map(p=>`<div class="res-entry"><span class="res-entry-name" style="cursor:pointer;color:${col};" onclick="openLitPdf('${c.id}','${p.id}')" title="${esc(p.name)}">${esc(p.name)}</span><button class="res-del-btn" onclick="delLitPdf('${c.id}','${p.id}')">×</button></div>`).join("");
-  const wordEntries=words.map(w=>`<div class="res-entry"><span class="res-entry-name" style="cursor:pointer;color:${col};" onclick="downloadLitWord('${c.id}','${w.id}')" title="${esc(w.name)}">${esc(w.name)}</span><button class="res-del-btn" onclick="delLitWord('${c.id}','${w.id}')">×</button></div>`).join("");
-  const fileAdd=`<div class="res-add-row"><input id="litfileinput-${c.id}" type="file" accept="application/pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" style="display:none;" onchange="addLitFile('${c.id}')"><button class="res-add-btn" style="background:#f3f4f6;color:#374151;border:1px solid #e5e7eb;" onclick="document.getElementById('litfileinput-${c.id}').click()">Choose file…</button></div>`;
-
-  return `<div style="margin-top:10px;">
-    <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
-      <span style="font-size:10px;font-weight:700;color:#9ca3af;letter-spacing:1px;text-transform:uppercase;">Resources</span>${countBadge}
-      <div style="margin-left:auto;display:flex;gap:4px;">${tabBtn("url","🔗","URL",urls.length)}${tabBtn("file","📎","File",fileCount)}</div>
-    </div>
-    <div id="liturl-sec-${c.id}" style="display:${tab==="url"?"block":"none"};">${urlEntries}${urlAdd}</div>
-    <div id="litfile-sec-${c.id}" style="display:${tab==="file"?"block":"none"};">${pdfEntries}${wordEntries}${fileAdd}</div>
-  </div>`;
-}
-
-// ── 先行研究子アイテム ─────────────────────────────────
-function litChildHtml(c,ci,col){
-  const hasNote=!!(c.note&&c.note.trim());
-  const urls=c.urls||[];
-  const pdfs=c.pdfs||[];
-  const totalRes=urls.length+pdfs.length;
-  const numCol=c.done?"#9ca3af":hasNote?col:"#d1d5db";
-  const oninput=`setSubtaskNote('${c.id}',this.value);updateBulletColor('${c.id}',this.value,'${col}')`;
-  const resBadge=totalRes>0?`<span style="font-size:10px;font-weight:700;background:${col};color:#fff;border-radius:99px;padding:1px 5px;margin-left:4px;">${totalRes}</span>`:"";
-
-  return `<div id="stwrap-${c.id}" class="child-row" style="background:${c.done?"#f9fafb":"#fff"};opacity:${c.done?0.7:1};">
-    <div class="child-header" onclick="toggleChildBody('${c.id}')">
-      <span id="stbul-${c.id}" style="color:${numCol};font-size:12px;width:20px;flex-shrink:0;">${ci+1}.</span>
-      <span id="stlbl-${c.id}" style="flex:1;font-size:12px;color:${c.done?"#9ca3af":"#374151"};text-decoration:${c.done?"line-through":"none"};">${esc(c.text)}</span>
-      ${resBadge}
-      <span id="carrow-${c.id}" style="font-size:10px;color:#9ca3af;margin-left:4px;">▼</span>
-    </div>
-    <div id="cbody-${c.id}" class="child-body" style="display:none;">
-      <textarea style="width:100%;border:1px solid #e5e7eb;border-radius:6px;padding:6px 10px;font-size:12px;resize:vertical;min-height:60px;outline:none;box-sizing:border-box;color:#374151;" placeholder="Notes…" oninput="${oninput}">${esc(c.note||"")}</textarea>
-      <div id="litres-${c.id}">${litResourcesHtml(c,col)}</div>
-      <div style="margin-top:8px;display:flex;justify-content:flex-end;">
-        <button class="markbtn-${c.id}" onclick="toggleSubtask('${c.id}')" style="font-size:11px;color:${col};background:none;border:1px solid ${col};border-radius:6px;padding:3px 10px;cursor:pointer;">${c.done?"✓ Done":"Mark as done"}</button>
-      </div>
-    </div>
-  </div>`;
-}
-
-function parentHtml(s,idx,col,isLit){
-  const childDone=s.children.filter(c=>c.done).length;
-  const children=isLit
-    ? s.children.map((c,ci)=>litChildHtml(c,ci,col)).join("")
-    : s.children.map((c,ci)=>{
-        const hasNote=!!(c.note&&c.note.trim());
-        const numCol=c.done?"#9ca3af":hasNote?col:"#d1d5db";
-        const oninput=`setSubtaskNote('${c.id}',this.value);updateBulletColor('${c.id}',this.value,'${col}')`;
-        const hasRes=Array.isArray(c.urls);
-        const totalRes=hasRes?(c.urls||[]).length+(c.pdfs||[]).length+(c.words||[]).length:0;
-        const resBadge=totalRes>0?`<span style="font-size:10px;font-weight:700;background:${col};color:#fff;border-radius:99px;padding:1px 5px;margin-left:4px;">${totalRes}</span>`:"";
-        const resHtml=hasRes?`<div id="stres-${c.id}" style="margin-top:6px;">${stResourcesHtml(c,col)}</div>`:"";
-        return `<div id="stwrap-${c.id}" class="child-row" style="background:${c.done?"#f9fafb":"#fff"};opacity:${c.done?0.7:1};"><div class="child-header" onclick="toggleChildBody('${c.id}')"><span id="stbul-${c.id}" style="color:${numCol};font-size:12px;width:20px;flex-shrink:0;">${ci+1}.</span><span id="stlbl-${c.id}" style="flex:1;font-size:12px;color:${c.done?"#9ca3af":"#374151"};text-decoration:${c.done?"line-through":"none"};">${esc(c.text)}</span>${resBadge}<span id="carrow-${c.id}" style="font-size:10px;color:#9ca3af;">▼</span></div><div id="cbody-${c.id}" class="child-body" style="display:none;"><textarea style="width:100%;border:1px solid #e5e7eb;border-radius:6px;padding:6px 10px;font-size:12px;resize:vertical;min-height:60px;outline:none;box-sizing:border-box;color:#374151;" placeholder="Notes…" oninput="${oninput}">${esc(c.note||"")}</textarea>${resHtml}<div style="margin-top:6px;display:flex;justify-content:flex-end;"><button class="markbtn-${c.id}" onclick="toggleSubtask('${c.id}')" style="font-size:11px;color:${col};background:none;border:1px solid ${col};border-radius:6px;padding:3px 10px;cursor:pointer;">${c.done?"✓ Done":"Mark as done"}</button></div></div></div>`;
-      }).join("");
-
-  let totalRes=0;
-  if(isLit)s.children.forEach(c=>{totalRes+=(c.urls||[]).length+(c.pdfs||[]).length;});
-  const resBadge=isLit&&totalRes>0?`<span style="font-size:10px;font-weight:700;background:${col};color:#fff;border-radius:99px;padding:1px 5px;margin-right:4px;">${totalRes}</span>`:"";
-
-  const combinedResBadge=isLit?resBadge:"";
-  const parResHtml="";
-  return `<div style="margin-bottom:5px;"><div style="border:1px solid #e5e7eb;border-radius:8px;background:#fff;"><div id="stwrap-${s.id}" onclick="toggleParent('${s.id}')" style="display:flex;align-items:center;gap:10px;padding:9px 12px;cursor:pointer;user-select:none;"><span id="stbul-${s.id}" style="width:20px;height:20px;border-radius:50%;background:${s.done?col:"#e5e7eb"};color:${s.done?"#fff":"#6b7280"};font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">${idx+1}</span><span id="stlbl-${s.id}" style="flex:1;font-size:13px;color:${s.done?"#9ca3af":"#1f2937"};text-decoration:${s.done?"line-through":"none"};">${esc(s.text)}</span><span style="font-size:11px;color:#9ca3af;margin-right:4px;">${childDone}/${s.children.length}</span>${combinedResBadge}<span id="par-arrow-${s.id}" style="font-size:11px;color:#9ca3af;">${s.open?"▲":"▼"}</span></div></div><div id="children-${s.id}" style="margin-left:20px;border-left:2px solid #e5e7eb;padding-left:10px;margin-top:3px;display:${s.open?"block":"none"};">${children}</div></div>`;
-}
+function stResourcesHtml(s,col){const urls=s.urls||[];const pdfs=s.pdfs||[];const words=s.words||[];const tab=stTabState[s.id]||"url";const fileCount=pdfs.length+words.length;const totalCount=urls.length+fileCount;const countBadge=totalCount>0?`<span style="font-size:10px;font-weight:700;background:${col};color:#fff;border-radius:99px;padding:1px 5px;margin-left:4px;">${totalCount}</span>`:"";const tabBtn=(t,label,count)=>{const active=tab===t;const cnt=count>0?`<span style="font-size:9px;font-weight:700;background:${active?"rgba(255,255,255,0.35)":col};color:#fff;border-radius:99px;padding:0 4px;margin-left:3px;">${count}</span>`:"";return `<button id="sttab-${t}-${s.id}" class="res-tab" style="background:${active?col:"#fff"};color:${active?"#fff":"#6b7280"};border-color:${active?col:"#e5e7eb"};" onclick="setStTab('${s.id}','${t}')">${label}${cnt}</button>`;};const urlEntries=urls.map(u=>`<div class="res-entry"><a href="${esc(u.href)}" target="_blank" class="res-entry-link" style="color:${col};" title="${esc(u.href)}">${esc(u.label||u.href.replace(/^https?:\/\//,"").slice(0,45))}</a><button class="res-del-btn" onclick="delStUrl('${s.id}','${u.id}')">×</button></div>`).join("");const urlAdd=`<div class="res-add-row" style="flex-wrap:wrap;gap:4px;"><input id="sturllabel-${s.id}" class="res-add-input" placeholder="Label (optional)" style="width:100px;flex:none;"><input id="sturlinput-${s.id}" class="res-add-input" placeholder="https://…" style="flex:1;min-width:100px;"><button class="res-add-btn" style="background:${col};color:#fff;" onclick="addStUrl('${s.id}')">Add</button></div>`;const fileEntries=[...pdfs.map(p=>`<div class="res-entry"><span class="res-entry-name" style="cursor:pointer;color:${col};" onclick="openStPdf('${s.id}','${p.id}')">${esc(p.name)}</span><button class="res-del-btn" onclick="delStPdf('${s.id}','${p.id}')">×</button></div>`),...words.map(w=>`<div class="res-entry"><span class="res-entry-name" style="cursor:pointer;color:${col};" onclick="downloadStWord('${s.id}','${w.id}')">${esc(w.name)}</span><button class="res-del-btn" onclick="delStWord('${s.id}','${w.id}')">×</button></div>`)].join("");const fileAdd=`<div class="res-add-row"><input id="stfileinput-${s.id}" type="file" accept="application/pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" style="display:none;" onchange="addStFile('${s.id}')"><button class="res-add-btn" style="background:#f3f4f6;color:#374151;border:1px solid #e5e7eb;" onclick="document.getElementById('stfileinput-${s.id}').click()">Choose file…</button></div>`;return `<div style="margin-top:8px;border-top:1px solid #f3f4f6;padding-top:8px;"><div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;"><span style="font-size:10px;font-weight:700;color:#9ca3af;letter-spacing:1px;text-transform:uppercase;">Resources</span>${countBadge}<div style="margin-left:auto;display:flex;gap:4px;">${tabBtn("url","URL",urls.length)}${tabBtn("file","File",fileCount)}</div></div><div id="sturl-sec-${s.id}" style="display:${tab==="url"?"block":"none"};">${urlEntries}${urlAdd}</div><div id="stfile-sec-${s.id}" style="display:${tab==="file"?"block":"none"};">${fileEntries}${fileAdd}</div></div>`;}
+function repResourcesHtml(r,col){const urls=r.urls||[];const pdfs=r.pdfs||[];const words=r.words||[];const tab=repTabState[r.id]||"url";const fileCount=pdfs.length+words.length;const totalCount=urls.length+fileCount;const countBadge=totalCount>0?`<span style="font-size:10px;font-weight:700;background:${col};color:#fff;border-radius:99px;padding:1px 6px;margin-left:4px;">${totalCount}</span>`:"";const tabBtn=(t,icon,label,count)=>{const active=tab===t;const cnt=count>0?`<span style="font-size:9px;font-weight:700;background:${active?"rgba(255,255,255,0.35)":col};color:#fff;border-radius:99px;padding:0 4px;margin-left:3px;">${count}</span>`:"";return `<button id="reptab-${t}-${r.id}" class="res-tab" style="background:${active?col:"#fff"};color:${active?"#fff":"#6b7280"};border-color:${active?col:"#e5e7eb"};" onclick="setRepTab('${r.id}','${t}')">${label}${cnt}</button>`;};const urlEntries=urls.map(u=>`<div class="res-entry"><a href="${esc(u.href)}" target="_blank" class="res-entry-link" style="color:${col};" title="${esc(u.href)}">${esc(u.label||u.href.replace(/^https?:\/\//,"").slice(0,45))}</a><button class="res-del-btn" onclick="delRepUrl('${r.id}','${u.id}')">×</button></div>`).join("");const urlAdd=`<div class="res-add-row" style="flex-wrap:wrap;gap:4px;"><input id="repurllabel-${r.id}" class="res-add-input" placeholder="Label (optional)" style="width:110px;flex:none;"><input id="repurlinput-${r.id}" class="res-add-input" placeholder="https://…" style="flex:1;min-width:120px;"><button class="res-add-btn" style="background:${col};color:#fff;" onclick="addRepUrl('${r.id}')">Add</button></div>`;const pdfEntries=pdfs.map(p=>`<div class="res-entry"><span class="res-entry-name" style="cursor:pointer;color:${col};" onclick="openRepPdf('${r.id}','${p.id}')" title="${esc(p.name)}">${esc(p.name)}</span><button class="res-del-btn" onclick="delRepPdf('${r.id}','${p.id}')">×</button></div>`).join("");const wordEntries=words.map(w=>`<div class="res-entry"><span class="res-entry-name" style="cursor:pointer;color:${col};" onclick="downloadRepWord('${r.id}','${w.id}')" title="${esc(w.name)}">${esc(w.name)}</span><button class="res-del-btn" onclick="delRepWord('${r.id}','${w.id}')">×</button></div>`).join("");const fileAdd=`<div class="res-add-row"><input id="repfileinput-${r.id}" type="file" accept="application/pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" style="display:none;" onchange="addRepFile('${r.id}')"><button class="res-add-btn" style="background:#f3f4f6;color:#374151;border:1px solid #e5e7eb;" onclick="document.getElementById('repfileinput-${r.id}').click()">Choose file…</button></div>`;return `<div style="margin-top:12px;border-top:1px solid #f3f4f6;padding-top:10px;"><div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;"><span style="font-size:10px;font-weight:700;color:#9ca3af;letter-spacing:1px;text-transform:uppercase;">Resources</span>${countBadge}<div style="margin-left:auto;display:flex;gap:4px;">${tabBtn("url","🔗","URL",urls.length)}${tabBtn("file","📎","File",fileCount)}</div></div><div id="repurl-sec-${r.id}" style="display:${tab==="url"?"block":"none"};">${urlEntries}${urlAdd}</div><div id="repfile-sec-${r.id}" style="display:${tab==="file"?"block":"none"};">${pdfEntries}${wordEntries}${fileAdd}</div></div>`;}
+function litResourcesHtml(c,col){const urls=c.urls||[];const pdfs=c.pdfs||[];const words=c.words||[];const tab=litTabState[c.id]||"url";const fileCount=pdfs.length+words.length;const totalCount=urls.length+fileCount;const countBadge=totalCount>0?`<span style="font-size:10px;font-weight:700;background:${col};color:#fff;border-radius:99px;padding:1px 6px;margin-left:4px;">${totalCount}</span>`:"";const tabBtn=(t,icon,label,count)=>{const active=tab===t;const cnt=count>0?`<span style="font-size:9px;font-weight:700;background:${active?"rgba(255,255,255,0.35)":col};color:#fff;border-radius:99px;padding:0 4px;margin-left:3px;">${count}</span>`:"";return `<button id="littab-${t}-${c.id}" class="res-tab" style="background:${active?col:"#fff"};color:${active?"#fff":"#6b7280"};border-color:${active?col:"#e5e7eb"};" onclick="setLitTab('${c.id}','${t}')">${label}${cnt}</button>`;};const urlEntries=urls.map(u=>`<div class="res-entry"><a href="${esc(u.href)}" target="_blank" class="res-entry-link" style="color:${col};" title="${esc(u.href)}">${esc(u.label||u.href.replace(/^https?:\/\//,"").slice(0,45))}</a><button class="res-del-btn" onclick="delLitUrl('${c.id}','${u.id}')">×</button></div>`).join("");const urlAdd=`<div class="res-add-row" style="flex-wrap:wrap;gap:4px;"><input id="liturllabel-${c.id}" class="res-add-input" placeholder="Label (optional)" style="width:110px;flex:none;"><input id="liturlinput-${c.id}" class="res-add-input" placeholder="https://…" style="flex:1;min-width:120px;"><button class="res-add-btn" style="background:${col};color:#fff;" onclick="addLitUrl('${c.id}')">Add</button></div>`;const pdfEntries=pdfs.map(p=>`<div class="res-entry"><span class="res-entry-name" style="cursor:pointer;color:${col};" onclick="openLitPdf('${c.id}','${p.id}')" title="${esc(p.name)}">${esc(p.name)}</span><button class="res-del-btn" onclick="delLitPdf('${c.id}','${p.id}')">×</button></div>`).join("");const wordEntries=words.map(w=>`<div class="res-entry"><span class="res-entry-name" style="cursor:pointer;color:${col};" onclick="downloadLitWord('${c.id}','${w.id}')" title="${esc(w.name)}">${esc(w.name)}</span><button class="res-del-btn" onclick="delLitWord('${c.id}','${w.id}')">×</button></div>`).join("");const fileAdd=`<div class="res-add-row"><input id="litfileinput-${c.id}" type="file" accept="application/pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" style="display:none;" onchange="addLitFile('${c.id}')"><button class="res-add-btn" style="background:#f3f4f6;color:#374151;border:1px solid #e5e7eb;" onclick="document.getElementById('litfileinput-${c.id}').click()">Choose file…</button></div>`;return `<div style="margin-top:10px;"><div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;"><span style="font-size:10px;font-weight:700;color:#9ca3af;letter-spacing:1px;text-transform:uppercase;">Resources</span>${countBadge}<div style="margin-left:auto;display:flex;gap:4px;">${tabBtn("url","🔗","URL",urls.length)}${tabBtn("file","📎","File",fileCount)}</div></div><div id="liturl-sec-${c.id}" style="display:${tab==="url"?"block":"none"};">${urlEntries}${urlAdd}</div><div id="litfile-sec-${c.id}" style="display:${tab==="file"?"block":"none"};">${pdfEntries}${wordEntries}${fileAdd}</div></div>`;}
+function litChildHtml(c,ci,col){const hasNote=!!(c.note&&c.note.trim());const urls=c.urls||[];const pdfs=c.pdfs||[];const totalRes=urls.length+pdfs.length;const numCol=c.done?"#9ca3af":hasNote?col:"#d1d5db";const oninput=`setSubtaskNote('${c.id}',this.value);updateBulletColor('${c.id}',this.value,'${col}')`;const resBadge=totalRes>0?`<span style="font-size:10px;font-weight:700;background:${col};color:#fff;border-radius:99px;padding:1px 5px;margin-left:4px;">${totalRes}</span>`:"";return `<div id="stwrap-${c.id}" class="child-row" style="background:${c.done?"#f9fafb":"#fff"};opacity:${c.done?0.7:1};"><div class="child-header" onclick="toggleChildBody('${c.id}')"><span id="stbul-${c.id}" style="color:${numCol};font-size:12px;width:20px;flex-shrink:0;">${ci+1}.</span><span id="stlbl-${c.id}" style="flex:1;font-size:12px;color:${c.done?"#9ca3af":"#374151"};text-decoration:${c.done?"line-through":"none"};">${esc(c.text)}</span>${resBadge}<span id="carrow-${c.id}" style="font-size:10px;color:#9ca3af;margin-left:4px;">▼</span></div><div id="cbody-${c.id}" class="child-body" style="display:none;"><textarea style="width:100%;border:1px solid #e5e7eb;border-radius:6px;padding:6px 10px;font-size:12px;resize:vertical;min-height:60px;outline:none;box-sizing:border-box;color:#374151;" placeholder="Notes…" oninput="${oninput}">${esc(c.note||"")}</textarea><div id="litres-${c.id}">${litResourcesHtml(c,col)}</div><div style="margin-top:8px;display:flex;justify-content:flex-end;"><button class="markbtn-${c.id}" onclick="toggleSubtask('${c.id}')" style="font-size:11px;color:${col};background:none;border:1px solid ${col};border-radius:6px;padding:3px 10px;cursor:pointer;">${c.done?"✓ Done":"Mark as done"}</button></div></div></div>`;}
+function parentHtml(s,idx,col,isLit){const childDone=s.children.filter(c=>c.done).length;const children=isLit?s.children.map((c,ci)=>litChildHtml(c,ci,col)).join(""):s.children.map((c,ci)=>{const hasNote=!!(c.note&&c.note.trim());const numCol=c.done?"#9ca3af":hasNote?col:"#d1d5db";const oninput=`setSubtaskNote('${c.id}',this.value);updateBulletColor('${c.id}',this.value,'${col}')`;const hasRes=Array.isArray(c.urls);const totalRes=hasRes?(c.urls||[]).length+(c.pdfs||[]).length+(c.words||[]).length:0;const resBadge=totalRes>0?`<span style="font-size:10px;font-weight:700;background:${col};color:#fff;border-radius:99px;padding:1px 5px;margin-left:4px;">${totalRes}</span>`:"";const resHtml=hasRes?`<div id="stres-${c.id}" style="margin-top:6px;">${stResourcesHtml(c,col)}</div>`:"";return `<div id="stwrap-${c.id}" class="child-row" style="background:${c.done?"#f9fafb":"#fff"};opacity:${c.done?0.7:1};"><div class="child-header" onclick="toggleChildBody('${c.id}')"><span id="stbul-${c.id}" style="color:${numCol};font-size:12px;width:20px;flex-shrink:0;">${ci+1}.</span><span id="stlbl-${c.id}" style="flex:1;font-size:12px;color:${c.done?"#9ca3af":"#374151"};text-decoration:${c.done?"line-through":"none"};">${esc(c.text)}</span>${resBadge}<span id="carrow-${c.id}" style="font-size:10px;color:#9ca3af;">▼</span></div><div id="cbody-${c.id}" class="child-body" style="display:none;"><textarea style="width:100%;border:1px solid #e5e7eb;border-radius:6px;padding:6px 10px;font-size:12px;resize:vertical;min-height:60px;outline:none;box-sizing:border-box;color:#374151;" placeholder="Notes…" oninput="${oninput}">${esc(c.note||"")}</textarea>${resHtml}<div style="margin-top:6px;display:flex;justify-content:flex-end;"><button class="markbtn-${c.id}" onclick="toggleSubtask('${c.id}')" style="font-size:11px;color:${col};background:none;border:1px solid ${col};border-radius:6px;padding:3px 10px;cursor:pointer;">${c.done?"✓ Done":"Mark as done"}</button></div></div></div>`;}).join("");let totalRes=0;if(isLit)s.children.forEach(c=>{totalRes+=(c.urls||[]).length+(c.pdfs||[]).length;});const resBadge=isLit&&totalRes>0?`<span style="font-size:10px;font-weight:700;background:${col};color:#fff;border-radius:99px;padding:1px 5px;margin-right:4px;">${totalRes}</span>`:"";return `<div style="margin-bottom:5px;"><div style="border:1px solid #e5e7eb;border-radius:8px;background:#fff;"><div id="stwrap-${s.id}" onclick="toggleParent('${s.id}')" style="display:flex;align-items:center;gap:10px;padding:9px 12px;cursor:pointer;user-select:none;"><span id="stbul-${s.id}" style="width:20px;height:20px;border-radius:50%;background:${s.done?col:"#e5e7eb"};color:${s.done?"#fff":"#6b7280"};font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">${idx+1}</span><span id="stlbl-${s.id}" style="flex:1;font-size:13px;color:${s.done?"#9ca3af":"#1f2937"};text-decoration:${s.done?"line-through":"none"};">${esc(s.text)}</span><span style="font-size:11px;color:#9ca3af;margin-right:4px;">${childDone}/${s.children.length}</span>${resBadge}<span id="par-arrow-${s.id}" style="font-size:11px;color:#9ca3af;">${s.open?"▲":"▼"}</span></div></div><div id="children-${s.id}" style="margin-left:20px;border-left:2px solid #e5e7eb;padding-left:10px;margin-top:3px;display:${s.open?"block":"none"};">${children}</div></div>`;}
 function taskRowHtml(t,col){return `<div id="task-${t.id}" class="task-row" style="background:${t.done?"#f9fafb":"#fff"};opacity:${t.done?0.55:1};"><input type="checkbox" ${t.done?"checked":""} onchange="toggleTask('${t.id}')" style="width:15px;height:15px;accent-color:${col};flex-shrink:0;"><span class="tlbl" style="flex:1;font-size:13px;color:${t.done?"#9ca3af":"#1f2937"};text-decoration:${t.done?"line-through":"none"};">${esc(t.text)}</span>${t.deadline?`<span style="font-size:11px;color:#6b7280;white-space:nowrap;">${t.deadline.slice(5).replace("-","/")} </span>`:""}${t.deadline?badge(t.deadline):""}<button onclick="deleteTask('${t.id}')" style="background:none;border:none;color:#d1d5db;cursor:pointer;font-size:15px;padding:0 2px;">×</button></div>`;}
 
-// ── RENDER ─────────────────────────────────────────────
+// ── RENDER: SCHEDULE ───────────────────────────────────
+function renderSchedule(){
+  const allT=SCH_PHASES.flatMap(p=>p.segs.flatMap(s=>s.weeks.flatMap(w=>w.tasks)));
+  const totDone=allT.filter(t=>schCk[t.id]).length;
+  const totPct=Math.round(totDone/allT.length*100);
+  let h=`<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;"><div style="font-size:18px;font-weight:700;color:#111;">Schedule</div><span style="font-size:12px;color:#6b7280;">${totDone}/${allT.length} 完了</span></div>`;
+  h+=`<div style="margin-bottom:16px;">${pbar(totPct,"#322470","sch-tot-bar")}<div style="display:flex;justify-content:flex-end;margin-top:2px;"><span id="sch-tot-pct" style="font-size:11px;font-weight:700;color:#322470;">${totPct}%</span></div></div>`;
+  h+=`<div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;">
+    <div style="display:flex;align-items:center;gap:8px;background:#F5EDE8;border-radius:8px;padding:7px 12px;flex:1;min-width:140px;">
+      <div style="width:8px;height:8px;border-radius:50%;background:#7F4826;flex-shrink:0;"></div>
+      <span style="font-size:12px;font-weight:700;color:#4A2010;">推敲のみ</span>
+      <span style="font-size:12px;color:#7A4020;">3/30〜4/4　10本</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;background:#FEE8E0;border-radius:8px;padding:7px 12px;flex:1;min-width:140px;">
+      <div style="width:8px;height:8px;border-radius:50%;background:#FB5022;flex-shrink:0;"></div>
+      <span style="font-size:12px;font-weight:700;color:#6A1000;">新規執筆</span>
+      <span style="font-size:12px;color:#8A2008;">4/5〜4/17　6本</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;background:#FEF4E0;border-radius:8px;padding:7px 12px;flex:1;min-width:140px;">
+      <div style="width:8px;height:8px;border-radius:50%;background:#EFA119;flex-shrink:0;"></div>
+      <span style="font-size:12px;font-weight:700;color:#5A3000;">全完了</span>
+      <span style="font-size:12px;color:#7A5000;">4/17　16本</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;background:#ECEAF8;border-radius:8px;padding:7px 12px;flex:1;min-width:140px;">
+      <div style="width:8px;height:8px;border-radius:50%;background:#322470;flex-shrink:0;"></div>
+      <span style="font-size:12px;font-weight:700;color:#1E1650;">以降</span>
+      <span style="font-size:12px;color:#2A1E60;">4/18〜　修論集中</span>
+    </div>
+  </div>`;
+  SCH_PHASES.forEach(phase=>{
+    h+=`<div class="sch-phase"><div class="sch-phase-line"></div><span class="sch-phase-label">${esc(phase.label)}</span><div class="sch-phase-line"></div></div>`;
+    phase.segs.forEach(s=>{
+      const sa=s.weeks.flatMap(w=>w.tasks);const sd=sa.filter(t=>schCk[t.id]).length;const sp=Math.round(sd/sa.length*100);
+      const isO=schOpenS[s.id]!==false;
+      let whtml="";
+      s.weeks.forEach(w=>{
+        const isWO=schOpenW[w.id]!==false;
+        const wdone=w.tasks.filter(t=>schCk[t.id]).length;
+        let thtml="";
+        w.tasks.forEach(t=>{
+          const ck=!!schCk[t.id];
+          thtml+=`<div id="scht-${t.id}" class="sch-task"><input type="checkbox" style="accent-color:${s.col};" ${ck?"checked":""} onchange="toggleSchTask('${t.id}')"><span class="sch-task-t${ck?" done":""}">${esc(t.t)}</span>${stag(t.k)}</div>`;
+        });
+        const db=w.dead?`<div class="sch-dead-bar">⚠ ${esc(w.dead)}</div>`:"";
+        whtml+=`<div class="sch-wk">
+          <div class="sch-wk-head" onclick="toggleSchWk('${w.id}')">
+            <span class="sch-wk-lbl" style="color:${s.col};">${esc(w.lbl)}</span>
+            <span class="sch-wk-date">${esc(w.date)}</span>
+            <span class="sch-wk-cnt">${wdone}/${w.tasks.length} 完了</span>
+            <span id="schwkarr-${w.id}" style="font-size:11px;color:#9ca3af;margin-left:6px;">${isWO?"▲":"▼"}</span>
+          </div>
+          <div id="schwkbody-${w.id}" style="display:${isWO?"block":"none"};">${db}<div class="sch-wk-body">${thtml}</div></div>
+        </div>`;
+      });
+      h+=`<div class="sch-seg">
+        <div class="sch-seg-head" onclick="toggleSchSeg('${s.id}')">
+          <div class="sch-seg-dot" style="width:10px;height:10px;border-radius:50%;background:${s.col};flex-shrink:0;"></div>
+          <div class="sch-seg-info">
+            <div class="sch-seg-title">${esc(s.title)}</div>
+            <div class="sch-seg-period">${esc(s.period)}</div>
+            ${pbar(sp,s.col,"spbar-"+s.id)}
+            <div id="sstat-${s.id}" class="sch-seg-stat">${sd}/${sa.length} 完了</div>
+          </div>
+          <span id="scharr-${s.id}" class="sch-seg-arr">${isO?"▲":"▼"}</span>
+        </div>
+        <div id="schbody-${s.id}" class="sch-seg-body" style="display:${isO?"block":"none"};">${whtml}</div>
+      </div>`;
+    });
+  });
+  h+=`<div id="save-status" style="font-size:11px;color:#9ca3af;margin-top:16px;">✓ Saved</div>`;
+  return h;
+}
+
+// ── RENDER: TIMELINE ───────────────────────────────────
 function renderTimeline(){
   const hd=document.getElementById("hide-done-chk"),hideDone=hd?hd.checked:true;
-  const all=projects.flatMap(p=>{
-    if(p.tasks)return p.tasks.filter(t=>t.deadline).map(t=>({key:t.id,label:t.text,deadline:t.deadline,done:t.done,color:p.color,proj:p.title}));
-    if(p.reports)return p.reports.flatMap(r=>[{key:r.id+"_d",label:c2n(r.label.replace(/〈前期〉|〈後期〉/g,"").trim().replace("レポート","Report"))+" — Draft",deadline:r.deadline,done:r.steps[0]?.done,color:p.color,proj:p.title},{key:r.id+"_f",label:c2n(r.label.replace(/〈前期〉|〈後期〉/g,"").trim().replace("レポート","Report"))+" — Final",deadline:r.finalDeadline,done:r.steps[3]?.done,color:p.color,proj:p.title}]);
-    return[];
-  }).sort((a,b)=>new Date(a.deadline)-new Date(b.deadline));
+  const all=projects.flatMap(p=>{if(p.tasks)return p.tasks.filter(t=>t.deadline).map(t=>({key:t.id,label:t.text,deadline:t.deadline,done:t.done,color:p.color,proj:p.title}));if(p.reports)return p.reports.flatMap(r=>[{key:r.id+"_d",label:c2n(r.label.replace(/〈前期〉|〈後期〉/g,"").trim().replace("レポート","Report"))+" — Draft",deadline:r.deadline,done:r.steps[0]?.done,color:p.color,proj:p.title},{key:r.id+"_f",label:c2n(r.label.replace(/〈前期〉|〈後期〉/g,"").trim().replace("レポート","Report"))+" — Final",deadline:r.finalDeadline,done:r.steps[3]?.done,color:p.color,proj:p.title}]);return[];}).sort((a,b)=>new Date(a.deadline)-new Date(b.deadline));
   const filtered=hideDone?all.filter(t=>!t.done):all;
   const groups={};filtered.forEach(t=>{const k=t.deadline?.slice(0,7)||"未定";if(!groups[k])groups[k]=[];groups[k].push(t);});
   const now=new Date(),cm=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,"0")}`;
   const sem=k=>{const m=parseInt(k.split("-")[1]);if(m>=6&&m<=9)return "〈前期〉";if(m>=10||m<=1)return "〈後期〉";return "";};
   const ml=k=>{if(k==="未定")return "TBD";const[y,m]=k.split("-");return `${sem(k)} ${y}年${parseInt(m)}月`;};
-  let h=`<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;"><div style="font-size:18px;font-weight:700;color:#111;">📅 Tasks &amp; Deadlines</div><label style="display:flex;align-items:center;gap:6px;font-size:12px;color:#6b7280;cursor:pointer;user-select:none;"><input type="checkbox" id="hide-done-chk" ${hideDone?"checked":""} onchange="toggleTimelineDone()" style="accent-color:#4f46e5;">完了済みを隠す</label></div>`;
-  if(!filtered.length)return h+`<div style="text-align:center;padding:60px 0;color:#9ca3af;font-size:14px;">🎉 All done!</div>`;
-  Object.keys(groups).forEach(mo=>{
-    const isCur=mo===cm;
-    h+=`<div style="margin-bottom:22px;"><div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><span style="font-size:13px;font-weight:700;color:${isCur?"#4f46e5":"#374151"};">${isCur?"▶ ":""}${ml(mo)}</span><div style="flex:1;height:1px;background:#e5e7eb;"></div><span style="font-size:11px;color:#9ca3af;">${groups[mo].length}件</span></div>`;
-    groups[mo].forEach(t=>{const lbl=t.proj.length>8?t.proj.slice(0,8)+"…":t.proj;h+=`<div class="timeline-row" style="border-left:3px solid ${t.color};opacity:${t.done?0.4:1};"><span style="font-size:12px;color:#9ca3af;width:28px;flex-shrink:0;">${t.deadline?.slice(8)}日</span><span style="flex:1;font-size:13px;color:#1f2937;text-decoration:${t.done?"line-through":"none"};">${esc(t.label)}<span style="font-size:10px;font-weight:700;color:${t.color};margin-left:6px;">${esc(lbl)}</span></span>${badge(t.deadline)}</div>`;});
-    h+=`</div>`;
-  });
+  let h=`<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;"><div style="font-size:18px;font-weight:700;color:#111;">Tasks &amp; Deadlines</div><label style="display:flex;align-items:center;gap:6px;font-size:12px;color:#6b7280;cursor:pointer;user-select:none;"><input type="checkbox" id="hide-done-chk" ${hideDone?"checked":""} onchange="toggleTimelineDone()" style="accent-color:#4f46e5;">完了済みを隠す</label></div>`;
+  if(!filtered.length)return h+`<div style="text-align:center;padding:60px 0;color:#9ca3af;font-size:14px;">All done!</div>`;
+  Object.keys(groups).forEach(mo=>{const isCur=mo===cm;h+=`<div style="margin-bottom:22px;"><div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><span style="font-size:13px;font-weight:700;color:${isCur?"#4f46e5":"#374151"};">${isCur?"▶ ":""}${ml(mo)}</span><div style="flex:1;height:1px;background:#e5e7eb;"></div><span style="font-size:11px;color:#9ca3af;">${groups[mo].length}件</span></div>`;groups[mo].forEach(t=>{const lbl=t.proj.length>8?t.proj.slice(0,8)+"…":t.proj;h+=`<div class="timeline-row" style="border-left:3px solid ${t.color};opacity:${t.done?0.4:1};"><span style="font-size:12px;color:#9ca3af;width:28px;flex-shrink:0;">${t.deadline?.slice(8)}日</span><span style="flex:1;font-size:13px;color:#1f2937;text-decoration:${t.done?"line-through":"none"};">${esc(t.label)}<span style="font-size:10px;font-weight:700;color:${t.color};margin-left:6px;">${esc(lbl)}</span></span>${badge(t.deadline)}</div>`;});h+=`</div>`;});
   return h;
 }
 
+// ── RENDER: PROJECT ────────────────────────────────────
 function renderProjectView(){
   const proj=getProj(),isThesis=proj.id==="thesis",pct=calcPct(proj),col=proj.color;
   let h=`<div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;"><span style="width:12px;height:12px;border-radius:50%;background:${col};flex-shrink:0;"></span><div style="font-size:20px;font-weight:700;color:#111;">${esc(proj.title)}</div></div>${pbar(pct,col,"proj-pbar")}<div style="display:flex;justify-content:space-between;font-size:12px;color:#6b7280;margin-bottom:20px;"><span>Progress</span><span id="proj-pct" style="font-weight:700;color:${col};">${pct}%</span></div>`;
-
   if(isThesis){
     let left="";
-    ["研究内容","Research"].forEach(group=>{
-      const items=proj.subtasks.filter(s=>s.group===group);
-      const allSub=items.flatMap(s=>s.children?[s,...s.children]:[s]);
-      const dn=allSub.filter(s=>s.done).length;
-      const label=group==="研究内容"?"Outline":"Research";
-      left+=`<div style="margin-bottom:20px;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><div class="slbl" style="margin-bottom:0;">${label}</div><div style="flex:1;height:1px;background:#e5e7eb;"></div><span style="font-size:11px;color:#9ca3af;">${dn}/${items.length}</span></div>`;
-      items.forEach((s,idx)=>{
-        if(s.isParent)left+=parentHtml(s,idx,col,!!s.isLiterature);
-        else left+=stItemHtml(s,idx,col,group==="Research");
-      });
-      left+=`</div>`;
-    });
+    ["研究内容","Research"].forEach(group=>{const items=proj.subtasks.filter(s=>s.group===group);const allSub=items.flatMap(s=>s.children?[s,...s.children]:[s]);const dn=allSub.filter(s=>s.done).length;const label=group==="研究内容"?"Outline":"Research";left+=`<div style="margin-bottom:20px;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><div class="slbl" style="margin-bottom:0;">${label}</div><div style="flex:1;height:1px;background:#e5e7eb;"></div><span style="font-size:11px;color:#9ca3af;">${dn}/${items.length}</span></div>`;items.forEach((s,idx)=>{if(s.isParent)left+=parentHtml(s,idx,col,!!s.isLiterature);else left+=stItemHtml(s,idx,col,group==="Research");});left+=`</div>`;});
     left+=`<div style="margin-top:4px;"><div class="slbl">Memo</div><textarea class="memo-area" placeholder="Notes, references, feedback…" oninput="updateMemo('${proj.id}',this.value)">${esc(proj.memo||"")}</textarea></div>`;
-
     let right=`<div class="slbl">Links &amp; Reference</div><div style="display:flex;flex-direction:column;gap:6px;margin-bottom:4px;"><a href="https://www.myendnoteweb.com/EndNoteWeb.html" target="_blank" class="link-btn" style="color:${col};">EndNote Web</a><a href="https://docs.google.com/spreadsheets/d/1cIJRqCX5O-vT-tAwC5mpi9WARtgT6D0umUuBo27tXkg/edit?resourcekey=&gid=329566813#gid=329566813" target="_blank" class="link-btn" style="color:${col};">アンケート結果</a></div>${accordionHtml("guide","","覚書：レポート・修論の書き方",GUIDE_SECTIONS,"400")}<div style="margin-top:20px;"><div class="slbl">Tasks</div><div id="task-list">${proj.tasks.map(t=>taskRowHtml(t,col)).join("")}</div><div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;"><input id="new-task-input" class="add-input" placeholder="New task…" onkeydown="if(event.key==='Enter')addTask();"><input id="new-deadline-input" type="date" style="border:1px solid #e5e7eb;border-radius:8px;padding:7px 8px;font-size:12px;outline:none;color:#374151;"><button onclick="addTask()" style="background:${col};color:#fff;border:none;border-radius:8px;padding:7px 14px;font-size:12px;cursor:pointer;font-weight:600;">Add</button></div></div>`;
-
     h+=`<div class="two-col"><div class="col-left">${left}</div><div class="col-right">${right}</div></div>`;
-
   } else {
     if(SYLLABUS[proj.id])h+=accordionHtml("syl-"+proj.id,"🤍","Syllabus",SYLLABUS[proj.id].sections);
     h+=`<div class="slbl" style="margin-top:20px;">Reports</div>`;
-    ["前期","後期"].forEach(sem=>{
-      const semR=proj.reports.filter(r=>r.label.includes(`〈${sem}〉`));if(!semR.length)return;
-      h+=`<div><div style="display:flex;align-items:center;gap:8px;margin:10px 0 6px;"><span style="font-size:12px;font-weight:700;color:${col};">〈${sem}〉</span><div style="flex:1;height:1px;background:#e5e7eb;"></div></div>`;
-      semR.forEach(r=>{
-        const dn=r.steps.filter(s=>s.done).length,rPct=Math.round(dn/r.steps.length*100);
-        const sl=c2n(r.label.replace(/〈前期〉|〈後期〉/g,"").trim().replace("レポート","Report"));
-        // resource badge for report card header
-        const totalRes=(r.urls||[]).length+(r.pdfs||[]).length;
-        const resBadge=totalRes>0?`<span style="font-size:10px;font-weight:700;background:${col};color:#fff;border-radius:99px;padding:1px 5px;margin-left:4px;">📎${totalRes}</span>`:"";
-        h+=`<div class="report-card"><div class="report-header" onclick="toggleReport('${r.id}')"><div style="flex:1;"><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;"><span style="font-size:13px;font-weight:600;color:#1f2937;">${esc(sl)}</span>${resBadge}<span style="font-size:11px;color:#6b7280;">Due ${r.deadline?.slice(5).replace("-","/")}</span>${badge(r.deadline)}</div>${pbar(rPct,col,"rbar-"+r.id)}<span id="rprog-${r.id}" style="font-size:11px;color:#9ca3af;">Progress: ${dn}/${r.steps.length} steps completed　／　Final: ${r.finalDeadline?.slice(5).replace("-","/")}</span></div><span id="rarrow-${r.id}" style="font-size:12px;color:#9ca3af;">${r.open?"▲":"▼"}</span></div><div id="rbody-${r.id}" class="report-body" style="display:${r.open?"block":"none"};">`;
-        r.steps.forEach((s,i)=>{h+=`<div id="step-${s.id}" style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:${i<r.steps.length-1?"1px solid #f9fafb":"none"};"><input type="checkbox" ${s.done?"checked":""} onchange="toggleStep('${r.id}','${s.id}')" style="width:15px;height:15px;accent-color:${col};flex-shrink:0;"><span class="slbl2" style="flex:1;font-size:13px;color:${s.done?"#9ca3af":"#374151"};text-decoration:${s.done?"line-through":"none"};"><span style="font-size:11px;color:#d1d5db;margin-right:6px;">${i+1}.</span>${esc(s.text)}</span>${i===3?badge(r.finalDeadline):""}</div>`;});
-        // Resources (URL + PDF multi-attach)
-        h+=`<div id="repres-${r.id}">${repResourcesHtml(r,col)}</div>`;
-        h+=`</div></div>`;
-      });
-      h+=`</div>`;
-    });
+    ["前期","後期"].forEach(sem=>{const semR=proj.reports.filter(r=>r.label.includes(`〈${sem}〉`));if(!semR.length)return;h+=`<div><div style="display:flex;align-items:center;gap:8px;margin:10px 0 6px;"><span style="font-size:12px;font-weight:700;color:${col};">〈${sem}〉</span><div style="flex:1;height:1px;background:#e5e7eb;"></div></div>`;semR.forEach(r=>{const dn=r.steps.filter(s=>s.done).length,rPct=Math.round(dn/r.steps.length*100);const sl=r.label.replace(/〈前期〉|〈後期〉/g,"").trim();const totalRes=(r.urls||[]).length+(r.pdfs||[]).length;const resBadge=totalRes>0?`<span style="font-size:10px;font-weight:700;background:${col};color:#fff;border-radius:99px;padding:1px 5px;margin-left:4px;">📎${totalRes}</span>`:"";h+=`<div class="report-card"><div class="report-header" onclick="toggleReport('${r.id}')"><div style="flex:1;"><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;"><span style="font-size:13px;font-weight:600;color:#1f2937;">${esc(sl)}</span>${resBadge}<span style="font-size:11px;color:#6b7280;">Due ${r.deadline?.slice(5).replace("-","/")}</span>${badge(r.deadline)}</div>${pbar(rPct,col,"rbar-"+r.id)}<span id="rprog-${r.id}" style="font-size:11px;color:#9ca3af;">Progress: ${dn}/${r.steps.length} steps completed　／　Final: ${r.finalDeadline?.slice(5).replace("-","/")}</span></div><span id="rarrow-${r.id}" style="font-size:12px;color:#9ca3af;">${r.open?"▲":"▼"}</span></div><div id="rbody-${r.id}" class="report-body" style="display:${r.open?"block":"none"};">`;r.steps.forEach((s,i)=>{h+=`<div id="step-${s.id}" style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:${i<r.steps.length-1?"1px solid #f9fafb":"none"};"><input type="checkbox" ${s.done?"checked":""} onchange="toggleStep('${r.id}','${s.id}')" style="width:15px;height:15px;accent-color:${col};flex-shrink:0;"><span class="slbl2" style="flex:1;font-size:13px;color:${s.done?"#9ca3af":"#374151"};text-decoration:${s.done?"line-through":"none"};"><span style="font-size:11px;color:#d1d5db;margin-right:6px;">${i+1}.</span>${esc(s.text)}</span>${i===3?badge(r.finalDeadline):""}</div>`;});h+=`<div id="repres-${r.id}">${repResourcesHtml(r,col)}</div>`;h+=`</div></div>`;});h+=`</div>`;});
     h+=`<div style="margin-top:24px;"><div class="slbl">Memo</div><textarea class="memo-area" placeholder="Notes, references, feedback…" oninput="updateMemo('${proj.id}',this.value)">${esc(proj.memo||"")}</textarea></div>`;
   }
   h+=`<div id="save-status" style="font-size:11px;color:#9ca3af;margin-top:16px;">✓ Saved</div>`;
@@ -704,12 +545,13 @@ function renderProjectView(){
 }
 
 function renderMain(){
-  let html=currentView==="timeline"?renderTimeline():renderProjectView();
+  let html;
+  if(currentView==="timeline")html=renderTimeline();
+  else if(currentView==="schedule")html=renderSchedule();
+  else html=renderProjectView();
   document.getElementById("main").innerHTML=html;
 }
 function fullRender(){updateSidebar();renderMain();}
-
-// ── INIT ───────────────────────────────────────────────
 const raw=load();
 projects=raw?migrateData(raw):DEFAULT_PROJECTS;
 fullRender();
