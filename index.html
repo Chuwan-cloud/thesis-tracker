@@ -74,7 +74,7 @@ function mkRep(pfx,n,label,dl,fdl){return{id:`${pfx}_r${n}`,label,deadline:dl,fi
 function mkLitChild(id,text){return{id,text,done:false,note:"",urls:[],pdfs:[],words:[]};}
 
 const DEFAULT_PROJECTS=[
-  {id:"thesis",title:"修士論文",color:"#4f46e5",memo:"",
+  {id:"thesis",title:"修士論文",color:"#5b1f11",memo:"",
    tasks:[{id:"th1",text:"題目提出",done:false,deadline:`${YEAR}-06-30`},{id:"th2",text:"背景・先行研究・目的・方法 提出（50%）",done:false,deadline:`${YEAR}-08-31`},{id:"th3",text:"中間発表",done:false,deadline:`${YEAR}-09-30`},{id:"th4",text:"初稿 ピア・レビュー",done:false,deadline:`${YEAR}-10-07`},{id:"th5",text:"初稿修正版 提出（70%）",done:false,deadline:`${YEAR}-10-15`},{id:"th6",text:"第2稿 提出（90%）",done:false,deadline:`${YEAR}-11-15`},{id:"th7",text:"修士論文 提出",done:false,deadline:`${YEAR}-12-31`},{id:"th8",text:"面接試問",done:false,deadline:`${YEAR+1}-01-31`}],
    subtasks:[
      {id:"st1",group:"研究内容",text:"研究背景",done:false,isParent:true,open:false,urls:[],pdfs:[],words:[],children:[{id:"st1a",urls:[],pdfs:[],words:[],text:"海外中等教育段階の日本語教育の制度・理念",done:false,note:""},{id:"st1b",urls:[],pdfs:[],words:[],text:"外国語環境における日本語教育の課題",done:false,note:""},{id:"st1c",urls:[],pdfs:[],words:[],text:"メキシコの言語状況",done:false,note:""},{id:"st1d",urls:[],pdfs:[],words:[],text:"メキシコの日本語教育の歴史と現状",done:false,note:""},{id:"st1e",urls:[],pdfs:[],words:[],text:"LMJ概要",done:false,note:""}]},
@@ -97,10 +97,10 @@ const DEFAULT_PROJECTS=[
      {id:"st14",group:"Research",text:"Intv. 2",done:false,note:"",urls:[],pdfs:[],words:[]},
      {id:"st15",group:"Research",text:"Intv. 3",done:false,note:"",urls:[],pdfs:[],words:[]},
    ]},
-  {id:"c1",title:"異文化間コミュニケーション論",color:"#0891b2",memo:"",reports:[mkRep("c1",1,"〈前期〉レポート①",`${YEAR}-06-15`,`${YEAR}-08-14`),mkRep("c1",2,"〈前期〉レポート②",`${YEAR}-08-15`,`${YEAR}-09-07`),mkRep("c1",3,"〈後期〉レポート③",`${YEAR}-10-15`,`${YEAR}-12-14`),mkRep("c1",4,"〈後期〉レポート④",`${YEAR}-12-15`,`${YEAR+1}-01-11`)]},
-  {id:"c2",title:"言語教育学",color:"#059669",memo:"",reports:[mkRep("c2",1,"〈前期〉レポート①",`${YEAR}-06-15`,`${YEAR}-08-14`),mkRep("c2",2,"〈前期〉レポート②",`${YEAR}-08-15`,`${YEAR}-09-07`),mkRep("c2",3,"〈後期〉レポート③",`${YEAR}-10-15`,`${YEAR}-12-14`),mkRep("c2",4,"〈後期〉レポート④",`${YEAR}-12-15`,`${YEAR+1}-01-11`)]},
-  {id:"c3",title:"日本語教育方法論",color:"#d97706",memo:"",reports:[mkRep("c3",1,"〈前期〉レポート①",`${YEAR}-06-15`,`${YEAR}-08-14`),mkRep("c3",2,"〈前期〉レポート②",`${YEAR}-08-15`,`${YEAR}-09-07`),mkRep("c3",3,"〈後期〉レポート③",`${YEAR}-10-15`,`${YEAR}-12-14`),mkRep("c3",4,"〈後期〉レポート④",`${YEAR}-12-15`,`${YEAR+1}-01-11`)]},
-  {id:"c4",title:"言語教育工学",color:"#db2777",memo:"",reports:[mkRep("c4",1,"〈前期〉レポート①",`${YEAR}-06-15`,`${YEAR}-08-14`),mkRep("c4",2,"〈前期〉レポート②",`${YEAR}-08-15`,`${YEAR}-09-07`),mkRep("c4",3,"〈後期〉レポート③",`${YEAR}-10-15`,`${YEAR}-12-14`),mkRep("c4",4,"〈後期〉レポート④",`${YEAR}-12-15`,`${YEAR+1}-01-11`)]},
+  {id:"c1",title:"異文化間コミュニケーション論",color:"#e7ba80",memo:"",reports:[mkRep("c1",1,"〈前期〉レポート①",`${YEAR}-06-15`,`${YEAR}-08-14`),mkRep("c1",2,"〈前期〉レポート②",`${YEAR}-08-15`,`${YEAR}-09-07`),mkRep("c1",3,"〈後期〉レポート③",`${YEAR}-10-15`,`${YEAR}-12-14`),mkRep("c1",4,"〈後期〉レポート④",`${YEAR}-12-15`,`${YEAR+1}-01-11`)]},
+  {id:"c2",title:"言語教育学",color:"#5474a1",memo:"",reports:[mkRep("c2",1,"〈前期〉レポート①",`${YEAR}-06-15`,`${YEAR}-08-14`),mkRep("c2",2,"〈前期〉レポート②",`${YEAR}-08-15`,`${YEAR}-09-07`),mkRep("c2",3,"〈後期〉レポート③",`${YEAR}-10-15`,`${YEAR}-12-14`),mkRep("c2",4,"〈後期〉レポート④",`${YEAR}-12-15`,`${YEAR+1}-01-11`)]},
+  {id:"c3",title:"日本語教育方法論",color:"#323659",memo:"",reports:[mkRep("c3",1,"〈前期〉レポート①",`${YEAR}-06-15`,`${YEAR}-08-14`),mkRep("c3",2,"〈前期〉レポート②",`${YEAR}-08-15`,`${YEAR}-09-07`),mkRep("c3",3,"〈後期〉レポート③",`${YEAR}-10-15`,`${YEAR}-12-14`),mkRep("c3",4,"〈後期〉レポート④",`${YEAR}-12-15`,`${YEAR+1}-01-11`)]},
+  {id:"c4",title:"言語教育工学",color:"#b36633",memo:"",reports:[mkRep("c4",1,"〈前期〉レポート①",`${YEAR}-06-15`,`${YEAR}-08-14`),mkRep("c4",2,"〈前期〉レポート②",`${YEAR}-08-15`,`${YEAR}-09-07`),mkRep("c4",3,"〈後期〉レポート③",`${YEAR}-10-15`,`${YEAR}-12-14`),mkRep("c4",4,"〈後期〉レポート④",`${YEAR}-12-15`,`${YEAR+1}-01-11`)]},
 ];
 const GUIDE_SECTIONS=[
   {title:"体裁・書式",items:["A4サイズ，縦40字×横40字（レポート・修論共通）","日本語：MS明朝体　英語：Times New Roman","「両端揃え」を使用（文字間隔崩れ防止）","２行以上の文頭揃えは「インデント」を使用","章・節の区切りは「改ページ」を使用","注釈は「脚注の挿入」または「文末脚注の挿入」を使用"]},
