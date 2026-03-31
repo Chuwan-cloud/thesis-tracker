@@ -461,7 +461,7 @@ function renderDash(){
     const pct=calcPct(p);
     const stepLabels=["D","F","P","✓"];
     // use #A4BDE0 for text on light-colored subjects (c2=#C9D763, c4=#E9B0C8)
-    const titleCol=(p.color==="#A4BDE0"||p.color==="#C9D763"||p.color==="#D76A4C"||p.color==="#E9B0C8")?"#4a5568":p.color;
+    const titleCol="#374151";
     h+=`<div class="subj-card" onclick="selectSubject('${p.id}')">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
         <div class="subj-title" style="color:${titleCol};">${esc(p.title)}</div>
