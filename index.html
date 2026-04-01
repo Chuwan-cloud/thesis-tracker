@@ -214,7 +214,7 @@ function schLoad(){try{const s=localStorage.getItem(SCH_KEY);return s?JSON.parse
 function schSave(){try{localStorage.setItem(SCH_KEY,JSON.stringify(schCk));}catch(e){}}
 let schCk=schLoad(),schOpenS={},schOpenW={};
 
-const SCOL={c1:PALETTE.c1,c3:PALETTE.c3,c4:PALETTE.c4,c2:PALETTE.c2,fb:"#B1D8B8",th:PALETTE.thesis};
+const SCOL={c1:PALETTE.c1,c3:PALETTE.c3,c4:PALETTE.c4,c2:PALETTE.c2,fb:"#A6171C",th:PALETTE.thesis};
 function sk(id,t){return{id,t};}
 const SCH_PHASES=[
   {label:"推敲・提出のみ（3/30〜4/4）",segs:[
